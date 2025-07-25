@@ -209,7 +209,7 @@ jobs:
           body: |
             ### Automated build for commit [${{ github.sha }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }})
             
-            **WebGL Build**: Play directly in your browser at [https://tSigler2.github.io/mggj/](https://tSigler2.github.io/mggj/)
+            **WebGL Build**: Play directly in your browser at [https://tsigler2.github.io/mggj/](https://tsigler2.github.io/mggj/)
             
             ### Build Status
             | Platform | Status |
