@@ -16,7 +16,9 @@ jobs:
       - name: Cache NuGet packages
         uses: actions/cache@v3
         with:
-          path: ~/.nuget/packages
+          path: |
+            ~/.nuget/packages
+            .nuget
           key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
           restore-keys: |
             ${{ runner.os }}-nuget-
@@ -39,5 +41,8 @@ jobs:
             echo "No C# files changed - skipping formatting check"
           fi
         
+      - name: Restore dependencies
+        run: dotnet restore mggj.csproj
+        
       - name: Build project
-        run: dotnet build mggj.csproj --no-restore --configuration Release
+        run: dotnet build mggj.csproj --configuration Release
