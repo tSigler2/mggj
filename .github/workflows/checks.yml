@@ -1,0 +1,43 @@
+name: Code Quality Checks
+
+on:
+  pull_request: {}
+  push: {}
+
+jobs:
+  dotnet-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+        
+      - name: Cache NuGet packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+            
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8.0.x
+          
+      - name: Install dotnet-format
+        run: dotnet tool install -g dotnet-format
+          
+      - name: Formatting check
+        run: |
+          changed_files=$(git diff --name-only --diff-filter=ACMRT HEAD^ | grep '\.cs$' || true)
+          if [ -n "$changed_files" ]; then
+            echo "Checking changed files: $changed_files"
+            dotnet format --include $changed_files --verify-no-changes --verbosity detailed
+          else
+            echo "No C# files changed - skipping formatting check"
+          fi
+        
+      - name: Build project
+        run: dotnet build mggj.csproj --no-restore --configuration Release
