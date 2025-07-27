@@ -1,0 +1,231 @@
+name: "godot-ci export"
+on: 
+  push:
+    branches: [ main ]
+
+
+# NOTE: If your `project.godot` is at the repository root, set `PROJECT_PATH` below to ".".
+
+env:
+  GODOT_VERSION: 4.4.1
+  EXPORT_NAME: mggj-prototype
+  PROJECT_PATH: "."
+
+jobs:
+  export-windows:
+    name: Windows Export
+    runs-on: ubuntu-22.04  # Use 22.04 with godot 4
+    container:
+      image: barichello/godot-ci:4.4.1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/export_templates/
+          mkdir -v -p ~/.config/
+          mv /root/.config/godot ~/.config/godot
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+      - name: Windows Build
+        run: |
+          mkdir -v -p build/windows
+          EXPORT_DIR="$(readlink -f build)"
+          cd $PROJECT_PATH
+          godot --headless --verbose --export-release "Windows Desktop" "$EXPORT_DIR/windows/$EXPORT_NAME.exe"
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows
+          path: build/windows
+
+  export-linux:
+    name: Linux Export
+    runs-on: ubuntu-22.04  # Use 22.04 with godot 4
+    container:
+      image: barichello/godot-ci:4.4.1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/export_templates/
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+      - name: Linux Build
+        run: |
+          mkdir -v -p build/linux
+          EXPORT_DIR="$(readlink -f build)"
+          cd $PROJECT_PATH
+          godot --headless --verbose --export-release "Linux/X11" "$EXPORT_DIR/linux/$EXPORT_NAME.x86_64"
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux
+          path: build/linux
+
+  export-web:
+    name: Web Export
+    runs-on: ubuntu-22.04
+    container:
+      image: barichello/godot-ci:4.4.1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/export_templates/
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+      - name: Web Build
+        run: |
+          mkdir -v -p build/web
+          EXPORT_DIR="$(readlink -f build)"
+          cd $PROJECT_PATH
+          godot --headless --verbose --export-release "Web" "$EXPORT_DIR/web/index.html"
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: web
+          path: build/web
+      - name: Install rsync 📚
+        run: |
+          apt-get update && apt-get install -y rsync
+      - name: Deploy to GitHub Pages 🚀
+        uses: JamesIves/github-pages-deploy-action@releases/v4
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: build/web # The folder the action should deploy.
+
+  export-mac:
+    name: Mac Export
+    runs-on: ubuntu-22.04  # Use 22.04 with godot 4
+    container:
+      image: barichello/godot-ci:4.4.1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/export_templates/
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+      - name: Mac Build
+        run: |
+          mkdir -v -p build/mac
+          EXPORT_DIR="$(readlink -f build)"
+          cd $PROJECT_PATH
+          godot --headless --verbose --export-release "macOS" "$EXPORT_DIR/mac/$EXPORT_NAME.zip"
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mac
+          path: build/mac
+
+  # release creation job
+  create-release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    needs: [export-windows, export-linux, export-mac, export-web]
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+        
+      # Check job statuses BEFORE moving files
+      - name: Get Job Statuses
+        id: job-status
+        run: |
+          # Check Windows
+          if [ -f "artifacts/windows/$EXPORT_NAME.exe" ]; then
+            windows_status="✅ Success"
+          else
+            windows_status="❌ Failed"
+          fi
+          
+          # Check Linux
+          if [ -f "artifacts/linux/$EXPORT_NAME.x86_64" ]; then
+            linux_status="✅ Success"
+          else
+            linux_status="❌ Failed"
+          fi
+          
+          # Check Mac
+          if [ -f "artifacts/mac/$EXPORT_NAME.zip" ]; then
+            mac_status="✅ Success"
+          else
+            mac_status="❌ Failed"
+          fi
+          
+          # Check Web
+          if [ -f "artifacts/web/index.html" ]; then
+            web_status="✅ Success"
+          else
+            web_status="❌ Failed"
+          fi
+          
+          echo "windows_status=$windows_status" >> $GITHUB_OUTPUT
+          echo "linux_status=$linux_status" >> $GITHUB_OUTPUT
+          echo "mac_status=$mac_status" >> $GITHUB_OUTPUT
+          echo "web_status=$web_status" >> $GITHUB_OUTPUT
+          
+      - name: Prepare Release Assets
+        run: |
+          mkdir -p release_assets
+          
+          # Windows
+          if [ -f "artifacts/windows/$EXPORT_NAME.exe" ]; then
+            mv "artifacts/windows/$EXPORT_NAME.exe" "release_assets/$EXPORT_NAME.exe"
+          fi
+          if [ -f "artifacts/windows/$EXPORT_NAME.pck" ]; then
+            mv "artifacts/windows/$EXPORT_NAME.pck" "release_assets/$EXPORT_NAME.pck"
+          fi
+          
+          # Linux
+          if [ -f "artifacts/linux/$EXPORT_NAME.x86_64" ]; then
+            mv "artifacts/linux/$EXPORT_NAME.x86_64" "release_assets/$EXPORT_NAME.x86_64"
+          fi
+          
+          # Mac
+          if [ -f "artifacts/mac/$EXPORT_NAME.zip" ]; then
+            mv "artifacts/mac/$EXPORT_NAME.zip" "release_assets/$EXPORT_NAME-mac.zip"
+          fi
+          
+          # Web
+          if [ -d "artifacts/web" ]; then
+            (cd artifacts/web && zip -r ../../release_assets/$EXPORT_NAME-web.zip .)
+          fi
+          
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: "nightly-${{ github.run_id }}"
+          name: "Nightly Build (${{ github.sha }})"
+          body: |
+            ### Automated build for commit [${{ github.sha }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }})
+            
+            **WebGL Build**: Play directly in your browser at [https://tsigler2.github.io/mggj/](https://tsigler2.github.io/mggj/)
+            
+            ### Build Status
+            | Platform | Status |
+            |----------|--------|
+            | Windows  | ${{ steps.job-status.outputs.windows_status }} |
+            | Linux    | ${{ steps.job-status.outputs.linux_status }} |
+            | macOS    | ${{ steps.job-status.outputs.mac_status }} |
+            | Web      | ${{ steps.job-status.outputs.web_status }} |
+            
+            ### Download Links
+            - Windows: Download the .exe file above
+            - Linux: Download the .x86_64 file above
+            - macOS: Download the .zip file above
+            - Web: Download the .zip file above or play in browser
+          prerelease: true
+          files: |
+            release_assets/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
