@@ -1,4 +1,4 @@
-# Magical Girl Game Jam 2025 Game
+# Moth Friends: Waiting in the Wings
 
 ## Requirements for Contributing
 
@@ -10,44 +10,42 @@ Git Hooks:
 ## Credits
 
 ### Project Leads
-- Stephen S.: Timeline Creation and Management
-- David J.: Scope Management
-- Hannah W.: Scheduling and Scope Management Assistance
+- Stephen S.: Overall Team Lead, Art Team Lead
 
 ### Artists
-- Stephen S.
-    - Art Team Lead
-    - Bullet Concept Art
-- Hannah W.
-    - UI/UX Design and Art Creation
-- Jake H.
-    - Character Concept Art
-- Alex H.
-    - Environment Concept Art
 - Laura B.
     - Environment Concept Art
+- Alex H.
+    - Environment Concept Art
+- Jake H.
+    - Character Concept Art
+- Hannah W.
+    - UI/UX Design and Art Creation
 - Kacy W.
     - Story Writing
 
 ### Programmers
-- Thomas S.
-    - Programming Team Lead
-    - Enemy Attack Pattern Programming
-- David J.
-    - Special Ability Programming
+- Jared B.
+    - Asset Implementation
+    - Collision
+    - Cross Team Support
 - Carson C.
     - Score System
     - Health System
     - Dialogue System
+    - Cross Team Support
+- David J.
+    - Special Ability Programming
+    - Main Character Programming
 - Sagar P.
     - UI/UX Implementation
     - Scene Management
     - Level Design and Implementation
+- Thomas S.
+    - Programming Team Lead
+    - Enemy Attack Pattern Programming
 - Kacy W.
     - Asset Implementation
-- Jared B.
-    - Asset Implementation
-    - Collision
 
 ### Sound Designers
 - Lucien B.
