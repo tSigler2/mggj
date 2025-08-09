@@ -1,5 +1,5 @@
-using Godot;
 using System;
+using Godot;
 
 public partial class Enemy : BaseEntity
 {
@@ -24,21 +24,31 @@ public partial class Enemy : BaseEntity
     {
         Velocity = new Vector2(3, 4);
 
-        BulletGenerator = (double Radius, double GenerateSpaceInterval, double x, double y, double BulletSpeed) =>
+        BulletGenerator = (
+            double Radius,
+            double GenerateSpaceInterval,
+            double x,
+            double y,
+            double BulletSpeed
+        ) =>
         {
             double spaceAccumulate = 0.0;
             while (spaceAccumulate < 360.0)
             {
                 GD.Print(spaceAccumulate);
                 var bullet = new Bullet();
-                bullet.Position = new Vector2((float)Mathf.Cos(spaceAccumulate * Math.PI / 180) * (float)Radius, (float)Mathf.Sin(spaceAccumulate * Math.PI / 180) * (float)Radius);
-                bullet.Velocity = new Vector2((float)(Mathf.Cos(spaceAccumulate * Math.PI / 180) * BulletSpeed), (float)(Mathf.Sin(spaceAccumulate * Math.PI / 180) * BulletSpeed));
+                bullet.Position = new Vector2(
+                    (float)Mathf.Cos(spaceAccumulate * Math.PI / 180) * (float)Radius,
+                    (float)Mathf.Sin(spaceAccumulate * Math.PI / 180) * (float)Radius
+                );
+                bullet.Velocity = new Vector2(
+                    (float)(Mathf.Cos(spaceAccumulate * Math.PI / 180) * BulletSpeed),
+                    (float)(Mathf.Sin(spaceAccumulate * Math.PI / 180) * BulletSpeed)
+                );
                 AddChild(bullet);
                 spaceAccumulate += GenerateSpaceInterval;
             }
         };
-
-
     }
 
     public override void _PhysicsProcess(double delta)
@@ -64,7 +74,6 @@ public partial class Enemy : BaseEntity
             BulletGenerator(Radius, GenerateSpaceInterval, Position.X, Position.Y, BulletSpeed);
             deltaAccumulate = 0.0;
         }
-
 
         if (Health <= 0)
         {
