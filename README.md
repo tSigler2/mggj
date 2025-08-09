@@ -2,8 +2,11 @@
 
 ## Requirements for Contributing
 
-Git Hooks: 
- - Bash/Zsh: `cp hooks/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit`
+Pre-Commit Hooks: CSharpier -- A Prettier Inspired CSharp Formatter
+- Install `pre-commit` via your method of choice.
+    - [pre-commit Installation Instructions](https://pre-commit.com/#install)
+- Install`pre-commit` hooks with the command: `pre-commit install`
+- Verify pre-commit hook installation with the command `pre-commit run --all-files`
 
 ## Written with Godot-Mono
 
