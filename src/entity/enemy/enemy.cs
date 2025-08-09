@@ -1,9 +1,11 @@
 using Godot;
 using System;
 
-public partial class Enemy : Area2D
+public partial class Enemy : BaseEntity
 {
     private Action<double, double, double, double, double> BulletGenerator;
+
+    [Export]
     private double deltaAccumulate;
 
     [Export]
@@ -13,26 +15,10 @@ public partial class Enemy : Area2D
     private double GenerateSpaceInterval;
 
     [Export]
-    public int Health;
-
-    [Export]
     private double Radius;
 
     [Export]
     private double BulletSpeed;
-
-    [Export]
-    public double x;
-
-    [Export]
-    public double y;
-
-    [Export]
-    public double dx;
-
-    [Export]
-    public double dy;
-
 
     public override void _Ready()
     {
@@ -43,7 +29,7 @@ public partial class Enemy : Area2D
             while (spaceAccumulate <= 360.0)
             {
                 var bullet = new Bullet();
-                bullet.Texture = GD.Load<Texture2D>("assets/art");
+                //bullet.Texture = GD.Load<Texture2D>("assets/art");
                 bullet.Position = new Vector2((float)Math.Cos((float)spaceAccumulate) * (float)Radius, (float)Math.Sin((float)spaceAccumulate) * (float)Radius);
                 bullet.Velocity = new Vector2((float)((bullet.Position.X - x) * BulletSpeed), (float)((bullet.Position.Y - y) * BulletSpeed));
                 AddChild(bullet);
@@ -54,18 +40,29 @@ public partial class Enemy : Area2D
 
     }
 
+    public override void _PhysicsProcess(double delta)
+    {
+        var collide = MoveAndCollide(Velocity * (float)delta);
+
+        if (collide != null)
+        {
+            //if (collide.GetCollider() is PlayerBullet)
+            //{
+            //    Health -= collide.GetCollider().Damage;
+            //}
+        }
+    }
+
     public override void _Process(double delta)
     {
         deltaAccumulate += delta;
 
         if (deltaAccumulate >= GenerateInterval)
         {
-            BulletGenerator(Radius, GenerateSpaceInterval, x, y, BulletSpeed);
+            BulletGenerator(Radius, GenerateSpaceInterval, Position.X, Position.Y, BulletSpeed);
             deltaAccumulate = 0.0;
         }
 
-        x += dx * (float)delta;
-        y += dy * (float)delta;
 
         if (Health <= 0)
         {
@@ -73,7 +70,7 @@ public partial class Enemy : Area2D
         }
     }
 
-    private void OnBodyEntered(Node body)
+    private void OnBodyEntered(Node2D body)
     {
         //        if(body is PlayerBullet bullet)
         //        {
