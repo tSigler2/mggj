@@ -27,14 +27,12 @@ public partial class Enemy : BaseEntity
         BulletGenerator = (double Radius, double GenerateSpaceInterval, double x, double y, double BulletSpeed) =>
         {
             double spaceAccumulate = 0.0;
-            GD.Print("Callback Working!");
-
-            while (spaceAccumulate <= 360.0)
+            while (spaceAccumulate < 360.0)
             {
+                GD.Print(spaceAccumulate);
                 var bullet = new Bullet();
-                //bullet.Texture = GD.Load<Texture2D>("assets/art/test/asteroid.png");
-                bullet.Position = new Vector2((float)Math.Cos((float)spaceAccumulate) * (float)Radius, (float)Math.Sin((float)spaceAccumulate) * (float)Radius);
-                bullet.Velocity = new Vector2((float)((bullet.Position.X - x) * BulletSpeed), (float)((bullet.Position.Y - y) * BulletSpeed));
+                bullet.Position = new Vector2((float)Mathf.Cos(spaceAccumulate * Math.PI / 180) * (float)Radius, (float)Mathf.Sin(spaceAccumulate * Math.PI / 180) * (float)Radius);
+                bullet.Velocity = new Vector2((float)(Mathf.Cos(spaceAccumulate * Math.PI / 180) * BulletSpeed), (float)(Mathf.Sin(spaceAccumulate * Math.PI / 180) * BulletSpeed));
                 AddChild(bullet);
                 spaceAccumulate += GenerateSpaceInterval;
             }

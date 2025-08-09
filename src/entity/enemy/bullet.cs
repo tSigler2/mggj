@@ -5,6 +5,21 @@ public partial class Bullet : BaseEntity
     [Export]
     private int Damage;
 
+    private Sprite2D sprite;
+    private CollisionShape2D Collider;
+
+    public override void _Ready()
+    {
+        sprite = new Sprite2D();
+        sprite.Texture = (Texture2D)ResourceLoader.Load("assets/art/test/asteroid.png");
+        AddChild(sprite);
+
+        Collider = new CollisionShape2D();
+        Collider.Shape = new CircleShape2D() { Radius = (sprite.Texture.GetSize().X / 2) };
+        AddChild(Collider);
+        Show();
+    }
+
     public override void _Process(double delta)
     {
         Position += Velocity * (float)delta;
