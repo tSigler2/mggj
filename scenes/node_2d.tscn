@@ -1,9 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://tihi5cofvocw"]
+[gd_scene load_steps=3 format=3 uid="uid://tihi5cofvocw"]
 
 [ext_resource type="Script" uid="uid://bp8amfvqsw86a" path="res://src/entity/enemy/Enemy.cs" id="1_6e84v"]
+[ext_resource type="Texture2D" uid="uid://7lt230bb04rn" path="res://assets/art/test/asteroid.png" id="2_4dvvg"]
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(1978, 622)
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(40, 60)
 script = ExtResource("1_6e84v")
+GenerateInterval = 2.0
+GenerateSpaceInterval = 5.0
+Radius = 0.5
+BulletSpeed = 4.0
+Health = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("2_4dvvg")

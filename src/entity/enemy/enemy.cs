@@ -22,14 +22,17 @@ public partial class Enemy : BaseEntity
 
     public override void _Ready()
     {
+        Velocity = new Vector2(3, 4);
+
         BulletGenerator = (double Radius, double GenerateSpaceInterval, double x, double y, double BulletSpeed) =>
         {
             double spaceAccumulate = 0.0;
+            GD.Print("Callback Working!");
 
             while (spaceAccumulate <= 360.0)
             {
                 var bullet = new Bullet();
-                //bullet.Texture = GD.Load<Texture2D>("assets/art");
+                //bullet.Texture = GD.Load<Texture2D>("assets/art/test/asteroid.png");
                 bullet.Position = new Vector2((float)Math.Cos((float)spaceAccumulate) * (float)Radius, (float)Math.Sin((float)spaceAccumulate) * (float)Radius);
                 bullet.Velocity = new Vector2((float)((bullet.Position.X - x) * BulletSpeed), (float)((bullet.Position.Y - y) * BulletSpeed));
                 AddChild(bullet);
@@ -42,15 +45,16 @@ public partial class Enemy : BaseEntity
 
     public override void _PhysicsProcess(double delta)
     {
-        var collide = MoveAndCollide(Velocity * (float)delta);
+        MoveAndSlide();
+        //var collide = MoveAndCollide(Velocity * (float)delta);
 
-        if (collide != null)
-        {
-            //if (collide.GetCollider() is PlayerBullet)
-            //{
-            //    Health -= collide.GetCollider().Damage;
-            //}
-        }
+        //if (collide != null)
+        //{
+        //if (collide.GetCollider() is PlayerBullet)
+        //{
+        //    Health -= collide.GetCollider().Damage;
+        //}
+        //}
     }
 
     public override void _Process(double delta)
