@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://tihi5cofvocw"]
+
+[ext_resource type="Script" uid="uid://bp8amfvqsw86a" path="res://src/entity/enemy/Enemy.cs" id="1_6e84v"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(1978, 622)
+script = ExtResource("1_6e84v")
