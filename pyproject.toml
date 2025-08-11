@@ -1,0 +1,10 @@
+[project]
+name = "Moth-Friends-Waiting-in-the-Wings"
+version = "0.0.1"
+description = ""
+authors = [{ name = "Team Glass Canon" }]
+license = { text = "MIT" }
+readme = "README.md"
+dependencies = [
+    "pre-commit",
+]
