@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://tihi5cofvocw"]
+
+[ext_resource type="Script" uid="uid://bp8amfvqsw86a" path="res://src/entity/enemy/enemy.cs" id="1_6e84v"]
+[ext_resource type="Texture2D" uid="uid://7lt230bb04rn" path="res://assets/art/test/asteroid.png" id="2_4dvvg"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(628, 327)
+script = ExtResource("1_6e84v")
+GenerateInterval = 2.0
+GenerateSpaceInterval = 20.0
+Radius = 0.5
+BulletSpeed = 100.0
+Health = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(-5, 4)
+texture = ExtResource("2_4dvvg")
