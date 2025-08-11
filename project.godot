@@ -11,12 +11,8 @@ config_version=5
 [application]
 
 config/name="mggj"
-<<<<<<< Updated upstream
-=======
 run/main_scene="uid://cs4fmv7d4t4bf"
->>>>>>> Stashed changes
-config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
-config/icon="res://icon.svg"
+config/features=PackedStringArray("4.4", "C#")
 
 [dotnet]
 
