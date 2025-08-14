@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://tihi5cofvocw"]
+[gd_scene load_steps=2 format=3 uid="uid://tihi5cofvocw"]
 
-[ext_resource type="Script" uid="uid://bp8amfvqsw86a" path="res://src/entity/enemy/enemy.cs" id="1_6e84v"]
-[ext_resource type="Texture2D" uid="uid://7lt230bb04rn" path="res://assets/art/test/asteroid.png" id="2_4dvvg"]
+[ext_resource type="Script" uid="uid://btnmt78dnmr0c" path="res://src/entity/enemy/enemy.cs" id="1_6e84v"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -16,4 +15,3 @@ Health = 5
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 position = Vector2(-5, 4)
-texture = ExtResource("2_4dvvg")
