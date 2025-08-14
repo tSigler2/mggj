@@ -11,15 +11,29 @@ config_version=5
 [application]
 
 config/name="mggj"
+run/main_scene="uid://tihi5cofvocw"
 config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+
+[dialogue_manager]
+
+runtime/advanced/uses_dotnet=true
 
 [dotnet]
 
 project/assembly_name="mggj"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+renderer/rendering_method.web="forward_plus"
 textures/vram_compression/import_etc2_astc=true
