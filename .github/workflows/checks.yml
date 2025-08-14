@@ -36,7 +36,7 @@ jobs:
           changed_files=$(git diff --name-only --diff-filter=ACMRT HEAD^ | grep '\.cs$' || true)
           if [ -n "$changed_files" ]; then
             echo "Checking changed files: $changed_files"
-            dotnet format --include $changed_files --verify-no-changes --verbosity detailed
+            dotnet format mggj.sln --include $changed_files --verify-no-changes --verbosity detailed
           else
             echo "No C# files changed - skipping formatting check"
           fi
