@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0gx1naxd7ugo"]
+
+[ext_resource type="Script" uid="uid://cv6kdxqu6kghr" path="res://src/manage/talktest.gd" id="1_1n7tu"]
+
+[node name="Cc-test" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_1n7tu")

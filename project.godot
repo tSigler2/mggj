@@ -22,6 +22,7 @@ DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 [dialogue_manager]
 
 runtime/advanced/uses_dotnet=true
+runtime/balloon_path="res://Dialogue/Example Baloon/Balloon.tscn"
 
 [dotnet]
 
@@ -30,6 +31,10 @@ project/assembly_name="mggj"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
+
+[internationalization]
+
+locale/translations_pot_files=PackedStringArray("res://Dialogue/untitled.dialogue")
 
 [rendering]
 
