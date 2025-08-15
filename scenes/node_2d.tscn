@@ -8,10 +8,11 @@
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 position = Vector2(628, 327)
 script = ExtResource("1_6e84v")
+deltaAccumulate = 60.0
 GenerateInterval = 2.0
 GenerateSpaceInterval = 20.0
-Radius = 0.5
-BulletSpeed = 100.0
+Radius = 3.0
+BulletSpeed = 40.0
 Health = 5
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
