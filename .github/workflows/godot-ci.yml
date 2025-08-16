@@ -1,8 +1,7 @@
 name: "godot-ci export"
-on: 
+on:
   push:
-    branches: [ main ]
-
+    branches: [main]
 
 # NOTE: If your `project.godot` is at the repository root, set `PROJECT_PATH` below to ".".
 
@@ -14,7 +13,7 @@ env:
 jobs:
   export-windows:
     name: Windows Export
-    runs-on: ubuntu-22.04  # Use 22.04 with godot 4
+    runs-on: ubuntu-22.04 # Use 22.04 with godot 4
     container:
       image: barichello/godot-ci:4.4.1
     steps:
@@ -22,27 +21,47 @@ jobs:
         uses: actions/checkout@v4
         with:
           lfs: true
+      - name: Install .NET SDK
+        run: |
+          apt-get update
+          apt-get install -y wget
+          wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+          dpkg -i packages-microsoft-prod.deb
+          rm packages-microsoft-prod.deb
+          apt-get update
+          apt-get install -y dotnet-sdk-8.0
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates/
           mkdir -v -p ~/.config/
           mv /root/.config/godot ~/.config/godot
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+      - name: Restore .NET dependencies
+        run: dotnet restore $PROJECT_PATH/mggj.csproj
+      - name: Build .NET project
+        run: dotnet build $PROJECT_PATH/mggj.csproj -c Release
       - name: Windows Build
         run: |
           mkdir -v -p build/windows
           EXPORT_DIR="$(readlink -f build)"
           cd $PROJECT_PATH
           godot --headless --verbose --export-release "Windows Desktop" "$EXPORT_DIR/windows/$EXPORT_NAME.exe"
+      - name: Package Windows Build
+        run: |
+          cd build/windows
+          zip -r "$EXPORT_NAME-windows.zip" ./*
+      # Debugging step to verify files
+      - name: List build directory
+        run: ls -lh build/windows
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: windows
-          path: build/windows
+          path: build/windows/${{ env.EXPORT_NAME }}-windows.zip
 
   export-linux:
     name: Linux Export
-    runs-on: ubuntu-22.04  # Use 22.04 with godot 4
+    runs-on: ubuntu-22.04
     container:
       image: barichello/godot-ci:4.4.1
     steps:
@@ -50,16 +69,35 @@ jobs:
         uses: actions/checkout@v4
         with:
           lfs: true
+
+      - name: Install .NET SDK
+        run: |
+          apt-get update
+          apt-get install -y wget
+          wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+          dpkg -i packages-microsoft-prod.deb
+          rm packages-microsoft-prod.deb
+          apt-get update
+          apt-get install -y dotnet-sdk-8.0
+
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates/
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+
+      - name: Restore .NET dependencies
+        run: dotnet restore $PROJECT_PATH/mggj.csproj
+
+      - name: Build .NET project
+        run: dotnet build $PROJECT_PATH/mggj.csproj -c Release
+
       - name: Linux Build
         run: |
           mkdir -v -p build/linux
           EXPORT_DIR="$(readlink -f build)"
           cd $PROJECT_PATH
           godot --headless --verbose --export-release "Linux/X11" "$EXPORT_DIR/linux/$EXPORT_NAME.x86_64"
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
@@ -76,33 +114,59 @@ jobs:
         uses: actions/checkout@v4
         with:
           lfs: true
+
+      - name: Install .NET SDK
+        run: |
+          apt-get update
+          apt-get install -y wget
+          wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+          dpkg -i packages-microsoft-prod.deb
+          rm packages-microsoft-prod.deb
+          apt-get update
+          apt-get install -y dotnet-sdk-8.0
+
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates/
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+
+      - name: Restore .NET dependencies
+        run: dotnet restore $PROJECT_PATH/mggj.csproj
+
+      - name: Build .NET project
+        run: dotnet build $PROJECT_PATH/mggj.csproj -c Release
+
       - name: Web Build
         run: |
           mkdir -v -p build/web
           EXPORT_DIR="$(readlink -f build)"
           cd $PROJECT_PATH
           godot --headless --verbose --export-release "Web" "$EXPORT_DIR/web/index.html"
+
+      - name: Add Version File
+        run: |
+          echo "${{ github.sha }}" > build/web/version.txt
+          date +%s > build/web/build_timestamp.txt
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: web
           path: build/web
-      - name: Install rsync 📚
+
+      - name: Install rsync
         run: |
           apt-get update && apt-get install -y rsync
-      - name: Deploy to GitHub Pages 🚀
+
+      - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@releases/v4
         with:
-          branch: gh-pages # The branch the action should deploy to.
-          folder: build/web # The folder the action should deploy.
+          branch: gh-pages
+          folder: build/web
 
   export-mac:
     name: Mac Export
-    runs-on: ubuntu-22.04  # Use 22.04 with godot 4
+    runs-on: ubuntu-22.04
     container:
       image: barichello/godot-ci:4.4.1
     steps:
@@ -110,16 +174,35 @@ jobs:
         uses: actions/checkout@v4
         with:
           lfs: true
+
+      - name: Install .NET SDK
+        run: |
+          apt-get update
+          apt-get install -y wget
+          wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+          dpkg -i packages-microsoft-prod.deb
+          rm packages-microsoft-prod.deb
+          apt-get update
+          apt-get install -y dotnet-sdk-8.0
+
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates/
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+
+      - name: Restore .NET dependencies
+        run: dotnet restore $PROJECT_PATH/mggj.csproj
+
+      - name: Build .NET project
+        run: dotnet build $PROJECT_PATH/mggj.csproj -c Release
+
       - name: Mac Build
         run: |
           mkdir -v -p build/mac
           EXPORT_DIR="$(readlink -f build)"
           cd $PROJECT_PATH
           godot --headless --verbose --export-release "macOS" "$EXPORT_DIR/mac/$EXPORT_NAME.zip"
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
@@ -136,71 +219,114 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: artifacts
-        
-      # Check job statuses BEFORE moving files
+      # Windows check now looks for zip
       - name: Get Job Statuses
         id: job-status
         run: |
-          # Check Windows
-          if [ -f "artifacts/windows/$EXPORT_NAME.exe" ]; then
+          # Windows
+          if [ -f "artifacts/windows/${{ env.EXPORT_NAME }}-windows.zip" ]; then
             windows_status="✅ Success"
           else
             windows_status="❌ Failed"
           fi
-          
+
           # Check Linux
           if [ -f "artifacts/linux/$EXPORT_NAME.x86_64" ]; then
             linux_status="✅ Success"
           else
             linux_status="❌ Failed"
           fi
-          
+
           # Check Mac
           if [ -f "artifacts/mac/$EXPORT_NAME.zip" ]; then
             mac_status="✅ Success"
           else
             mac_status="❌ Failed"
           fi
-          
+
           # Check Web
           if [ -f "artifacts/web/index.html" ]; then
             web_status="✅ Success"
           else
             web_status="❌ Failed"
           fi
-          
+
           echo "windows_status=$windows_status" >> $GITHUB_OUTPUT
           echo "linux_status=$linux_status" >> $GITHUB_OUTPUT
           echo "mac_status=$mac_status" >> $GITHUB_OUTPUT
           echo "web_status=$web_status" >> $GITHUB_OUTPUT
-          
+
       - name: Prepare Release Assets
         run: |
           mkdir -p release_assets
-          
+
           # Windows
-          if [ -f "artifacts/windows/$EXPORT_NAME.exe" ]; then
-            mv "artifacts/windows/$EXPORT_NAME.exe" "release_assets/$EXPORT_NAME.exe"
+          if [ -f "artifacts/windows/${{ env.EXPORT_NAME }}-windows.zip" ]; then
+            mv "artifacts/windows/${{ env.EXPORT_NAME }}-windows.zip" "release_assets/${{ env.EXPORT_NAME }}-windows.zip"
           fi
-          if [ -f "artifacts/windows/$EXPORT_NAME.pck" ]; then
-            mv "artifacts/windows/$EXPORT_NAME.pck" "release_assets/$EXPORT_NAME.pck"
-          fi
-          
+
           # Linux
           if [ -f "artifacts/linux/$EXPORT_NAME.x86_64" ]; then
             mv "artifacts/linux/$EXPORT_NAME.x86_64" "release_assets/$EXPORT_NAME.x86_64"
           fi
-          
+
           # Mac
           if [ -f "artifacts/mac/$EXPORT_NAME.zip" ]; then
             mv "artifacts/mac/$EXPORT_NAME.zip" "release_assets/$EXPORT_NAME-mac.zip"
           fi
-          
+
           # Web
           if [ -d "artifacts/web" ]; then
             (cd artifacts/web && zip -r ../../release_assets/$EXPORT_NAME-web.zip .)
           fi
-          
+
+      - name: Generate Asset Links
+        id: asset-links
+        run: |
+          tag="nightly-${{ github.run_id }}"
+          repo="${{ github.repository }}"
+
+          windows_link=""
+          linux_link=""
+          mac_link=""
+          web_link=""
+
+          if [ -f "release_assets/${{ env.EXPORT_NAME }}-windows.zip" ]; then
+            windows_link="https://github.com/$repo/releases/download/$tag/${{ env.EXPORT_NAME }}-windows.zip"
+          fi
+
+          if [ -f "release_assets/$EXPORT_NAME.x86_64" ]; then
+            linux_link="https://github.com/$repo/releases/download/$tag/$EXPORT_NAME.x86_64"
+          fi
+
+          if [ -f "release_assets/$EXPORT_NAME-mac.zip" ]; then
+            mac_link="https://github.com/$repo/releases/download/$tag/$EXPORT_NAME-mac.zip"
+          fi
+
+          if [ -f "release_assets/$EXPORT_NAME-web.zip" ]; then
+            web_link="https://github.com/$repo/releases/download/$tag/$EXPORT_NAME-web.zip"
+          fi
+
+          echo "windows_link=$windows_link" >> $GITHUB_OUTPUT
+          echo "linux_link=$linux_link" >> $GITHUB_OUTPUT
+          echo "mac_link=$mac_link" >> $GITHUB_OUTPUT
+          echo "web_link=$web_link" >> $GITHUB_OUTPUT
+
+      # Generate the default GitHub Pages URL
+      - name: Set GitHub Pages URL
+        id: gh-pages-url
+        run: |
+          # Extract repository owner and name
+          REPO_OWNER=$(echo "${{ github.repository }}" | cut -d'/' -f1)
+          REPO_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f2)
+
+          # Convert to lowercase
+          REPO_OWNER_LOWER=$(echo "$REPO_OWNER" | tr '[:upper:]' '[:lower:]')
+
+          # Generate GitHub Pages URL
+          GH_PAGES_URL="https://${REPO_OWNER_LOWER}.github.io/${REPO_NAME}/"
+          echo "gh_pages_url=${GH_PAGES_URL}" >> $GITHUB_OUTPUT
+
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
@@ -208,17 +334,17 @@ jobs:
           name: "Nightly Build (${{ github.sha }})"
           body: |
             ### Automated build for commit [${{ github.sha }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }})
-            
-            **WebGL Build**: Play directly in your browser at [https://tsigler2.github.io/mggj/](https://tsigler2.github.io/mggj/)
-            
-            ### Build Status
-            | Platform | Status |
-            |----------|--------|
-            | Windows  | ${{ steps.job-status.outputs.windows_status }} |
-            | Linux    | ${{ steps.job-status.outputs.linux_status }} |
-            | macOS    | ${{ steps.job-status.outputs.mac_status }} |
-            | Web      | ${{ steps.job-status.outputs.web_status }} |
-            
+
+            **WebGL Build**: Play directly in your browser at [${{ steps.gh-pages-url.outputs.gh_pages_url }}](${{ steps.gh-pages-url.outputs.gh_pages_url }})
+
+            ### Build Status & Downloads
+            | Platform | Status | Download |
+            |----------|--------|----------|
+            | Windows  | ${{ steps.job-status.outputs.windows_status }} | ${{ steps.asset-links.outputs.windows_link && format('<a href="{0}">Download</a>', steps.asset-links.outputs.windows_link) || 'Not available' }} |
+            | Linux    | ${{ steps.job-status.outputs.linux_status }} | ${{ steps.asset-links.outputs.linux_link && format('<a href="{0}">Download</a>', steps.asset-links.outputs.linux_link) || 'Not available' }} |
+            | macOS    | ${{ steps.job-status.outputs.mac_status }} | ${{ steps.asset-links.outputs.mac_link && format('<a href="{0}">Download</a>', steps.asset-links.outputs.mac_link) || 'Not available' }} |
+            | Web      | ${{ steps.job-status.outputs.web_status }} | ${{ steps.asset-links.outputs.web_link && format('<a href="{0}">Download</a>', steps.asset-links.outputs.web_link) || 'Not available' }} |
+
             ### Download Links
             - Windows: Download the .exe file above
             - Linux: Download the .x86_64 file above
