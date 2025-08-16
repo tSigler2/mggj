@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-        
+
       - name: Cache NuGet packages
         uses: actions/cache@v3
         with:
@@ -22,15 +22,15 @@ jobs:
           key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
           restore-keys: |
             ${{ runner.os }}-nuget-
-            
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 8.0.x
-          
+
       - name: Install dotnet-format
         run: dotnet tool install -g dotnet-format
-          
+
       - name: Formatting check
         run: |
           changed_files=$(git diff --name-only --diff-filter=ACMRT HEAD^ | grep '\.cs$' || true)
@@ -40,9 +40,9 @@ jobs:
           else
             echo "No C# files changed - skipping formatting check"
           fi
-        
+
       - name: Restore dependencies
         run: dotnet restore mggj.csproj
-        
+
       - name: Build project
         run: dotnet build mggj.csproj --configuration Release

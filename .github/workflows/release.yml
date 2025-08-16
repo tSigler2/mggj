@@ -28,15 +28,15 @@ jobs:
               echo "dotnet_version=mcr.microsoft.com/dotnet/sdk:6.0-jammy" >> $GITHUB_OUTPUT
           else
               echo "dotnet_version=mcr.microsoft.com/dotnet/sdk:8.0-jammy" >> $GITHUB_OUTPUT
-          fi       
-          
+          fi
+
   build:
     name: Build Image
     runs-on: ubuntu-22.04
     needs: [version]
     steps:
       - uses: actions/checkout@v3
-      - run:  echo IMAGE_OWNER=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]') >> $GITHUB_ENV
+      - run: echo IMAGE_OWNER=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]') >> $GITHUB_ENV
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1.14.1
         with:
@@ -70,7 +70,7 @@ jobs:
     needs: [version]
     steps:
       - uses: actions/checkout@v3
-      - run:  echo IMAGE_OWNER=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]') >> $GITHUB_ENV
+      - run: echo IMAGE_OWNER=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]') >> $GITHUB_ENV
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1.14.1
         with:
