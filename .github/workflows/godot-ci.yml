@@ -143,6 +143,11 @@ jobs:
           cd $PROJECT_PATH
           godot --headless --verbose --export-release "Web" "$EXPORT_DIR/web/index.html"
 
+      - name: Add Version File
+        run: |
+          echo "${{ github.sha }}" > build/web/version.txt
+          date +%s > build/web/build_timestamp.txt
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
