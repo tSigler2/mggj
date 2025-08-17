@@ -3,7 +3,7 @@ using Godot;
 
 public partial class Enemy : BaseEntity
 {
-    private Action<double, double, double, double, double> BulletGenerator;
+    protected Action<double, double, double, double, double> BulletGenerator;
 
     [Export]
     private double deltaAccumulate;
@@ -12,13 +12,16 @@ public partial class Enemy : BaseEntity
     private double GenerateInterval;
 
     [Export]
-    private double GenerateSpaceInterval;
+    protected double GenerateSpaceInterval;
 
     [Export]
     private double Radius;
 
     [Export]
     private double BulletSpeed;
+
+    [Export]
+    private int Damage;
 
     public override void _Ready()
     {
@@ -35,7 +38,6 @@ public partial class Enemy : BaseEntity
             double spaceAccumulate = 0.0;
             while (spaceAccumulate < 360.0)
             {
-                GD.Print(spaceAccumulate);
                 var bullet = new Bullet();
                 bullet.Position = new Vector2(
                     (float)Mathf.Cos(spaceAccumulate * Math.PI / 180) * (float)Radius,
@@ -54,15 +56,12 @@ public partial class Enemy : BaseEntity
     public override void _PhysicsProcess(double delta)
     {
         MoveAndSlide();
-        //var collide = MoveAndCollide(Velocity * (float)delta);
+        var collide = MoveAndCollide(Velocity * (float)delta);
 
-        //if (collide != null)
-        //{
-        //if (collide.GetCollider() is PlayerBullet)
-        //{
-        //    Health -= collide.GetCollider().Damage;
-        //}
-        //}
+        if (collide != null)
+        {
+            if (collide.GetCollider() is Player) { }
+        }
     }
 
     public override void _Process(double delta)
@@ -83,9 +82,9 @@ public partial class Enemy : BaseEntity
 
     private void OnBodyEntered(Node2D body)
     {
-        //        if(body is PlayerBullet bullet)
-        //        {
-        //            Health -= bullet.Damage;
-        //        }
+        if (body is Player p)
+        {
+            p.Health -= Damage;
+        }
     }
 }

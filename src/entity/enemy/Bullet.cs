@@ -40,11 +40,11 @@ public partial class Bullet : BaseEntity
 
     private void OnBodyEntered(Node2D body)
     {
-        //        if(body is Player p)
-        //        {
-        //            p.Health -= Damage;
-        //            QueueFree();
-        //        }
+        if (body is Player p)
+        {
+            p.Health -= Damage;
+            QueueFree();
+        }
     }
 
     private void OnVisibilityNotifier2DScreenExited()
