@@ -1,0 +1,171 @@
+[gd_scene load_steps=2 format=3 uid="uid://x0rn8b6bnlq3"]
+
+[ext_resource type="Script" uid="uid://uq17860h72mq" path="res://src/manage/UI.cs" id="1_cy4bk"]
+
+[node name="UiSystem" type="CanvasLayer"]
+script = ExtResource("1_cy4bk")
+
+[node name="MainMenu" type="MarginContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -50.5
+offset_right = 48.0
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu"]
+layout_mode = 2
+
+[node name="Button1" type="Button" parent="MainMenu/VBoxContainer"]
+layout_mode = 2
+text = "Start Game"
+
+[node name="Button2" type="Button" parent="MainMenu/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="Button3" type="Button" parent="MainMenu/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[node name="SettingsMenu" type="MarginContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -29.5
+offset_top = -39.0
+offset_right = 29.5
+offset_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsMenu"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsMenu/VBoxContainer"]
+layout_mode = 2
+text = "Volume"
+
+[node name="HSlider" type="HSlider" parent="SettingsMenu/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="SettingsMenu/VBoxContainer"]
+layout_mode = 2
+text = "Back"
+
+[node name="PauseMenu" type="MarginContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.5
+offset_top = -50.5
+offset_right = 55.5
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu"]
+layout_mode = 2
+
+[node name="Button1" type="Button" parent="PauseMenu/VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="Button2" type="Button" parent="PauseMenu/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="Button3" type="Button" parent="PauseMenu/VBoxContainer"]
+layout_mode = 2
+text = "Quit to Menu"
+
+[node name="HUD" type="MarginContainer" parent="."]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD"]
+layout_mode = 2
+
+[node name="Player health" type="TextureRect" parent="HUD/HBoxContainer"]
+layout_mode = 2
+
+[node name="Score" type="Label" parent="HUD/HBoxContainer"]
+layout_mode = 2
+
+[node name="Timer" type="Label" parent="HUD/HBoxContainer"]
+layout_mode = 2
+
+[node name="LoseScreen" type="MarginContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.5
+offset_top = -33.0
+offset_right = 55.5
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LoseScreen"]
+layout_mode = 2
+
+[node name="Button1" type="Button" parent="LoseScreen/VBoxContainer"]
+layout_mode = 2
+text = "Restart"
+
+[node name="Button2" type="Button" parent="LoseScreen/VBoxContainer"]
+layout_mode = 2
+text = "Quit to Menu"
+
+[node name="WinScreen" type="MarginContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WinScreen"]
+layout_mode = 2
+
+[node name="Button1" type="Button" parent="WinScreen/VBoxContainer"]
+layout_mode = 2
+text = "Quit to Menu"
+
+[connection signal="pressed" from="MainMenu/VBoxContainer/Button1" to="." method="OnStartButtonPressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/Button2" to="." method="OnSettingsButtonPressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/Button3" to="." method="OnQuitButtonPressed"]
+[connection signal="visibility_changed" from="SettingsMenu/VBoxContainer/HSlider" to="." method="_on_volume_slider_value_chan"]
+[connection signal="pressed" from="SettingsMenu/VBoxContainer/Button" to="." method="OnBackButtonPressed"]
+[connection signal="pressed" from="PauseMenu/VBoxContainer/Button1" to="." method="OnResumeButtonPressed"]
+[connection signal="pressed" from="PauseMenu/VBoxContainer/Button2" to="." method="OnSettingsButtonPressed"]
+[connection signal="pressed" from="PauseMenu/VBoxContainer/Button3" to="." method="OnQuitToMenuButtonPressed"]
+[connection signal="pressed" from="LoseScreen/VBoxContainer/Button1" to="." method="OnStartButtonPressed"]
+[connection signal="pressed" from="LoseScreen/VBoxContainer/Button2" to="." method="OnQuitToMenuButtonPressed"]
+[connection signal="pressed" from="WinScreen/VBoxContainer/Button1" to="." method="OnQuitToMenuButtonPressed"]
