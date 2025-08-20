@@ -5,8 +5,15 @@ public partial class Bullet : BaseEntity
     [Export]
     private int Damage;
 
+    [Export]
+    public float Height;
+
+    [Export]
+    public float HeightDelta = 1.0f;
+
     public Sprite2D sprite;
-    private CollisionShape2D Collider;
+    private RectangleShape2D ColliderShape;
+    private CollisionShape2D Collision;
 
     public override void _Ready()
     {
@@ -14,29 +21,29 @@ public partial class Bullet : BaseEntity
         sprite.Texture = (Texture2D)ResourceLoader.Load("assets/art/test/asteroid.png");
         AddChild(sprite);
 
-        Collider = new CollisionShape2D();
-        Collider.Shape = new RectangleShape2D();
-        AddChild(Collider);
+        Collision = new CollisionShape2D();
+
+        ColliderShape = new RectangleShape2D();
+        ColliderShape.Size = new Vector2(0.0f, 20.0f);
+        Collision.Shape = ColliderShape;
+        Height = Viewport.Y;
         Show();
     }
 
     public override void _Process(double delta)
     {
-        Position += Velocity * (float)delta;
-        //Collider.Shape = (Vector2)sprite.Texture.GetSize();
-    }
-
-    public override void _PhysicsProcess(double delta)
-    {
-        var collide = MoveAndCollide(Velocity * (float)delta);
-
-        if (collide != null)
+        if (Position.X >= 0)
         {
-            if (collide.GetCollider().HasMethod("AlterHealth"))
-            {
-                collide.GetCollider().Call("AlterHealth", Damage);
-            }
+            QueueFree();
+            return;
         }
+
+        Height -= HeightDelta;
+        Position -= Velocity * (float)delta;
+
+        ColliderShape.Size = new Vector2(ColliderShape.Size.X, Height);
+
+        sprite.Position = Position;
     }
 
     private void OnBodyEntered(Node2D body)

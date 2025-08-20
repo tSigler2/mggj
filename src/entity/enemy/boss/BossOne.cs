@@ -24,9 +24,6 @@ public partial class BossOne : Enemy
 
         BulletGenerator = (Random rng, double bulletSpeed) =>
         {
-            int count = 0;
-            double interval = 0.0;
-
             float xPos = (float)rng.NextDouble() * Viewport.X;
             var bullet = new Bullet();
             bullet.Position = new Vector2(xPos, Viewport.Y);
