@@ -5,7 +5,7 @@ public partial class Bullet : BaseEntity
     [Export]
     private int Damage;
 
-    private Sprite2D sprite;
+    public Sprite2D sprite;
     private CollisionShape2D Collider;
 
     public override void _Ready()
@@ -15,7 +15,7 @@ public partial class Bullet : BaseEntity
         AddChild(sprite);
 
         Collider = new CollisionShape2D();
-        Collider.Shape = new CircleShape2D() { Radius = (sprite.Texture.GetSize().X / 2) };
+        Collider.Shape = new RectangleShape2D();
         AddChild(Collider);
         Show();
     }
@@ -23,6 +23,7 @@ public partial class Bullet : BaseEntity
     public override void _Process(double delta)
     {
         Position += Velocity * (float)delta;
+        //Collider.Shape = (Vector2)sprite.Texture.GetSize();
     }
 
     public override void _PhysicsProcess(double delta)
