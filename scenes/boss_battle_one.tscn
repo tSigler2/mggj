@@ -1,3 +1,25 @@
-[gd_scene format=3 uid="uid://btn41w7n5d041"]
+[gd_scene load_steps=3 format=3 uid="uid://btn41w7n5d041"]
 
-[node name="BossBattle1" type="Node2D"]
+[ext_resource type="Texture2D" uid="uid://cvsnbi2i8o4ag" path="res://assets/art/test/battle_bg.png" id="1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xa4rf"]
+
+[node name="BossBattleOne" type="Node2D"]
+
+[node name="Background" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("1")
+expand_mode = 3
+
+[node name="Player" type="Node" parent="."]
+
+[node name="Boss" type="Sprite2D" parent="."]
+
+[node name="ProjectileContainer" type="Node2D" parent="."]
+
+[node name="Boundaries" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries"]
+shape = SubResource("RectangleShape2D_xa4rf")
