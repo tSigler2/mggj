@@ -3,11 +3,13 @@
 [ext_resource type="Texture2D" uid="uid://bebni8unrl265" path="res://assets/art/test/friend_one_room.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://3tyaysiqocbh" path="res://assets/art/test/moth_1.png" id="2"]
 [ext_resource type="Script" uid="uid://e7qqvppbtiqf" path="res://src/manage/Dialogue.cs" id="3"]
-[ext_resource type="PackedScene" uid="uid://btn41w7n5d041" path="res://scenes/boss_battle_one.tscn" id="4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_umafs"]
 
 [node name="FriendOneBedroom" type="Node2D"]
 
 [node name="Background" type="TextureRect" parent="."]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource("1")
@@ -24,5 +26,4 @@ script = ExtResource("3")
 position = Vector2(400, 500)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea"]
-shape = RectangleShape2D.new()
-extents = Vector2(100, 50)
+shape = SubResource("RectangleShape2D_umafs")
