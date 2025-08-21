@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bb10upxckm62m"]
+
+[ext_resource type="Texture2D" uid="uid://bebni8unrl265" path="res://assets/art/test/friend_one_room.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://3tyaysiqocbh" path="res://assets/art/test/moth_1.png" id="2"]
+[ext_resource type="Script" uid="uid://e7qqvppbtiqf" path="res://src/manage/Dialogue.cs" id="3"]
+[ext_resource type="PackedScene" uid="uid://btn41w7n5d041" path="res://scenes/boss_battle_one.tscn" id="4"]
+
+[node name="FriendOneBedroom" type="Node2D"]
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("1")
+expand_mode = 3
+
+[node name="Friend" type="Sprite2D" parent="."]
+position = Vector2(400, 300)
+texture = ExtResource("2")
+
+[node name="DialogueSystem" type="Node" parent="."]
+script = ExtResource("3")
+
+[node name="TransitionArea" type="Area2D" parent="."]
+position = Vector2(400, 500)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea"]
+shape = RectangleShape2D.new()
+extents = Vector2(100, 50)

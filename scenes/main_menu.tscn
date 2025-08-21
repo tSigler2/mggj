@@ -1,3 +1,55 @@
-[gd_scene format=3 uid="uid://btcs4lack6574"]
+[gd_scene load_steps=3 format=3 uid="uid://btcs4lack6574"]
 
-[node name="MainMenu" type="Node2D"]
+[ext_resource type="Texture2D" uid="uid://dnw1oneiq7uib" path="res://assets/art/test/main_menu_bg.png" id="1"]
+[ext_resource type="FontFile" uid="uid://blxj0y6745at2" path="res://assets/fonts/PixelatedEleganceRegular-ovyAA.ttf" id="2"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("1")
+expand_mode = 3
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 100.0
+offset_right = 800.0
+offset_bottom = 200.0
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 64
+text = "Moth Friends"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 500.0
+offset_top = 300.0
+offset_right = 700.0
+offset_bottom = 500.0
+alignment = 1
+
+[node name="StartButton" type="Button" parent="Buttons"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 24
+text = "Start Game"
+
+[node name="SettingsButton" type="Button" parent="Buttons"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 24
+text = "Settings"
+
+[node name="QuitButton" type="Button" parent="Buttons"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 24
+text = "Quit"
