@@ -1,45 +1,37 @@
-[gd_scene load_steps=4 format=3 uid="uid://btcs4lack6574"]
+[gd_scene load_steps=4 format=3 uid="uid://wc6nniwp6y8v"]
 
 [ext_resource type="Texture2D" uid="uid://dnw1oneiq7uib" path="res://assets/art/test/main_menu_bg.png" id="1"]
-[ext_resource type="Script" uid="uid://uq17860h72mq" path="res://src/manage/UI.cs" id="1_bqqt6"]
+[ext_resource type="Script" uid="uid://m2fhjjqmr5ml" path="res://src/manage/MainMenu.cs" id="1_bqqt6"]
 [ext_resource type="FontFile" uid="uid://blxj0y6745at2" path="res://assets/fonts/PixelatedEleganceRegular-ovyAA.ttf" id="2"]
 
-[node name="MainMenu" type="Control"]
-layout_mode = 3
+[node name="MainMenu" type="MarginContainer" node_paths=PackedStringArray("StartButton", "SettingsButton", "QuitButton")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bqqt6")
+StartButton = NodePath("Buttons/StartButton")
+SettingsButton = NodePath("Buttons/SettingsButton")
+QuitButton = NodePath("Buttons/QuitButton")
 
 [node name="Background" type="TextureRect" parent="."]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
+layout_mode = 2
 texture = ExtResource("1")
 expand_mode = 3
 
-[node name="Title" type="Label" parent="."]
-layout_mode = 0
-offset_left = 121.0
-offset_top = 107.0
-offset_right = 1073.0
-offset_bottom = 226.0
+[node name="Buttons" type="VBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="Buttons"]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 64
 text = "Moth Friends
 Waiting in the Wings"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Buttons" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 500.0
-offset_top = 300.0
-offset_right = 700.0
-offset_bottom = 500.0
-alignment = 1
 
 [node name="StartButton" type="Button" parent="Buttons"]
 layout_mode = 2
@@ -58,7 +50,3 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 24
 text = "Quit"
-
-[connection signal="pressed" from="Buttons/StartButton" to="." method="StartGame"]
-[connection signal="pressed" from="Buttons/SettingsButton" to="." method="ShowSettings"]
-[connection signal="pressed" from="Buttons/QuitButton" to="." method="QuitGame"]
