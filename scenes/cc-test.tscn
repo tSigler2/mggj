@@ -1,8 +1,40 @@
-[gd_scene load_steps=2 format=3 uid="uid://d0gx1naxd7ugo"]
+[gd_scene load_steps=8 format=3 uid="uid://d0gx1naxd7ugo"]
 
-[ext_resource type="Script" uid="uid://cv6kdxqu6kghr" path="res://src/manage/talktest.gd" id="1_1n7tu"]
+[ext_resource type="PackedScene" uid="uid://cs4fmv7d4t4bf" path="res://scenes/player.tscn" id="2_oqwi3"]
+[ext_resource type="Texture2D" uid="uid://b2xa516xjo0m2" path="res://icon.svg" id="2_peehu"]
+[ext_resource type="Script" uid="uid://crkwgfgsuyoht" path="res://Dialogue/PlayerDialogue.gd" id="2_r7saq"]
+[ext_resource type="PackedScene" uid="uid://75mvwey5ooq" path="res://Dialogue/Actionable.tscn" id="3_r7saq"]
+[ext_resource type="Resource" uid="uid://btl2euykcm0qt" path="res://Dialogue/untitled.dialogue" id="4_ud8lg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4exeu"]
+radius = 98.3544
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_45n1d"]
+radius = 16.0312
 
 [node name="Cc-test" type="Node2D"]
 
-[node name="Node2D" type="Node2D" parent="."]
-script = ExtResource("1_1n7tu")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(552, 237)
+scale = Vector2(0.640625, 0.625)
+texture = ExtResource("2_peehu")
+
+[node name="Actionable" parent="Sprite2D" instance=ExtResource("3_r7saq")]
+dialogue_resource = ExtResource("4_ud8lg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Actionable"]
+shape = SubResource("CircleShape2D_4exeu")
+
+[node name="Player" parent="." instance=ExtResource("2_oqwi3")]
+position = Vector2(-1, 0)
+
+[node name="Direction" type="Marker2D" parent="Player"]
+script = ExtResource("2_r7saq")
+
+[node name="ActionableFinder" type="Area2D" parent="Player/Direction"]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Direction/ActionableFinder"]
+position = Vector2(35, 40)
+shape = SubResource("CircleShape2D_45n1d")

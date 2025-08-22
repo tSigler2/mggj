@@ -11,8 +11,10 @@ namespace DialogueManagerRuntime
 
 	Control balloon;
 	RichTextLabel characterLabel;
+	TextureRect portrait;
 	RichTextLabel dialogueLabel;
 	VBoxContainer responsesMenu;
+	TextureRect dialogueBox;
 
 	Resource resource;
 	Array<Variant> temporaryGameStates = new Array<Variant>();
@@ -45,6 +47,8 @@ namespace DialogueManagerRuntime
 	  characterLabel = GetNode<RichTextLabel>("%CharacterLabel");
 	  dialogueLabel = GetNode<RichTextLabel>("%DialogueLabel");
 	  responsesMenu = GetNode<VBoxContainer>("%ResponsesMenu");
+	  portrait = GetNode<TextureRect>("%Portrait");
+	  dialogueBox = GetNode<TextureRect>("%DialogueBox");
 
 	  balloon.Hide();
 
@@ -160,6 +164,21 @@ namespace DialogueManagerRuntime
 	  // Set up the character name
 	  characterLabel.Visible = !string.IsNullOrEmpty(dialogueLine.Character);
 	  characterLabel.Text = Tr(dialogueLine.Character, "dialogue");
+	  string portraitPath = $"res://assets/art/ui/{characterLabel.Text}.png";
+	  if (FileAccess.FileExists(portraitPath)){
+		portrait.Texture = (Texture2D)ResourceLoader.Load(portraitPath);
+	}
+	  else{
+		portrait.Texture = null;
+	}
+	  string dialogueBoxPath = $"res://assets/art/ui/{characterLabel.Text.ToLower()}_dialoguebox.png";
+	  if (FileAccess.FileExists(dialogueBoxPath)){
+		dialogueBox.Texture = (Texture2D)ResourceLoader.Load(dialogueBoxPath);
+	}
+	  else{
+		dialogueBox.Texture = null;
+	}
+	
 
 	  // Set up the dialogue
 	  dialogueLabel.Hide();
