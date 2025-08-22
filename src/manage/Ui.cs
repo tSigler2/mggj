@@ -3,6 +3,8 @@ using System;
 
 public partial class UI : CanvasLayer
 {
+    public Vector2 ScreenSize = new Vector2(480.0f, 640.0f);
+
     // Export references to menu scenes
     [Export]
     public PackedScene MainMenuScene;
