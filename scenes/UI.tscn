@@ -68,6 +68,7 @@ PauseMenuScene = ExtResource("4_3wlde")
 BulletHellHUDScene = ExtResource("3_ua6yw")
 
 [node name="FadeSystem" type="MarginContainer" parent="."]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -87,13 +88,13 @@ libraries = {
 visible = false
 
 [node name="SettingsMenu" parent="." instance=ExtResource("4_75u2n")]
+visible = false
 
 [node name="PauseMenu" parent="." instance=ExtResource("4_3wlde")]
-
-[node name="DialogueContainer" type="MarginContainer" parent="."]
 visible = false
 
 [node name="BulletHellHud" parent="." instance=ExtResource("3_ua6yw")]
+visible = false
 
 [node name="SceneTransitionOverlay" type="ColorRect" parent="."]
 visible = false
