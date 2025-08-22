@@ -32,7 +32,7 @@ public partial class UI : CanvasLayer
     private MainMenu mainMenu;
     private Control settingsMenu;
     private Control pauseMenu;
-    private Control bulletHellHUD;
+    private BulletHellHUD bulletHellHUD;
 
     private bool gameStarted = false;
     private bool inBulletHell = false;
@@ -110,7 +110,7 @@ public partial class UI : CanvasLayer
 
         if (BulletHellHUDScene != null)
         {
-            bulletHellHUD = BulletHellHUDScene.Instantiate<Control>();
+            bulletHellHUD = BulletHellHUDScene.Instantiate<BulletHellHUD>();
             AddChild(bulletHellHUD);
             bulletHellHUD.Visible = false;
         }
@@ -233,28 +233,28 @@ public partial class UI : CanvasLayer
         PlayButtonClick();
         GetTree().Quit();
     }
-
+    
     public void UpdateScore(int score)
     {
-        if (ScoreLabel != null)
+        if (bulletHellHUD != null)
         {
-            ScoreLabel.Text = $"Score: {score}";
+            bulletHellHUD.UpdateScore(score);
         }
     }
 
     public void UpdateHealth(byte health)
     {
-        if (HealthLabel != null)
+        if (bulletHellHUD != null)
         {
-            HealthLabel.Text = $"Health: {health}";
+            bulletHellHUD.UpdateHealth(health);
         }
     }
 
     public void UpdateAbility(string ability)
     {
-        if (AbilityLabel != null)
+        if (bulletHellHUD != null)
         {
-            AbilityLabel.Text = $"Ability: {ability}";
+            bulletHellHUD.UpdateAbility(ability);
         }
     }
 

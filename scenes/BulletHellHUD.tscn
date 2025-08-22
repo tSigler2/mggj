@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhf54hactx38f"]
+
+[ext_resource type="Script" uid="uid://cc72jrsea68hj" path="res://src/manage/BulletHellHUD.cs" id="1_xjha1"]
+
+[node name="BulletHellHud" type="MarginContainer" node_paths=PackedStringArray("ScoreLabel", "HealthLabel", "AbilityLabel")]
+script = ExtResource("1_xjha1")
+ScoreLabel = NodePath("ScoreLabel")
+HealthLabel = NodePath("HealthLabel")
+AbilityLabel = NodePath("AbilityLabel")
+
+[node name="ScoreLabel" type="Label" parent="."]
+layout_mode = 2
+
+[node name="HealthLabel" type="Label" parent="."]
+layout_mode = 2
+
+[node name="AbilityLabel" type="Label" parent="."]
+layout_mode = 2
