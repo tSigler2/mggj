@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Godot;
 
 public partial class BossOne : Enemy
@@ -20,25 +21,76 @@ public partial class BossOne : Enemy
     [Export]
     private int BulletCount = 7;
 
+    [Export]
+    private Player p;
+
     private float xPos;
+    private int PatternCount = 0;
+    private double GlobalDeltaAccumulate;
+
+    private Action<Random, double>[] BulletPatterns = new Action<Random, double>[3];
 
     public override void _Ready()
     {
         base._Ready();
         rng = new Random();
+        GlobalDeltaAccumulate = 0;
 
-        BulletGenerator = (Random rng, double bulletSpeed) =>
+        BulletPatterns[0] = (Random rng, double bulletSpeed) =>
+        {
+            var bullet = new Bullet();
+            bullet.Position = new Vector2((float)(rng.NextDouble() * Viewport.X), Viewport.Y);
+            bullet.Velocity = new Vector2(0.0f, (float)-bulletSpeed);
+        };
+
+        BulletPatterns[1] = (Random rng, double bulletSpeed) =>
         {
             var bullet = new Bullet();
             bullet.Position = new Vector2(xPos, Viewport.Y);
-            bullet.Velocity = new Vector2(0.0f, (float)-bulletSpeed);
+
+            double ArchTanAngle = Mathf.Atan2(p.Position.Y - Position.Y, p.Position.X - Position.X);
+
+            bullet.Velocity = new Vector2(
+                (float)(Mathf.Cos(ArchTanAngle) * bulletSpeed),
+                (float)(Mathf.Sin(ArchTanAngle) * bulletSpeed)
+            );
         };
+
+        BulletPatterns[2] = (Random rng, double bulletSpeed) =>
+        {
+            float AngleDelta = 20.0f;
+            float AngleCurrent = 0.0f;
+
+            while (AngleCurrent <= 360.0f)
+            {
+                var bullet = new BossOneBullet();
+                bullet.Position = new Vector2(Position.X, Position.Y);
+
+                AngleCurrent += 20.0f;
+            }
+        };
+
+        BulletGenerator = BulletPatterns[0];
     }
 
     public override void _Process(double delta)
     {
         base._Process(delta);
         deltaAccumulate += delta;
+        GlobalDeltaAccumulate += delta;
+
+        if (GlobalDeltaAccumulate >= 60.0 && GlobalDeltaAccumulate < 120.0 && PatternCount == 0)
+        {
+            PatternCount++;
+        }
+        else if (
+            GlobalDeltaAccumulate >= 120.0
+            && GlobalDeltaAccumulate < 180.0
+            && PatternCount == 1
+        )
+        {
+            PatternCount++;
+        }
 
         if (
             (LongIntervalActive && deltaAccumulate >= LongInterval)

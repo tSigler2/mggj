@@ -1,18 +1,14 @@
 using Godot;
 
-public partial class Bullet : BaseEntity
+public partial class BossOneBullet : BaseEntity
 {
     [Export]
-    private int Damage;
+    public int Damage;
 
     [Export]
-    public float Height;
+    public string SpritePath;
 
-    [Export]
-    public float HeightDelta = 1.0f;
-
-    [Export]
-    public string SpritePath = "";
+    public double Height;
 
     public Sprite2D sprite;
     private RectangleShape2D ColliderShape;
@@ -45,13 +41,6 @@ public partial class Bullet : BaseEntity
             QueueFree();
             return;
         }
-
-        Height -= HeightDelta;
-        Position -= Velocity * (float)delta;
-
-        ColliderShape.Size = new Vector2(ColliderShape.Size.X, Height);
-
-        sprite.Position = Position;
     }
 
     private void OnBodyEntered(Node2D body)
