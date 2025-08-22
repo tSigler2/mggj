@@ -3,15 +3,20 @@ using System;
 
 public partial class UI : CanvasLayer
 {
-    public Vector2 ScreenSize = new Vector2(480.0f, 640.0f);
+    // Export references to menu scenes
+    [Export]
+    public PackedScene MainMenuScene;
 
-    // Menu containers
-    private MarginContainer mainMenu;
-    private MarginContainer settingsMenu;
-    private MarginContainer pauseMenu;
-    private MarginContainer dialogueContainer;
-    private MarginContainer bulletHellHUD;
+    [Export]
+    public PackedScene SettingsMenuScene;
 
+    [Export]
+    public PackedScene PauseMenuScene;
+
+    [Export]
+    public PackedScene BulletHellHUDScene;
+
+    // Export references to UI elements in the HUD
     [Export]
     public Label ScoreLabel;
 
@@ -21,11 +26,17 @@ public partial class UI : CanvasLayer
     [Export]
     public Label AbilityLabel;
 
+    // Menu instances
+    private MainMenu mainMenu;
+    private Control settingsMenu;
+    private Control pauseMenu;
+    private Control bulletHellHUD;
+
     private bool gameStarted = false;
-    private bool inDialogue = false;
     private bool inBulletHell = false;
 
     private AudioStreamPlayer buttonClickPlayer;
+    private ColorRect sceneTransitionOverlay;
 
     public override void _Ready()
     {
@@ -39,7 +50,7 @@ public partial class UI : CanvasLayer
         buttonClickPlayer.Bus = "UI";
         buttonClickPlayer.VolumeDb = -10;
 
-        // Create fade overlay
+        // Create initial fade overlay
         ColorRect fadeOverlay = new ColorRect();
         fadeOverlay.Name = "FadeOverlay";
         fadeOverlay.AnchorRight = 1;
@@ -47,27 +58,141 @@ public partial class UI : CanvasLayer
         fadeOverlay.Color = new Color(0, 0, 0, 1);
         AddChild(fadeOverlay);
 
+        // Create scene transition overlay but don't add it yet
+        sceneTransitionOverlay = new ColorRect();
+        sceneTransitionOverlay.Name = "SceneTransitionOverlay";
+        sceneTransitionOverlay.AnchorRight = 1;
+        sceneTransitionOverlay.AnchorBottom = 1;
+        sceneTransitionOverlay.Color = new Color(0, 0, 0, 0);
+        sceneTransitionOverlay.Visible = false;
+
+        // Instantiate menu scenes
+        InstantiateMenus();
+
         // Start fade animation
         FadeInFromBlack();
 
         ProcessMode = ProcessModeEnum.Always;
 
-        // Get menu references
-        mainMenu = GetNode<MarginContainer>("MainMenu");
-        settingsMenu = GetNode<MarginContainer>("SettingsMenu");
-        pauseMenu = GetNode<MarginContainer>("PauseMenu");
-        dialogueContainer = GetNode<MarginContainer>("DialogueContainer");
-        bulletHellHUD = GetNode<MarginContainer>("BulletHellHUD");
+        ShowMainMenu();
+    }
 
-        // Initialize HUD elements
-        if (bulletHellHUD != null)
+    private void InstantiateMenus()
+    {
+        // Instantiate MainMenu
+        if (MainMenuScene != null)
         {
-            bulletHellHUD.Hide();
+            mainMenu = MainMenuScene.Instantiate<MainMenu>();
+            AddChild(mainMenu);
+
+            // Connect to button events
+            mainMenu.StartButtonPressed += OnStartButtonPressed;
+            mainMenu.SettingsButtonPressed += OnSettingsButtonPressed;
+            mainMenu.QuitButtonPressed += OnQuitButtonPressed;
         }
 
-        dialogueContainer.Hide();
+        // Instantiate other menus
+        if (SettingsMenuScene != null)
+        {
+            settingsMenu = SettingsMenuScene.Instantiate<Control>();
+            AddChild(settingsMenu);
+            settingsMenu.Visible = false;
+        }
 
-        ShowMainMenu();
+        if (PauseMenuScene != null)
+        {
+            pauseMenu = PauseMenuScene.Instantiate<Control>();
+            AddChild(pauseMenu);
+            pauseMenu.Visible = false;
+        }
+
+        if (BulletHellHUDScene != null)
+        {
+            bulletHellHUD = BulletHellHUDScene.Instantiate<Control>();
+            AddChild(bulletHellHUD);
+            bulletHellHUD.Visible = false;
+        }
+    }
+
+    private async void FadeInFromBlack(float duration = 1.0f)
+    {
+        ColorRect fadeOverlay = GetNode<ColorRect>("FadeOverlay");
+        float elapsed = 0;
+
+        while (elapsed < duration)
+        {
+            elapsed += (float)GetProcessDeltaTime();
+            float alpha = Mathf.Lerp(1, 0, elapsed / duration);
+            fadeOverlay.Color = new Color(0, 0, 0, alpha);
+            await ToSignal(GetTree(), "process_frame");
+        }
+
+        fadeOverlay.QueueFree();
+    }
+
+    private void ShowMainMenu()
+    {
+        if (mainMenu != null)
+            mainMenu.Visible = true;
+        if (settingsMenu != null)
+            settingsMenu.Visible = false;
+        if (pauseMenu != null)
+            pauseMenu.Visible = false;
+        gameStarted = false;
+        GetTree().Paused = true;
+        Input.MouseMode = Input.MouseModeEnum.Visible;
+        if (bulletHellHUD != null)
+            bulletHellHUD.Visible = false;
+    }
+
+    private void ShowSettingsMenu()
+    {
+        if (settingsMenu != null)
+            settingsMenu.Visible = true;
+        if (mainMenu != null)
+            mainMenu.Visible = false;
+        if (pauseMenu != null)
+            pauseMenu.Visible = false;
+        if (bulletHellHUD != null)
+            bulletHellHUD.Visible = false;
+    }
+
+    public async void TransitionToScene(string scenePath)
+    {
+        // Add the transition overlay if it hasn't been added yet
+        if (sceneTransitionOverlay.GetParent() == null)
+        {
+            AddChild(sceneTransitionOverlay);
+        }
+
+        sceneTransitionOverlay.Visible = true;
+
+        // Fade out
+        float elapsed = 0;
+        float duration = 0.5f;
+
+        while (elapsed < duration)
+        {
+            elapsed += (float)GetProcessDeltaTime();
+            float alpha = Mathf.Lerp(0, 1, elapsed / duration);
+            sceneTransitionOverlay.Color = new Color(0, 0, 0, alpha);
+            await ToSignal(GetTree(), "process_frame");
+        }
+
+        // Change scene
+        GetTree().ChangeSceneToFile(scenePath);
+
+        // Fade in
+        elapsed = 0;
+        while (elapsed < duration)
+        {
+            elapsed += (float)GetProcessDeltaTime();
+            float alpha = Mathf.Lerp(1, 0, elapsed / duration);
+            sceneTransitionOverlay.Color = new Color(0, 0, 0, alpha);
+            await ToSignal(GetTree(), "process_frame");
+        }
+
+        sceneTransitionOverlay.Visible = false;
     }
 
     private void PlayButtonClick()
@@ -76,6 +201,35 @@ public partial class UI : CanvasLayer
         {
             buttonClickPlayer.Play();
         }
+    }
+
+    // Button event handlers
+    private void OnStartButtonPressed()
+    {
+        PlayButtonClick();
+        if (mainMenu != null)
+            mainMenu.Visible = false;
+        if (settingsMenu != null)
+            settingsMenu.Visible = false;
+        if (pauseMenu != null)
+            pauseMenu.Visible = false;
+        gameStarted = true;
+        GetTree().Paused = false;
+
+        // Start the game - transition to the first scene (boarding school)
+        TransitionToScene("res://scenes/boarding_school.tscn");
+    }
+
+    private void OnSettingsButtonPressed()
+    {
+        PlayButtonClick();
+        ShowSettingsMenu();
+    }
+
+    private void OnQuitButtonPressed()
+    {
+        PlayButtonClick();
+        GetTree().Quit();
     }
 
     public void UpdateScore(int score)
@@ -102,93 +256,22 @@ public partial class UI : CanvasLayer
         }
     }
 
-    private async void FadeInFromBlack(float duration = 1.0f)
-    {
-        ColorRect fadeOverlay = GetNode<ColorRect>("FadeOverlay");
-        float elapsed = 0;
-
-        while (elapsed < duration)
-        {
-            elapsed += (float)GetProcessDeltaTime();
-            float alpha = Mathf.Lerp(1, 0, elapsed / duration);
-            fadeOverlay.Color = new Color(0, 0, 0, alpha);
-            await ToSignal(GetTree(), "process_frame");
-        }
-
-        fadeOverlay.QueueFree();
-    }
-
-    public void TransitionToScene(string scenePath)
-    {
-        // Create fade overlay if it doesn't exist
-        ColorRect fadeOverlay = GetNodeOrNull<ColorRect>("SceneTransitionOverlay");
-        if (fadeOverlay == null)
-        {
-            fadeOverlay = new ColorRect();
-            fadeOverlay.Name = "SceneTransitionOverlay";
-            fadeOverlay.AnchorRight = 1;
-            fadeOverlay.AnchorBottom = 1;
-            fadeOverlay.Color = new Color(0, 0, 0, 0);
-            AddChild(fadeOverlay);
-        }
-
-        fadeOverlay.Visible = true;
-
-        // Start fade transition
-        Tween tween = CreateTween();
-        tween.TweenProperty(fadeOverlay, "color", new Color(0, 0, 0, 1), 0.5f);
-        tween.TweenCallback(
-            Callable.From(() =>
-            {
-                // Change scene
-                GetTree().ChangeSceneToFile(scenePath);
-
-                // Fade back in
-                Tween fadeIn = CreateTween();
-                fadeIn.TweenProperty(fadeOverlay, "color", new Color(0, 0, 0, 0), 0.5f);
-                fadeIn.TweenCallback(
-                    Callable.From(() =>
-                    {
-                        fadeOverlay.Visible = false;
-                    })
-                );
-            })
-        );
-    }
-
-    /*
-        public void ShowDialogue(string[] dialogueLines)
-        {
-            inDialogue = true;
-            dialogueContainer.Show();
-            bulletHellHUD.Hide();
-
-            // Start displaying dialogue
-            // dialogueContainer.Call("start_dialogue", dialogueLines);
-        }
-
-        public void EndDialogue()
-        {
-            inDialogue = false;
-            dialogueContainer.Hide();
-
-            // Transition to bullet hell mode
-            EnterBulletHellMode();
-        }
-        */
-
-
     public void EnterBulletHellMode()
     {
         inBulletHell = true;
-        bulletHellHUD.Show();
-        dialogueContainer.Hide();
+        if (bulletHellHUD != null)
+        {
+            bulletHellHUD.Visible = true;
+        }
     }
 
     public void ExitBulletHellMode()
     {
         inBulletHell = false;
-        bulletHellHUD.Hide();
+        if (bulletHellHUD != null)
+        {
+            bulletHellHUD.Visible = false;
+        }
     }
 
     public override void _Input(InputEvent @event)
@@ -198,10 +281,9 @@ public partial class UI : CanvasLayer
             // If game is started and no menu is visible, show pause menu
             if (
                 gameStarted
-                && !mainMenu.Visible
-                && !settingsMenu.Visible
-                && !pauseMenu.Visible
-                && !inDialogue
+                && (mainMenu == null || !mainMenu.Visible)
+                && (settingsMenu == null || !settingsMenu.Visible)
+                && (pauseMenu == null || !pauseMenu.Visible)
             )
             {
                 ShowPauseMenu();
@@ -209,14 +291,14 @@ public partial class UI : CanvasLayer
             }
 
             // If pause menu is visible, resume game
-            if (pauseMenu.Visible)
+            if (pauseMenu != null && pauseMenu.Visible)
             {
                 ResumeGame();
                 return;
             }
 
             // If settings menu is open, go back to previous menu
-            if (settingsMenu.Visible)
+            if (settingsMenu != null && settingsMenu.Visible)
             {
                 if (gameStarted)
                 {
@@ -228,62 +310,27 @@ public partial class UI : CanvasLayer
                 }
                 return;
             }
-
-            // If in dialogue, maybe skip dialogue or bring up options
-            /*
-            if (inDialogue)
-            {
-                // dialogueContainer.Call("advance_dialogue");
-            }*/
         }
-    }
-
-    private void ShowMainMenu()
-    {
-        mainMenu.Show();
-        settingsMenu.Hide();
-        pauseMenu.Hide();
-        gameStarted = false;
-        GetTree().Paused = true;
-        Input.MouseMode = Input.MouseModeEnum.Visible;
-        if (bulletHellHUD != null)
-            bulletHellHUD.Hide();
-        dialogueContainer.Hide();
-    }
-
-    private void ShowSettingsMenu()
-    {
-        settingsMenu.Show();
-        mainMenu.Hide();
-        pauseMenu.Hide();
-        if (bulletHellHUD != null)
-            bulletHellHUD.Hide();
-        dialogueContainer.Hide();
     }
 
     private void ShowPauseMenu()
     {
-        pauseMenu.Show();
+        if (pauseMenu != null)
+            pauseMenu.Visible = true;
         if (bulletHellHUD != null)
-            bulletHellHUD.Hide();
+            bulletHellHUD.Visible = false;
         GetTree().Paused = true;
         Input.MouseMode = Input.MouseModeEnum.Visible;
-
-        // Update volume slider in pause menu
-        HSlider pauseVolumeSlider = pauseMenu.GetNodeOrNull<HSlider>("VBoxContainer/VolumeSlider");
-        if (pauseVolumeSlider != null)
-        {
-            pauseVolumeSlider.Value = LoadVolumeSetting();
-        }
     }
 
     private void ResumeGame()
     {
         PlayButtonClick();
-        pauseMenu.Hide();
+        if (pauseMenu != null)
+            pauseMenu.Visible = false;
         if (inBulletHell && bulletHellHUD != null)
         {
-            bulletHellHUD.Show();
+            bulletHellHUD.Visible = true;
         }
         GetTree().Paused = false;
 
@@ -295,65 +342,6 @@ public partial class UI : CanvasLayer
         {
             Input.MouseMode = Input.MouseModeEnum.Visible;
         }
-    }
-
-    private void _on_start_button_pressed()
-    {
-        PlayButtonClick();
-        mainMenu.Hide();
-        settingsMenu.Hide();
-        pauseMenu.Hide();
-        gameStarted = true;
-        GetTree().Paused = false;
-
-        // Start the game - transition to the first scene (boarding school)
-        TransitionToScene("res://scenes/boarding_school.tscn");
-    }
-
-    private void _on_settings_button_pressed()
-    {
-        PlayButtonClick();
-        ShowSettingsMenu();
-    }
-
-    private void _on_resume_button_pressed()
-    {
-        PlayButtonClick();
-        ResumeGame();
-    }
-
-    private void _on_restart_button_pressed()
-    {
-        PlayButtonClick();
-        GetTree().ReloadCurrentScene();
-    }
-
-    private void _on_quit_button_pressed()
-    {
-        PlayButtonClick();
-        GetTree().Quit();
-    }
-
-    private void _on_apply_button_pressed()
-    {
-        PlayButtonClick();
-        HSlider settingsVolumeSlider = settingsMenu.GetNode<HSlider>("VBoxContainer/VolumeSlider");
-        float volume = settingsVolumeSlider != null ? (float)settingsVolumeSlider.Value : 80f;
-
-        ApplyAudioSettings(volume);
-        SaveVolumeSetting(volume);
-    }
-
-    private void _on_back_button_pressed()
-    {
-        PlayButtonClick();
-        ShowMainMenu();
-    }
-
-    private void _on_pause_volume_slider_value_changed(float value)
-    {
-        ApplyAudioSettings(value);
-        SaveVolumeSetting(value);
     }
 
     private void ApplyAudioSettings(float volume)
