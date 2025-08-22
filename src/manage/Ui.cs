@@ -1,7 +1,7 @@
-using Godot;
 using System;
+using Godot;
 
-public partial class UI : CanvasLayer
+public partial class Ui : CanvasLayer
 {
     public Vector2 ScreenSize = new Vector2(480.0f, 640.0f);
 
@@ -50,10 +50,10 @@ public partial class UI : CanvasLayer
         else
         {
             // Fallback to the hardcoded path if not assigned in editor
-            buttonClickPlayer.Stream = GD.Load<AudioStream>(
-                "res://assets/sound/ui/button_click.ogg"
-            );
-            GD.Print("ButtonClickSound not assigned in editor, using fallback");
+            //	buttonClickPlayer.Stream = GD.Load<AudioStream>(
+            //	"res://assets/sound/ui/button_click.ogg"
+            //);
+            //GD.Print("ButtonClickSound not assigned in editor, using fallback");
         }
 
         buttonClickPlayer.Bus = "UI";
