@@ -42,7 +42,7 @@ public partial class UI : CanvasLayer
         // Button click sound player
         buttonClickPlayer = new AudioStreamPlayer();
         AddChild(buttonClickPlayer);
-        
+
         if (ButtonClickSound != null)
         {
             buttonClickPlayer.Stream = ButtonClickSound;
@@ -93,13 +93,13 @@ public partial class UI : CanvasLayer
         {
             mainMenu = MainMenuScene.Instantiate<MainMenu>();
             AddChild(mainMenu);
-        
+
             // Connect to button events
             mainMenu.StartButtonPressed += OnStartButtonPressed;
             mainMenu.SettingsButtonPressed += OnSettingsButtonPressed;
             mainMenu.QuitButtonPressed += OnQuitButtonPressed;
         }
-    
+
         // Instantiate SettingsMenu
         if (SettingsMenuScene != null)
         {
@@ -108,7 +108,7 @@ public partial class UI : CanvasLayer
             settingsMenu.Visible = false;
             ConnectSettingsMenuEvents();
         }
-    
+
         // Instantiate PauseMenu
         if (PauseMenuScene != null)
         {
@@ -117,7 +117,7 @@ public partial class UI : CanvasLayer
             pauseMenu.Visible = false;
             ConnectPauseMenuEvents();
         }
-    
+
         // Instantiate BulletHellHUD (existing code)
         if (BulletHellHUDScene != null)
         {
@@ -126,12 +126,16 @@ public partial class UI : CanvasLayer
             bulletHellHUD.Visible = false;
         }
     }
-    
+
     private void ApplyResolution(string resolution)
     {
         // Parse resolution string (e.g., "1920x1080")
         var parts = resolution.Split('x');
-        if (parts.Length == 2 && int.TryParse(parts[0], out int width) && int.TryParse(parts[1], out int height))
+        if (
+            parts.Length == 2
+            && int.TryParse(parts[0], out int width)
+            && int.TryParse(parts[1], out int height)
+        )
         {
             GetWindow().Size = new Vector2I(width, height);
         }
@@ -254,7 +258,7 @@ public partial class UI : CanvasLayer
         PlayButtonClick();
         GetTree().Quit();
     }
-    
+
     public void UpdateScore(int score)
     {
         if (bulletHellHUD != null)
@@ -391,7 +395,7 @@ public partial class UI : CanvasLayer
         }
         return 80f; // Default value
     }
-    
+
     private void ConnectSettingsMenuEvents()
     {
         if (settingsMenu != null)
@@ -414,7 +418,7 @@ public partial class UI : CanvasLayer
         }
     }
 
-// Settings menu event handlers
+    // Settings menu event handlers
     private void OnSettingsVolumeChanged(float volume)
     {
         // Handle volume change from settings menu
@@ -451,7 +455,7 @@ public partial class UI : CanvasLayer
         }
     }
 
-// Pause menu event handlers
+    // Pause menu event handlers
     private void OnPauseVolumeChanged(float volume)
     {
         // Handle volume change from pause menu
