@@ -47,6 +47,7 @@ public partial class Ui : CanvasLayer
         {
             buttonClickPlayer.Stream = ButtonClickSound;
         }
+        /*
         else
         {
             // Fallback to the hardcoded path if not assigned in editor
@@ -55,6 +56,7 @@ public partial class Ui : CanvasLayer
             );
             GD.Print("ButtonClickSound not assigned in editor, using fallback");
         }
+        */
 
         buttonClickPlayer.Bus = "UI";
         buttonClickPlayer.VolumeDb = -10;
