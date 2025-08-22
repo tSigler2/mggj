@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://du47lv11opju8"]
+[gd_scene load_steps=11 format=3 uid="uid://du47lv11opju8"]
 
 [ext_resource type="Script" uid="uid://uq17860h72mq" path="res://src/manage/UI.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://wc6nniwp6y8v" path="res://scenes/MainMenu.tscn" id="2_ro3t7"]
 [ext_resource type="PackedScene" uid="uid://bhf54hactx38f" path="res://scenes/BulletHellHUD.tscn" id="3_ua6yw"]
 [ext_resource type="PackedScene" uid="uid://bf6cqak5w2735" path="res://scenes/PauseMenu.tscn" id="4_3wlde"]
 [ext_resource type="PackedScene" uid="uid://drw6sldqrqox5" path="res://scenes/SettingsMenu.tscn" id="4_75u2n"]
+[ext_resource type="AudioStream" uid="uid://dk0pdb7122s7p" path="res://assets/sound/ui/475188__sheyvan__button-clicking-1.ogg" id="6_3wlde"]
 
 [sub_resource type="Animation" id="Animation_ua6yw"]
 length = 0.001
@@ -66,6 +67,7 @@ MainMenuScene = ExtResource("2_ro3t7")
 SettingsMenuScene = ExtResource("4_75u2n")
 PauseMenuScene = ExtResource("4_3wlde")
 BulletHellHUDScene = ExtResource("3_ua6yw")
+ButtonClickSound = ExtResource("6_3wlde")
 
 [node name="MainMenu" parent="." instance=ExtResource("2_ro3t7")]
 visible = false

@@ -18,20 +18,14 @@ public partial class UI : CanvasLayer
     [Export]
     public PackedScene BulletHellHUDScene;
 
-    // Export references to UI elements in the HUD
+    // Button click sound
     [Export]
-    public Label ScoreLabel;
-
-    [Export]
-    public Label HealthLabel;
-
-    [Export]
-    public Label AbilityLabel;
+    public AudioStream ButtonClickSound;
 
     // Menu instances
     private MainMenu mainMenu;
-    private Control settingsMenu;
-    private Control pauseMenu;
+    private SettingsMenu settingsMenu;
+    private PauseMenu pauseMenu;
     private BulletHellHUD bulletHellHUD;
 
     private bool gameStarted = false;
@@ -48,7 +42,20 @@ public partial class UI : CanvasLayer
         // Button click sound player
         buttonClickPlayer = new AudioStreamPlayer();
         AddChild(buttonClickPlayer);
-        buttonClickPlayer.Stream = GD.Load<AudioStream>("res://assets/sound/ui/button_click.ogg");
+        
+        if (ButtonClickSound != null)
+        {
+            buttonClickPlayer.Stream = ButtonClickSound;
+        }
+        else
+        {
+            // Fallback to the hardcoded path if not assigned in editor
+            buttonClickPlayer.Stream = GD.Load<AudioStream>(
+                "res://assets/sound/ui/button_click.ogg"
+            );
+            GD.Print("ButtonClickSound not assigned in editor, using fallback");
+        }
+
         buttonClickPlayer.Bus = "UI";
         buttonClickPlayer.VolumeDb = -10;
 
@@ -81,38 +88,52 @@ public partial class UI : CanvasLayer
 
     private void InstantiateMenus()
     {
-        // Instantiate MainMenu
+        // Instantiate MainMenu (existing code)
         if (MainMenuScene != null)
         {
             mainMenu = MainMenuScene.Instantiate<MainMenu>();
             AddChild(mainMenu);
-
+        
             // Connect to button events
             mainMenu.StartButtonPressed += OnStartButtonPressed;
             mainMenu.SettingsButtonPressed += OnSettingsButtonPressed;
             mainMenu.QuitButtonPressed += OnQuitButtonPressed;
         }
-
-        // Instantiate other menus
+    
+        // Instantiate SettingsMenu
         if (SettingsMenuScene != null)
         {
-            settingsMenu = SettingsMenuScene.Instantiate<Control>();
+            settingsMenu = SettingsMenuScene.Instantiate<SettingsMenu>();
             AddChild(settingsMenu);
             settingsMenu.Visible = false;
+            ConnectSettingsMenuEvents();
         }
-
+    
+        // Instantiate PauseMenu
         if (PauseMenuScene != null)
         {
-            pauseMenu = PauseMenuScene.Instantiate<Control>();
+            pauseMenu = PauseMenuScene.Instantiate<PauseMenu>();
             AddChild(pauseMenu);
             pauseMenu.Visible = false;
+            ConnectPauseMenuEvents();
         }
-
+    
+        // Instantiate BulletHellHUD (existing code)
         if (BulletHellHUDScene != null)
         {
             bulletHellHUD = BulletHellHUDScene.Instantiate<BulletHellHUD>();
             AddChild(bulletHellHUD);
             bulletHellHUD.Visible = false;
+        }
+    }
+    
+    private void ApplyResolution(string resolution)
+    {
+        // Parse resolution string (e.g., "1920x1080")
+        var parts = resolution.Split('x');
+        if (parts.Length == 2 && int.TryParse(parts[0], out int width) && int.TryParse(parts[1], out int height))
+        {
+            GetWindow().Size = new Vector2I(width, height);
         }
     }
 
@@ -369,5 +390,93 @@ public partial class UI : CanvasLayer
             return (float)config.GetValue("audio", "volume", 80f);
         }
         return 80f; // Default value
+    }
+    
+    private void ConnectSettingsMenuEvents()
+    {
+        if (settingsMenu != null)
+        {
+            settingsMenu.VolumeChanged += OnSettingsVolumeChanged;
+            settingsMenu.ResolutionChanged += OnSettingsResolutionChanged;
+            settingsMenu.ApplyButtonPressed += OnSettingsApplyButtonPressed;
+            settingsMenu.BackButtonPressed += OnSettingsBackButtonPressed;
+        }
+    }
+
+    private void ConnectPauseMenuEvents()
+    {
+        if (pauseMenu != null)
+        {
+            pauseMenu.VolumeChanged += OnPauseVolumeChanged;
+            pauseMenu.ResumeButtonPressed += OnPauseResumeButtonPressed;
+            pauseMenu.RestartButtonPressed += OnPauseRestartButtonPressed;
+            pauseMenu.QuitButtonPressed += OnPauseQuitButtonPressed;
+        }
+    }
+
+// Settings menu event handlers
+    private void OnSettingsVolumeChanged(float volume)
+    {
+        // Handle volume change from settings menu
+        ApplyAudioSettings(volume);
+    }
+
+    private void OnSettingsResolutionChanged(string resolution)
+    {
+        // Handle resolution change from settings menu
+        ApplyResolution(resolution);
+    }
+
+    private void OnSettingsApplyButtonPressed()
+    {
+        // Save settings when apply button is pressed
+        if (settingsMenu != null)
+        {
+            SaveVolumeSetting((float)settingsMenu.VolumeSlider.Value);
+        }
+        PlayButtonClick();
+    }
+
+    private void OnSettingsBackButtonPressed()
+    {
+        // Go back to previous menu
+        PlayButtonClick();
+        if (gameStarted)
+        {
+            ShowPauseMenu();
+        }
+        else
+        {
+            ShowMainMenu();
+        }
+    }
+
+// Pause menu event handlers
+    private void OnPauseVolumeChanged(float volume)
+    {
+        // Handle volume change from pause menu
+        ApplyAudioSettings(volume);
+        SaveVolumeSetting(volume);
+    }
+
+    private void OnPauseResumeButtonPressed()
+    {
+        // Resume game
+        PlayButtonClick();
+        ResumeGame();
+    }
+
+    private void OnPauseRestartButtonPressed()
+    {
+        // Restart current scene
+        PlayButtonClick();
+        GetTree().ReloadCurrentScene();
+    }
+
+    private void OnPauseQuitButtonPressed()
+    {
+        // Quit to main menu
+        PlayButtonClick();
+        ShowMainMenu();
     }
 }
