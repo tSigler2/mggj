@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class UI : CanvasLayer
+public partial class Ui : CanvasLayer
 {
     public Vector2 ScreenSize = new Vector2(480.0f, 640.0f);
 
