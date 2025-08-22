@@ -11,9 +11,9 @@ config_version=5
 [application]
 
 config/name="mggj"
-run/main_scene="uid://cs4fmv7d4t4bf"
 config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
+config/main_scene=""
 
 [dotnet]
 
@@ -46,5 +46,3 @@ move_down={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-renderer/rendering_method.web="forward_plus"
-textures/vram_compression/import_etc2_astc=true
