@@ -5,6 +5,7 @@
 [ext_resource type="FontFile" uid="uid://blxj0y6745at2" path="res://assets/fonts/PixelatedEleganceRegular-ovyAA.ttf" id="2"]
 
 [node name="MainMenu" type="MarginContainer" node_paths=PackedStringArray("StartButton", "SettingsButton", "QuitButton")]
+process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

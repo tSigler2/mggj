@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://btn41w7n5d041"]
+[gd_scene load_steps=4 format=3 uid="uid://btn41w7n5d041"]
 
 [ext_resource type="Texture2D" uid="uid://cvsnbi2i8o4ag" path="res://assets/art/test/battle_bg.png" id="1"]
+[ext_resource type="Script" uid="uid://dpmwu2bitscy0" path="res://src/entity/enemy/boss/BossOne.cs" id="2_1yoa0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xa4rf"]
 
@@ -15,7 +16,10 @@ expand_mode = 3
 
 [node name="Player" type="Node" parent="."]
 
-[node name="Boss" type="Sprite2D" parent="."]
+[node name="Boss" type="Sprite2D" parent="." node_paths=PackedStringArray("p")]
+process_mode = 3
+script = ExtResource("2_1yoa0")
+p = NodePath("../Boundaries")
 
 [node name="ProjectileContainer" type="Node2D" parent="."]
 

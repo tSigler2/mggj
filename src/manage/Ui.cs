@@ -82,6 +82,7 @@ public partial class Ui : CanvasLayer
         FadeInFromBlack();
 
         ProcessMode = ProcessModeEnum.Always;
+        GD.Print(ProcessMode);
 
         ShowMainMenu();
     }

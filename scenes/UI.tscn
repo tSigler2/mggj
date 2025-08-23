@@ -62,6 +62,7 @@ _data = {
 }
 
 [node name="UIManager" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1")
 MainMenuScene = ExtResource("2_ro3t7")
 SettingsMenuScene = ExtResource("4_75u2n")

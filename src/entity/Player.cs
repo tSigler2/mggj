@@ -17,6 +17,7 @@ public partial class Player : Area2D
     public override void _Process(double delta)
     {
         var velocity = Vector2.Zero; // The player's movement vector.
+        GD.Print("Running Process");
 
         if (Input.IsActionPressed("move_right"))
         {

@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using Godot;
 
-public partial class BossOne : Enemy
+public partial class BossOne : Sprite2D
 {
     private Random rng;
+
+    private Action<Random, double> BulletGenerator;
 
     [Export]
     private double LongInterval = 360.0;
@@ -27,12 +29,16 @@ public partial class BossOne : Enemy
     private float xPos;
     private int PatternCount = 0;
     private double GlobalDeltaAccumulate;
+    private double deltaAccumulate;
+
+    private Vector2 Viewport;
 
     private Action<Random, double>[] BulletPatterns = new Action<Random, double>[3];
 
     public override void _Ready()
     {
-        base._Ready();
+        GD.Print("Started Up Ready Func");
+        Viewport = GetViewportRect().Size;
         rng = new Random();
         GlobalDeltaAccumulate = 0;
 
@@ -71,13 +77,19 @@ public partial class BossOne : Enemy
         };
 
         BulletGenerator = BulletPatterns[0];
+        GD.Print(ShortInterval, " ", LongInterval);
+        GD.Print("Inside Tree: ", IsInsideTree());
+        GD.Print("Process: ", ProcessMode);
+        GD.Print("Ended Ready Func");
     }
 
     public override void _Process(double delta)
     {
-        base._Process(delta);
+        GD.Print("Started Process");
         deltaAccumulate += delta;
         GlobalDeltaAccumulate += delta;
+        GD.Print(deltaAccumulate);
+        GD.Print(GlobalDeltaAccumulate);
 
         if (GlobalDeltaAccumulate >= 60.0 && GlobalDeltaAccumulate < 120.0 && PatternCount == 0)
         {
@@ -109,5 +121,6 @@ public partial class BossOne : Enemy
             }
             deltaAccumulate = 0.0;
         }
+        GD.Print("Ended Process");
     }
 }

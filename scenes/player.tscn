@@ -18,6 +18,7 @@ animations = [{
 radius = 9.05539
 
 [node name="Player" type="Area2D"]
+process_mode = 3
 script = ExtResource("2_qhqgy")
 metadata/_edit_group_ = true
 
