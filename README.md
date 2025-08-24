@@ -20,10 +20,6 @@
     - Story Writing
 
 ### Programmers
-- Jared B.
-    - Asset Implementation
-    - Collision
-    - Cross Team Support
 - Carson C.
     - Score System
     - Health System
