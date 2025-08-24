@@ -1,6 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://ddeyt3q46yb3y"]
+[gd_scene load_steps=7 format=3 uid="uid://ddeyt3q46yb3y"]
 
 [ext_resource type="Texture2D" uid="uid://c8ux35xa6utix" path="res://assets/art/test/boarding_school_bg.png" id="2"]
+[ext_resource type="PackedScene" uid="uid://ce305k1m8y3pi" path="res://scenes/player.tscn" id="2_sey61"]
+[ext_resource type="Script" uid="uid://biw5ll5ewicnv" path="res://src/entity/Player.cs" id="2_xno4l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sey61"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u0cw3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_84bvw"]
 
 [node name="BoardingSchool" type="Node2D"]
 
@@ -10,21 +18,27 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource("2")
 
-[node name="Player" type="Node" parent="."]
+[node name="PlayerParent" parent="." instance=ExtResource("2_sey61")]
 
 [node name="FriendDoors" type="Node2D" parent="."]
 
 [node name="FriendOneDoor" type="Area2D" parent="FriendDoors"]
 position = Vector2(200, 250)
+script = ExtResource("2_xno4l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FriendDoors/FriendOneDoor"]
+shape = SubResource("RectangleShape2D_sey61")
 
 [node name="FriendTwoDoor" type="Area2D" parent="FriendDoors"]
 position = Vector2(400, 250)
+script = ExtResource("2_xno4l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FriendDoors/FriendTwoDoor"]
+shape = SubResource("RectangleShape2D_u0cw3")
 
 [node name="FriendThreeDoor" type="Area2D" parent="FriendDoors"]
 position = Vector2(600, 250)
+script = ExtResource("2_xno4l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FriendDoors/FriendThreeDoor"]
+shape = SubResource("RectangleShape2D_84bvw")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bb10upxckm62m"]
+[gd_scene load_steps=5 format=3 uid="uid://bf2rmv8wdu747"]
 
 [ext_resource type="Texture2D" uid="uid://bebni8unrl265" path="res://assets/art/test/friend_one_room.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://3tyaysiqocbh" path="res://assets/art/test/moth_1.png" id="2"]
