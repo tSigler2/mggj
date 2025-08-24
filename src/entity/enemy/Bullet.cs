@@ -1,9 +1,9 @@
 using Godot;
 
-public partial class Bullet : BaseEntity
+public partial class Bullet : Area2D
 {
     [Export]
-    private int Damage;
+    public int Damage { get; set; } = 1;
 
     [Export]
     public float Height;
@@ -14,23 +14,31 @@ public partial class Bullet : BaseEntity
     [Export]
     public string SpritePath = "";
 
+    [Export]
+    public Vector2 Velocity { get; set; }
+
+    public Vector2 Viewport;
     public Sprite2D sprite;
     private RectangleShape2D ColliderShape;
     private CollisionShape2D Collision;
 
     public override void _Ready()
     {
+        Viewport = GetViewportRect().Size;
         sprite = new Sprite2D();
         sprite.Texture = (Texture2D)ResourceLoader.Load(SpritePath);
         AddChild(sprite);
 
         Collision = new CollisionShape2D();
+        AddChild(Collision);
 
         ColliderShape = new RectangleShape2D();
         ColliderShape.Size = new Vector2(0.0f, 20.0f);
         Collision.Shape = ColliderShape;
         Height = Viewport.Y;
-        Show();
+
+        // Connect the area entered signal
+        AreaEntered += OnAreaEntered;
     }
 
     public override void _Process(double delta)
@@ -50,21 +58,15 @@ public partial class Bullet : BaseEntity
         Position -= Velocity * (float)delta;
 
         ColliderShape.Size = new Vector2(ColliderShape.Size.X, Height);
-
         sprite.Position = Position;
     }
 
-    private void OnBodyEntered(Node2D body)
+    private void OnAreaEntered(Area2D area)
     {
-        if (body is Player p)
+        if (area is Player)
         {
-            p.Health -= Damage;
+            // Damage is handled in the Player script
             QueueFree();
         }
-    }
-
-    private void OnVisibilityNotifier2DScreenExited()
-    {
-        QueueFree();
     }
 }

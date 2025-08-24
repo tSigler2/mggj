@@ -12,6 +12,9 @@ public partial class Player : Area2D
     public override void _Ready()
     {
         ScreenSize = GetViewportRect().Size;
+
+        // Connect the area entered signal for bullet collisions
+        AreaEntered += OnAreaEntered;
     }
 
     public override void _Process(double delta)
@@ -56,5 +59,39 @@ public partial class Player : Area2D
             x: Mathf.Clamp(Position.X, 0, ScreenSize.X),
             y: Mathf.Clamp(Position.Y, 0, ScreenSize.Y)
         );
+    }
+
+    private void OnAreaEntered(Area2D area)
+    {
+        if (area.GetParent() is Player player)
+        {
+            // This shouldn't happen normally
+            GD.Print("Player collided with itself?");
+            return;
+        }
+
+        // Check if the area is a bullet
+        if (area is Bullet bullet)
+        {
+            Health -= bullet.Damage;
+            GD.Print($"Player hit! Health: {Health}");
+            
+            if (Health <= 0)
+            {
+                GD.Print("Player died!");
+                // Handle player death
+            }
+        }
+        else if (area is BossOneBullet bossBullet)
+        {
+            Health -= bossBullet.Damage;
+            GD.Print($"Player hit by boss bullet! Health: {Health}");
+            
+            if (Health <= 0)
+            {
+                GD.Print("Player died!");
+                // Handle player death
+            }
+        }
     }
 }

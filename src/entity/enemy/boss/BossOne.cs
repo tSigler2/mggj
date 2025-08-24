@@ -32,6 +32,7 @@ public partial class BossOne : Sprite2D
     private double deltaAccumulate;
 
     private Vector2 Viewport;
+    private Node2D projectileContainer;
 
     private Action<Random, double>[] BulletPatterns = new Action<Random, double>[3];
 
@@ -40,6 +41,8 @@ public partial class BossOne : Sprite2D
         Viewport = GetViewportRect().Size;
         rng = new Random();
         GlobalDeltaAccumulate = 0;
+        // Get the projectile container
+        projectileContainer = GetNode<Node2D>("../ProjectileContainer");
 
         BulletPatterns[0] = (Random rng, double bulletSpeed) =>
         {
@@ -78,6 +81,22 @@ public partial class BossOne : Sprite2D
         BulletGenerator = BulletPatterns[0];
     }
 
+    // add bullets to the container:
+    private void CreatePattern0Bullet(
+        Vector2 position,
+        Vector2 velocity,
+        Texture2D texture,
+        int damage
+    )
+    {
+        var bullet = new Bullet();
+        bullet.Position = position;
+        bullet.Velocity = velocity;
+        bullet.SpritePath = texture.ResourcePath;
+        bullet.Damage = damage;
+        projectileContainer.AddChild(bullet);
+    }
+
     public override void _Process(double delta)
     {
         GD.Print("Started Process");
@@ -91,9 +110,7 @@ public partial class BossOne : Sprite2D
             PatternCount++;
         }
         else if (
-            GlobalDeltaAccumulate >= 120.0
-            && GlobalDeltaAccumulate < 180.0
-            && PatternCount == 1
+            GlobalDeltaAccumulate >= 120.0 && GlobalDeltaAccumulate < 180.0 && PatternCount == 1
         )
         {
             PatternCount++;

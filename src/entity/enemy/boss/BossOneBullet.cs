@@ -1,13 +1,17 @@
 using Godot;
 
-public partial class BossOneBullet : BaseEntity
+public partial class BossOneBullet : Area2D
 {
     [Export]
-    public int Damage;
+    public int Damage { get; set; } = 2;
 
     [Export]
     public string SpritePath;
 
+    [Export]
+    public Vector2 Velocity { get; set; }
+
+    public Vector2 Viewport;
     public double Height;
 
     public Sprite2D sprite;
@@ -16,17 +20,21 @@ public partial class BossOneBullet : BaseEntity
 
     public override void _Ready()
     {
+        Viewport = GetViewportRect().Size;
         sprite = new Sprite2D();
         sprite.Texture = (Texture2D)ResourceLoader.Load(SpritePath);
         AddChild(sprite);
 
         Collision = new CollisionShape2D();
+        AddChild(Collision);
 
         ColliderShape = new RectangleShape2D();
         ColliderShape.Size = new Vector2(0.0f, 20.0f);
         Collision.Shape = ColliderShape;
         Height = Viewport.Y;
-        Show();
+
+        // Connect the area entered signal
+        AreaEntered += OnAreaEntered;
     }
 
     public override void _Process(double delta)
@@ -41,19 +49,16 @@ public partial class BossOneBullet : BaseEntity
             QueueFree();
             return;
         }
+
+        Position += Velocity * (float)delta;
     }
 
-    private void OnBodyEntered(Node2D body)
+    private void OnAreaEntered(Area2D area)
     {
-        if (body is Player p)
+        if (area is Player)
         {
-            p.Health -= Damage;
+            // Damage is handled in the Player script
             QueueFree();
         }
-    }
-
-    private void OnVisibilityNotifier2DScreenExited()
-    {
-        QueueFree();
     }
 }
