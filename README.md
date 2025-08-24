@@ -1,13 +1,5 @@
 # Moth Friends: Waiting in the Wings
 
-## Requirements for Contributing
-
-Pre-Commit Hooks: CSharpier -- A Prettier Inspired CSharp Formatter
-- Install `pre-commit` via your method of choice.
-    - [pre-commit Installation Instructions](https://pre-commit.com/#install)
-- Install`pre-commit` hooks with the command: `pre-commit install`
-- Verify pre-commit hook installation with the command `pre-commit run --all-files`
-
 ![The Girls](./imgs/GirlsArtwork.png)
 
 ## Credits
@@ -59,3 +51,11 @@ Pre-Commit Hooks: CSharpier -- A Prettier Inspired CSharp Formatter
 
 ### Playtesters
 - Siya S.
+
+## Requirements for Contributing
+
+Pre-Commit Hooks: CSharpier -- A Prettier Inspired CSharp Formatter
+- Install `pre-commit` via your method of choice.
+    - [pre-commit Installation Instructions](https://pre-commit.com/#install)
+- Install`pre-commit` hooks with the command: `pre-commit install`
+- Verify pre-commit hook installation with the command `pre-commit run --all-files`
