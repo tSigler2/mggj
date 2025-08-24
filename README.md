@@ -8,7 +8,7 @@ Pre-Commit Hooks: CSharpier -- A Prettier Inspired CSharp Formatter
 - Install`pre-commit` hooks with the command: `pre-commit install`
 - Verify pre-commit hook installation with the command `pre-commit run --all-files`
 
-## Written with Godot-Mono
+![The Girls](./imgs/GirlsArtwork.png)
 
 ## Credits
 
