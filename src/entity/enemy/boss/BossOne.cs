@@ -37,7 +37,6 @@ public partial class BossOne : Sprite2D
 
     public override void _Ready()
     {
-        GD.Print("Started Up Ready Func");
         Viewport = GetViewportRect().Size;
         rng = new Random();
         GlobalDeltaAccumulate = 0;
@@ -77,10 +76,6 @@ public partial class BossOne : Sprite2D
         };
 
         BulletGenerator = BulletPatterns[0];
-        GD.Print(ShortInterval, " ", LongInterval);
-        GD.Print("Inside Tree: ", IsInsideTree());
-        GD.Print("Process: ", ProcessMode);
-        GD.Print("Ended Ready Func");
     }
 
     public override void _Process(double delta)
@@ -88,7 +83,7 @@ public partial class BossOne : Sprite2D
         GD.Print("Started Process");
         deltaAccumulate += delta;
         GlobalDeltaAccumulate += delta;
-        GD.Print(deltaAccumulate);
+        GD.Print(delta);
         GD.Print(GlobalDeltaAccumulate);
 
         if (GlobalDeltaAccumulate >= 60.0 && GlobalDeltaAccumulate < 120.0 && PatternCount == 0)
