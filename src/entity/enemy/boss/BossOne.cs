@@ -43,14 +43,17 @@ public partial class BossOne : Sprite2D
 
         BulletPatterns[0] = (Random rng, double bulletSpeed) =>
         {
-            var bullet = new Bullet();
-            bullet.Position = new Vector2((float)(rng.NextDouble() * Viewport.X), Viewport.Y);
+            var bullet = new BossOneBullet();
+            GetTree().CurrentScene.AddChild(bullet);
+            bullet.Position = new Vector2((float)(rng.NextDouble() * Viewport.X), Viewport.Y - 50);
             bullet.Velocity = new Vector2(0.0f, (float)-bulletSpeed);
+            bullet.p = p;
+            bullet.Show();
         };
 
         BulletPatterns[1] = (Random rng, double bulletSpeed) =>
         {
-            var bullet = new Bullet();
+            var bullet = new BossOneBullet();
             bullet.Position = new Vector2(xPos, Viewport.Y);
 
             double ArchTanAngle = Mathf.Atan2(p.Position.Y - Position.Y, p.Position.X - Position.X);
@@ -59,11 +62,12 @@ public partial class BossOne : Sprite2D
                 (float)(Mathf.Cos(ArchTanAngle) * bulletSpeed),
                 (float)(Mathf.Sin(ArchTanAngle) * bulletSpeed)
             );
+            bullet.p = p;
+            GetTree().CurrentScene.AddChild(bullet);
         };
 
         BulletPatterns[2] = (Random rng, double bulletSpeed) =>
         {
-            float AngleDelta = 20.0f;
             float AngleCurrent = 0.0f;
 
             while (AngleCurrent <= 360.0f)
@@ -72,6 +76,7 @@ public partial class BossOne : Sprite2D
                 bullet.Position = new Vector2(Position.X, Position.Y);
 
                 AngleCurrent += 20.0f;
+                AddChild(bullet);
             }
         };
 
@@ -80,11 +85,8 @@ public partial class BossOne : Sprite2D
 
     public override void _Process(double delta)
     {
-        GD.Print("Started Process");
         deltaAccumulate += delta;
         GlobalDeltaAccumulate += delta;
-        GD.Print(delta);
-        GD.Print(GlobalDeltaAccumulate);
 
         if (GlobalDeltaAccumulate >= 60.0 && GlobalDeltaAccumulate < 120.0 && PatternCount == 0)
         {
@@ -116,6 +118,5 @@ public partial class BossOne : Sprite2D
             }
             deltaAccumulate = 0.0;
         }
-        GD.Print("Ended Process");
     }
 }

@@ -17,6 +17,7 @@ public partial class Bullet : BaseEntity
     public Sprite2D sprite;
     private RectangleShape2D ColliderShape;
     private CollisionShape2D Collision;
+    public Vector2 Velocity;
 
     public override void _Ready()
     {

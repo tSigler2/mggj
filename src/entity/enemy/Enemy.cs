@@ -23,6 +23,8 @@ public partial class Enemy : BaseEntity
     [Export]
     private int Damage;
 
+    private Vector2 Velocity;
+
     public override void _Ready()
     {
         base._Ready();
@@ -31,13 +33,14 @@ public partial class Enemy : BaseEntity
 
     public override void _PhysicsProcess(double delta)
     {
-        MoveAndSlide();
-        var collide = MoveAndCollide(Velocity * (float)delta);
-
-        if (collide != null)
-        {
-            if (collide.GetCollider() is Player) { }
-        }
+        //MoveAndSlide();
+        //var collide = MoveAndCollide(Velocity * (float)delta);
+        /*
+                if (collide != null)
+                {
+                    if (collide.GetCollider() is Player) { }
+                }
+                */
     }
 
     private void OnBodyEntered(Node2D body)
