@@ -1,14 +1,6 @@
 # Moth Friends: Waiting in the Wings
 
-## Requirements for Contributing
-
-Pre-Commit Hooks: CSharpier -- A Prettier Inspired CSharp Formatter
-- Install `pre-commit` via your method of choice.
-    - [pre-commit Installation Instructions](https://pre-commit.com/#install)
-- Install`pre-commit` hooks with the command: `pre-commit install`
-- Verify pre-commit hook installation with the command `pre-commit run --all-files`
-
-## Written with Godot-Mono
+![The Girls](./imgs/GirlsArtwork.png)
 
 ## Credits
 
@@ -17,45 +9,49 @@ Pre-Commit Hooks: CSharpier -- A Prettier Inspired CSharp Formatter
 
 ### Artists
 - Laura B.
-    - Environment Concept Art
+	- Environment Concept Art
 - Alex H.
-    - Environment Concept Art
+	- Environment Concept Art
 - Jake H.
-    - Character Concept Art
+	- Character Concept Art
 - Hannah W.
-    - UI/UX Design and Art Creation
+	- UI/UX Design and Art Creation
 - Kacy W.
-    - Story Writing
+	- Story Writing
 
 ### Programmers
-- Jared B.
-    - Asset Implementation
-    - Collision
-    - Cross Team Support
 - Carson C.
-    - Score System
-    - Health System
-    - Dialogue System
-    - Cross Team Support
+	- Score System
+	- Health System
+	- Dialogue System
+	- Cross Team Support
 - David J.
-    - Special Ability Programming
-    - Main Character Programming
+	- Special Ability Programming
+	- Main Character Programming
 - Sagar P.
-    - UI/UX Implementation
-    - Scene Management
-    - Level Design and Implementation
+	- UI/UX Implementation
+	- Scene Management
+	- Level Design and Implementation
 - Thomas S.
-    - Programming Team Lead
-    - Enemy Attack Pattern Programming
+	- Programming Team Lead
+	- Enemy Attack Pattern Programming
 - Kacy W.
-    - Asset Implementation
+	- Asset Implementation
 
 ### Sound Designers
 - Lucien B.
-    - SFX
-    - Boss 1 Song
+	- SFX
+	- Boss 1 Song
 - Thomas L.
-    - Music Composition
+	- Music Composition
 
 ### Playtesters
 - Siya S.
+
+## Requirements for Contributing
+
+Pre-Commit Hooks: CSharpier -- A Prettier Inspired CSharp Formatter
+- Install `pre-commit` via your method of choice.
+	- [pre-commit Installation Instructions](https://pre-commit.com/#install)
+- Install`pre-commit` hooks with the command: `pre-commit install`
+- Verify pre-commit hook installation with the command `pre-commit run --all-files`

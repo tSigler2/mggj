@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://bf176r8py2vc7"]
+
+[ext_resource type="Texture2D" uid="uid://c8ux35xa6utix" path="res://assets/art/test/boarding_school_bg.png" id="2"]
+
+[node name="BoardingSchool" type="Node2D"]
+
+[node name="Background" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("2")
+
+[node name="Player" type="Node" parent="."]
+
+[node name="FriendDoors" type="Node2D" parent="."]
+
+[node name="FriendOneDoor" type="Area2D" parent="FriendDoors"]
+position = Vector2(200, 250)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FriendDoors/FriendOneDoor"]
+
+[node name="FriendTwoDoor" type="Area2D" parent="FriendDoors"]
+position = Vector2(400, 250)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FriendDoors/FriendTwoDoor"]
+
+[node name="FriendThreeDoor" type="Area2D" parent="FriendDoors"]
+position = Vector2(600, 250)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FriendDoors/FriendThreeDoor"]
