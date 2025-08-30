@@ -12,8 +12,8 @@ process_mode = 3
 [node name="Sprite2D" type="Sprite2D" parent="." node_paths=PackedStringArray("p")]
 process_mode = 3
 script = ExtResource("1_ksr86")
-LongInterval = 2.0
-ShortInterval = 1.0
+LongInterval = 1.0
+ShortInterval = 0.1
 BulletSpeed = 200.0
 p = NodePath("../CharacterBody2D")
 
