@@ -16,7 +16,10 @@ public partial class BossTwoBulletOne : BaseEntity
     public Vector2 Velocity;
 
     [Export]
-    public float vChange = 0.5f;
+    public bool Direction;
+
+    [Export]
+    public float vChange = 0.01f;
 
     public override void _Ready()
     {
@@ -47,9 +50,9 @@ public partial class BossTwoBulletOne : BaseEntity
         if (Position.Y >= Viewport.Y)
             QueueFree();
 
-        Velocity = new Vector2(Velocity.X, Velocity.Y + vChange);
+        //Velocity = new Vector2(Velocity.X + vChange, Velocity.Y);
 
-        if (Velocity.Y >= 20 || Velocity.Y <= -20)
+        if (Velocity.X >= 20 || Velocity.X <= -20)
             vChange *= -1;
     }
 

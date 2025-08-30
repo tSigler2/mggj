@@ -12,11 +12,13 @@ public partial class BossTwo : Sprite2D
     [Export]
     public double BulletSpeed;
 
+    [Export]
+    public double BulletRate;
+
     private Vector2 Viewport;
     private int SideChoice = 1;
-    private double speedeltaAccumulate = 0.0;
 
-    private int stage = 1;
+    private int stage = 0;
     private double deltaAccumulate;
 
     private Action<Random, double, int>[] BulletPatterns = new Action<Random, double, int>[3];
@@ -32,12 +34,15 @@ public partial class BossTwo : Sprite2D
             if (d == 1)
             {
                 bullet.Position = new Vector2(0.0f, 0.0f);
+                bullet.Direction = true;
             }
             else if (d == -1)
             {
                 bullet.Position = new Vector2(Viewport.X, 0.0f);
+                bullet.Direction = false;
             }
 
+            bullet.p = p;
             bullet.Velocity = new Vector2(0.0f, (float)BulletSpeed);
             GetTree().CurrentScene.AddChild(bullet);
         };
@@ -66,17 +71,17 @@ public partial class BossTwo : Sprite2D
         {
             stage++;
         }
-        else if (stage == 2 && deltaAccumulate >= 300.0)
-        {
-            stage++;
-        }
-        else
+        else if (deltaAccumulate >= 300.0)
         {
             QueueFree();
         }
-        BulletPatterns[stage](rng, BulletSpeed, SideChoice);
 
-        if (stage == 0)
-            SideChoice *= -1;
+        if (deltaAccumulate >= BulletRate)
+        {
+            BulletPatterns[stage](rng, BulletSpeed, SideChoice);
+            deltaAccumulate = 0.0;
+            if (stage == 0)
+                SideChoice *= -1;
+        }
     }
 }

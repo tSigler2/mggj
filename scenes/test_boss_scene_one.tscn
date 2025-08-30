@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://b3ap4y37le05x"]
 
-[ext_resource type="Script" uid="uid://dpmwu2bitscy0" path="res://src/entity/enemy/boss/BossOne.cs" id="1_ksr86"]
-[ext_resource type="Script" uid="uid://biw5ll5ewicnv" path="res://src/entity/Player.cs" id="2_0affu"]
-[ext_resource type="Texture2D" uid="uid://dq8nlymgh5d0g" path="res://assets/art/test/Alice_Moth_Still_2.png" id="2_u3qq7"]
+[ext_resource type="Script" uid="uid://dpmwu2bitscy0" path="res://src/entity/enemy/boss/BossOne.cs" id="1_72l1x"]
+[ext_resource type="Script" uid="uid://biw5ll5ewicnv" path="res://src/entity/Player.cs" id="2_uykmq"]
+[ext_resource type="Texture2D" uid="uid://dq8nlymgh5d0g" path="res://assets/art/test/Alice_Moth_Still_2.png" id="3_6rxjc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0affu"]
 
@@ -11,7 +11,7 @@ process_mode = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="." node_paths=PackedStringArray("p")]
 process_mode = 3
-script = ExtResource("1_ksr86")
+script = ExtResource("1_72l1x")
 LongInterval = 1.0
 ShortInterval = 0.1
 BulletSpeed = 200.0
@@ -20,14 +20,14 @@ p = NodePath("../CharacterBody2D")
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("Collision")]
 process_mode = 3
 position = Vector2(214, 114)
-script = ExtResource("2_0affu")
+script = ExtResource("2_uykmq")
 Collision = NodePath("CollisionShape2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 process_mode = 3
 position = Vector2(1, 0.999985)
 scale = Vector2(0.984375, 0.9375)
-texture = ExtResource("2_u3qq7")
+texture = ExtResource("3_6rxjc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 process_mode = 3
