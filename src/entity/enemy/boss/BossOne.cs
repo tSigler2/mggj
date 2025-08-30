@@ -95,11 +95,15 @@ public partial class BossOne : Sprite2D
         deltaAccumulate += delta;
         GlobalDeltaAccumulate += delta;
 
-        if (GlobalDeltaAccumulate >= 10.0 && GlobalDeltaAccumulate < 20.0 && PatternCount == 0)
+        if (GlobalDeltaAccumulate >= 60.0 && GlobalDeltaAccumulate < 120.0 && PatternCount == 0)
         {
             PatternCount++;
         }
-        else if (GlobalDeltaAccumulate >= 20.0 && GlobalDeltaAccumulate < 30.0 && PatternCount == 1)
+        else if (
+            GlobalDeltaAccumulate >= 120.0
+            && GlobalDeltaAccumulate < 180.0
+            && PatternCount == 1
+        )
         {
             PatternCount++;
         }
