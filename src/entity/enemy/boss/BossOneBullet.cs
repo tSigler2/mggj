@@ -40,6 +40,8 @@ public partial class BossOneBullet : BaseEntity
     public override void _PhysicsProcess(double delta)
     {
         Position += Velocity * (float)delta;
+        Rotation = Velocity.Angle();
+
         if (this.p.cooldown == 0)
             CheckPlayerCollision();
         if (Position.Y <= 0 || Position.X <= 0)

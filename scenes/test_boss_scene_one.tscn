@@ -14,8 +14,10 @@ process_mode = 3
 script = ExtResource("1_72l1x")
 LongInterval = 1.0
 ShortInterval = 0.1
+LongIntervalActive = false
 BulletSpeed = 200.0
 p = NodePath("../CharacterBody2D")
+PatternCount = 1
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("Collision")]
 process_mode = 3
