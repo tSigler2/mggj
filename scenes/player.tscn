@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cs4fmv7d4t4bf"]
+[gd_scene load_steps=5 format=3 uid="uid://cs4fmv7d4t4bf"]
 
-[ext_resource type="Script" uid="uid://biw5ll5ewicnv" path="res://src/entity/player.cs" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://dq8nlymgh5d0g" path="res://assets/art/test/Alice_Moth_Still_2.png" id="2_g2els"]
-[ext_resource type="Script" uid="uid://cu2r3dnouaej3" path="res://src/entity/health.cs" id="2_qhqgy"]
+[ext_resource type="Script" uid="uid://biw5ll5ewicnv" path="res://src/entity/Player.cs" id="2_qhqgy"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qhqgy"]
 animations = [{
@@ -19,11 +18,9 @@ animations = [{
 radius = 9.05539
 
 [node name="Player" type="Area2D"]
-script = ExtResource("1_g2els")
-metadata/_edit_group_ = true
-
-[node name="Health" type="Node2D" parent="."]
+process_mode = 3
 script = ExtResource("2_qhqgy")
+metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(32.5679, 29.284)

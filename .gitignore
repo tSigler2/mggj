@@ -334,5 +334,8 @@ platform/windows/godot_res.res
 # Godot 4.x
 .godot/
 =======
+
 # Custom
 planning/*
+pyproject.toml
+uv.lock

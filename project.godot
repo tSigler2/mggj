@@ -11,8 +11,14 @@ config_version=5
 [application]
 
 config/name="mggj"
-run/main_scene="uid://cs4fmv7d4t4bf"
-config/features=PackedStringArray("4.4", "C#")
+run/main_scene="uid://du47lv11opju8"
+config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
+config/icon="res://icon.svg"
+config/main_scene=""
+
+[autoload]
+
+Ui="*res://src/manage/Ui.cs"
 
 [dotnet]
 
