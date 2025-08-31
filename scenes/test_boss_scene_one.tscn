@@ -17,7 +17,7 @@ ShortInterval = 0.1
 LongIntervalActive = false
 BulletSpeed = 200.0
 p = NodePath("../CharacterBody2D")
-PatternCount = 1
+PatternCount = 2
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("Collision")]
 process_mode = 3
