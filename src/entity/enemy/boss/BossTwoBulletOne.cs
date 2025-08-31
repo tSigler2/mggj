@@ -1,12 +1,12 @@
 using Godot;
 
-public partial class BossOneBullet : BaseEntity
+public partial class BossTwoBulletOne : BaseEntity
 {
     [Export]
     public int Damage;
 
     [Export]
-    public string SpritePath = "./assets/art/projectile/AliceBullet.png";
+    public string SpritePath = "./assets/art/projectile/PhoebeBullet.png";
 
     public double Height;
 
@@ -14,6 +14,12 @@ public partial class BossOneBullet : BaseEntity
     private CollisionShape2D Collision;
     public Player p;
     public Vector2 Velocity;
+
+    [Export]
+    public bool Direction;
+
+    [Export]
+    public float vChange = 0.01f;
 
     public override void _Ready()
     {
@@ -26,7 +32,6 @@ public partial class BossOneBullet : BaseEntity
         Collision.Shape = new RectangleShape2D { Size = sprite.Texture.GetSize() };
         AddChild(Collision);
         Height = Viewport.Y;
-        BodyEntered += OnBodyEntered;
         Collision.ProcessMode = Node.ProcessModeEnum.Always;
 
         SetCollisionLayerValue(1, false);
@@ -40,21 +45,15 @@ public partial class BossOneBullet : BaseEntity
     public override void _PhysicsProcess(double delta)
     {
         Position += Velocity * (float)delta;
-        Rotation = Velocity.Angle() + Mathf.Pi;
-
         if (this.p.cooldown == 0)
             CheckPlayerCollision();
-        if (Position.Y <= 0 || Position.X <= 0)
+        if (Position.Y >= Viewport.Y)
             QueueFree();
-    }
 
-    private void OnBodyEntered(Node body)
-    {
-        GD.Print("Bullet Encountered");
-        if (body is Player b)
-        {
-            b.Health -= Damage;
-        }
+        //Velocity = new Vector2(Velocity.X + vChange, Velocity.Y);
+
+        if (Velocity.X >= 20 || Velocity.X <= -20)
+            vChange *= -1;
     }
 
     private void CheckPlayerCollision()

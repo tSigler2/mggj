@@ -6,8 +6,6 @@ public partial class BossOne : Sprite2D
 {
     private Random rng;
 
-    private Action<Random, double> BulletGenerator;
-
     [Export]
     private double LongInterval = 360.0;
 
@@ -27,6 +25,8 @@ public partial class BossOne : Sprite2D
     private Player p;
 
     private float xPos;
+
+    [Export]
     private int PatternCount = 0;
     private double GlobalDeltaAccumulate;
     private double deltaAccumulate;
@@ -54,9 +54,12 @@ public partial class BossOne : Sprite2D
         BulletPatterns[1] = (Random rng, double bulletSpeed) =>
         {
             var bullet = new BossOneBullet();
-            bullet.Position = new Vector2(xPos, Viewport.Y);
+            bullet.Position = new Vector2((float)(rng.NextDouble() * Viewport.X), Viewport.Y);
 
-            double ArchTanAngle = Mathf.Atan2(p.Position.Y - Position.Y, p.Position.X - Position.X);
+            double ArchTanAngle = Mathf.Atan2(
+                p.Position.Y - bullet.Position.Y,
+                p.Position.X - bullet.Position.X
+            );
 
             bullet.Velocity = new Vector2(
                 (float)(Mathf.Cos(ArchTanAngle) * bulletSpeed),
@@ -68,19 +71,23 @@ public partial class BossOne : Sprite2D
 
         BulletPatterns[2] = (Random rng, double bulletSpeed) =>
         {
-            float AngleCurrent = 0.0f;
+            float EndAngle = (float)rng.NextDouble() * 360.0f;
+            float AngleCurrent = (float)rng.NextDouble() * EndAngle;
 
-            while (AngleCurrent <= 360.0f)
+            while (AngleCurrent <= EndAngle)
             {
                 var bullet = new BossOneBullet();
-                bullet.Position = new Vector2(Position.X, Position.Y);
+                bullet.Position = new Vector2(Viewport.X / 2, Viewport.Y / 2);
+                bullet.Velocity = new Vector2(
+                    (float)(Mathf.Cos(AngleCurrent) * bulletSpeed),
+                    (float)(Mathf.Sin(AngleCurrent) * bulletSpeed)
+                );
 
                 AngleCurrent += 20.0f;
-                AddChild(bullet);
+                bullet.p = p;
+                GetTree().CurrentScene.AddChild(bullet);
             }
         };
-
-        BulletGenerator = BulletPatterns[0];
     }
 
     public override void _Process(double delta)
@@ -110,11 +117,15 @@ public partial class BossOne : Sprite2D
             {
                 xPos = (float)rng.NextDouble() * Viewport.X;
             }
-            BulletGenerator(rng, BulletSpeed);
+            BulletPatterns[PatternCount](rng, BulletSpeed);
 
             if (BulletCount == 7)
             {
                 LongIntervalActive = true;
+            }
+            else
+            {
+                LongIntervalActive = false;
             }
             deltaAccumulate = 0.0;
         }
