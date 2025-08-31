@@ -1,8 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dlfu0iwr3tj6h"]
+[gd_scene load_steps=4 format=3 uid="uid://btn41w7n5d041"]
 
 [ext_resource type="Texture2D" uid="uid://cvsnbi2i8o4ag" path="res://assets/art/test/battle_bg.png" id="1"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xa4rf"]
+[ext_resource type="Script" uid="uid://dpmwu2bitscy0" path="res://src/entity/enemy/boss/BossOne.cs" id="2_1yoa0"]
+[ext_resource type="Script" uid="uid://biw5ll5ewicnv" path="res://src/entity/Player.cs" id="3_vsca0"]
 
 [node name="BossBattleOne" type="Node2D"]
 
@@ -13,13 +13,17 @@ anchor_bottom = 1.0
 texture = ExtResource("1")
 expand_mode = 3
 
-[node name="Player" type="Node" parent="."]
-
 [node name="Boss" type="Sprite2D" parent="."]
+process_mode = 3
+script = ExtResource("2_1yoa0")
+LongInterval = 2.0
+ShortInterval = 1.0
+BulletSpeed = 200.0
 
 [node name="ProjectileContainer" type="Node2D" parent="."]
 
-[node name="Boundaries" type="Area2D" parent="."]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+input_pickable = true
+script = ExtResource("3_vsca0")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries"]
-shape = SubResource("RectangleShape2D_xa4rf")
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]

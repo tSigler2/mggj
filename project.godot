@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="mggj"
-run/main_scene="uid://1ycetv1af4j0"
+run/main_scene="uid://du47lv11opju8"
 config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 config/main_scene=""
@@ -20,18 +20,9 @@ config/main_scene=""
 
 Ui="*res://src/manage/Ui.cs"
 
-[dialogue_manager]
-
-runtime/advanced/uses_dotnet=true
-runtime/balloon_path="uid://dtia1a02gf26c"
-
 [dotnet]
 
 project/assembly_name="mggj"
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 
 [input]
 
@@ -56,17 +47,8 @@ move_down={
 ]
 }
 
-[internationalization]
-
-locale/translations_pot_files=PackedStringArray("res://Dialogue/untitled.dialogue", "res://Dialogue/new.dialogue")
-
-[layer_names]
-
-2d_physics/layer_5="Actionable"
-
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-renderer/rendering_method.web="forward_plus"
 textures/vram_compression/import_etc2_astc=true
