@@ -109,7 +109,7 @@ public partial class BossTwo : Sprite2D
     public override void _Process(double delta)
     {
         deltaAccumulate += delta;
-        if (stage == 0 && deltaAccumulate >= 60.0)
+        if (stage == 0 && deltaAccumulate >= 1.0)
         {
             stage++;
         }
