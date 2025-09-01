@@ -59,15 +59,27 @@ public partial class Player : CharacterBody2D
             //animatedSprite2D.Stop();
         }
 
+        var CurrentScene = GetTree().CurrentScene;
+        GD.Print(Position);
         Position += velocity * (float)delta;
-        Position = new Vector2(
-            x: Mathf.Clamp(Position.X, 0, ScreenSize.X),
-            y: Mathf.Clamp(Position.Y, 0, ScreenSize.Y)
-        );
-        if (this.Health <= 0)
+        if (
+            CurrentScene.Name != "TestBossScene"
+            && CurrentScene.Name != "TestBossTwo"
+            && CurrentScene.Name != ""
+        )
+            Position = new Vector2(
+                x: Mathf.Clamp(Position.X, 0, ScreenSize.X),
+                y: Mathf.Clamp(Position.Y, 0, ScreenSize.Y)
+            );
+        else
         {
-            QueueFree();
+            Position = new Vector2(
+                x: Mathf.Clamp(Position.X, 32, 642.0f),
+                y: Mathf.Clamp(Position.Y, 16, ScreenSize.Y - 16)
+            );
         }
+        if (this.Health <= 0)
+            QueueFree();
     }
 
     public void HealthChange()
