@@ -40,10 +40,13 @@ public partial class BossTwo : Sprite2D
             {
                 bullet.Position = new Vector2(Viewport.X, 0.0f);
                 bullet.Direction = false;
+                bullet.vChange *= -1;
             }
 
             bullet.p = p;
+            bullet.bulletSpeed = BulletSpeed;
             bullet.Velocity = new Vector2(0.0f, (float)BulletSpeed);
+            bullet.Viewport = Viewport;
             GetTree().CurrentScene.AddChild(bullet);
         };
 

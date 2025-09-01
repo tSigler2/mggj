@@ -31,4 +31,4 @@ position = Vector2(215, 114)
 script = ExtResource("3_guif0")
 p = NodePath("../CharacterBody2D")
 BulletSpeed = 200.0
-BulletRate = 0.5
+BulletRate = 0.1
