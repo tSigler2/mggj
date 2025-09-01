@@ -45,7 +45,7 @@ public partial class BossOne : Sprite2D
         {
             var bullet = new BossOneBullet();
             GetTree().CurrentScene.AddChild(bullet);
-            bullet.Position = new Vector2((float)(rng.NextDouble() * Viewport.X), Viewport.Y - 50);
+            bullet.Position = new Vector2((float)(rng.NextDouble() * 650), Viewport.Y - 50);
             bullet.Velocity = new Vector2(0.0f, (float)-bulletSpeed);
             bullet.p = p;
             bullet.Show();
@@ -54,7 +54,7 @@ public partial class BossOne : Sprite2D
         BulletPatterns[1] = (Random rng, double bulletSpeed) =>
         {
             var bullet = new BossOneBullet();
-            bullet.Position = new Vector2((float)(rng.NextDouble() * Viewport.X), Viewport.Y);
+            bullet.Position = new Vector2((float)(rng.NextDouble() * 650), Viewport.Y);
 
             double ArchTanAngle = Mathf.Atan2(
                 p.Position.Y - bullet.Position.Y,
@@ -77,7 +77,7 @@ public partial class BossOne : Sprite2D
             while (AngleCurrent <= EndAngle)
             {
                 var bullet = new BossOneBullet();
-                bullet.Position = new Vector2(Viewport.X / 2, Viewport.Y / 2);
+                bullet.Position = new Vector2(650 / 2, Viewport.Y / 2);
                 bullet.Velocity = new Vector2(
                     (float)(Mathf.Cos(AngleCurrent) * bulletSpeed),
                     (float)(Mathf.Sin(AngleCurrent) * bulletSpeed)

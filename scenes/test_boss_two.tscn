@@ -9,22 +9,22 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b0a66"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3w35y"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rjkdn"]
 texture = ExtResource("4_rjkdn")
 0:0/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ixbke"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1blxj"]
 texture = ExtResource("5_1blxj")
 0:0/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mwsqd"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s2beq"]
 texture = ExtResource("6_s2beq")
 0:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_guif0"]
-sources/1 = SubResource("TileSetAtlasSource_3w35y")
-sources/2 = SubResource("TileSetAtlasSource_ixbke")
-sources/3 = SubResource("TileSetAtlasSource_mwsqd")
+sources/1 = SubResource("TileSetAtlasSource_rjkdn")
+sources/2 = SubResource("TileSetAtlasSource_1blxj")
+sources/3 = SubResource("TileSetAtlasSource_s2beq")
 
 [node name="TestBossTwo" type="Node2D"]
 
