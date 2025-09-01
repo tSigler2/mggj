@@ -34,14 +34,31 @@ public partial class BossTwo : Sprite2D
 
             if (d == 1)
             {
-                bullet.Position = new Vector2(0.0f, 0.0f);
-                bullet.Direction = true;
+                if (rng.NextDouble() < 0.5)
+                {
+                    bullet.Position = new Vector2(0.0f, 0.0f);
+                    bullet.Direction = true;
+                }
+                else
+                {
+                    bullet.Position = new Vector2(325.0f, 0.0f);
+                    bullet.Direction = false;
+                    bullet.vChange *= -1;
+                }
             }
             else if (d == -1)
             {
-                bullet.Position = new Vector2(Viewport.X, 0.0f);
-                bullet.Direction = false;
-                bullet.vChange *= -1;
+                if (rng.NextDouble() < 0.5)
+                {
+                    bullet.Position = new Vector2(325.0f, 0.0f);
+                    bullet.Direction = true;
+                }
+                else
+                {
+                    bullet.Position = new Vector2(650.0f, 0.0f);
+                    bullet.Direction = false;
+                    bullet.vChange *= -1;
+                }
             }
 
             bullet.p = p;

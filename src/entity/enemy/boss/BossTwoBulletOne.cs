@@ -67,7 +67,7 @@ public partial class BossTwoBulletOne : BaseEntity
             Velocity.Y
         );
 
-        if (Velocity.X >= 200 || Velocity.X <= -200)
+        if (Velocity.X >= 300 || Velocity.X <= -300)
             vChange *= -1;
     }
 

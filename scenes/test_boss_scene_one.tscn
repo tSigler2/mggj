@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://b3ap4y37le05x"]
+[gd_scene load_steps=14 format=4 uid="uid://b3ap4y37le05x"]
 
 [ext_resource type="Script" uid="uid://dpmwu2bitscy0" path="res://src/entity/enemy/boss/BossOne.cs" id="1_72l1x"]
 [ext_resource type="Script" uid="uid://biw5ll5ewicnv" path="res://src/entity/Player.cs" id="2_uykmq"]
@@ -26,6 +26,9 @@ texture = ExtResource("6_j6atf")
 sources/1 = SubResource("TileSetAtlasSource_pkcy8")
 sources/2 = SubResource("TileSetAtlasSource_y05qv")
 sources/3 = SubResource("TileSetAtlasSource_qublw")
+
+[sub_resource type="LabelSettings" id="LabelSettings_lmhtt"]
+font_size = 25
 
 [node name="TestBossScene" type="Node2D"]
 process_mode = 3
@@ -69,6 +72,7 @@ offset_left = 703.0
 offset_top = 19.0
 offset_right = 1123.0
 offset_bottom = 134.0
+label_settings = SubResource("LabelSettings_lmhtt")
 autowrap_mode = 3
 script = ExtResource("7_lmhtt")
 p = NodePath("../CharacterBody2D")
