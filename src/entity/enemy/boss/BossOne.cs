@@ -33,7 +33,7 @@ public partial class BossOne : Sprite2D
 
     private Vector2 Viewport;
 
-    private Action<Random, double>[] BulletPatterns = new Action<Random, double>[3];
+    private Action<Random, double>[] BulletPatterns = new Action<Random, double>[4];
 
     public override void _Ready()
     {

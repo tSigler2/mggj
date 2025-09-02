@@ -22,7 +22,7 @@ public partial class BossTwo : Sprite2D
     private int stage = 0;
     private double deltaAccumulate;
 
-    private Action<Random, double, int>[] BulletPatterns = new Action<Random, double, int>[3];
+    private Action<Random, double, int>[] BulletPatterns = new Action<Random, double, int>[4];
 
     public override void _Ready()
     {
@@ -86,6 +86,39 @@ public partial class BossTwo : Sprite2D
         {
             var bullet = new BossTwoBulletOne();
             GetTree().CurrentScene.AddChild(bullet);
+        };
+
+        BulletPatterns[3] = (Random rng, double speed, int d) =>
+        {
+            Vector2 center = new Vector2(650 / 2, Viewport.Y / 2);
+
+            float radius = 300f;
+
+            for (float angle = 0; angle < 360; angle += 5f)
+            {
+                float normalizedAngle = angle % 360;
+
+                if (normalizedAngle >= 270 || normalizedAngle <= 90)
+                    continue;
+
+                var bullet = new BossTwoBulletThree();
+
+                Vector2 spawnPos = new Vector2(
+                    center.X + Mathf.Cos(Mathf.DegToRad(angle)) * radius,
+                    center.Y + Mathf.Sin(Mathf.DegToRad(angle)) * radius
+                );
+
+                bullet.Position = spawnPos;
+
+                Vector2 dirToCenter = (center - spawnPos).Normalized();
+                bullet.Velocity = dirToCenter * (float)speed;
+
+                bullet.Target = center;
+
+                bullet.p = p;
+
+                GetTree().CurrentScene.AddChild(bullet);
+            }
         };
     }
 
