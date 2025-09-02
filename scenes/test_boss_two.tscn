@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://cwo2cuxgynsti"]
+[gd_scene load_steps=15 format=4 uid="uid://cwo2cuxgynsti"]
 
 [ext_resource type="Script" uid="uid://biw5ll5ewicnv" path="res://src/entity/Player.cs" id="1_44fik"]
 [ext_resource type="Texture2D" uid="uid://dq8nlymgh5d0g" path="res://assets/art/test/Alice_Moth_Still_2.png" id="2_guif0"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c6v8kedtqhktu" path="res://assets/art/tiles/ArenaWall.png" id="5_1blxj"]
 [ext_resource type="Texture2D" uid="uid://bcwq736det06a" path="res://assets/art/tiles/ArenaWallCorner.png" id="6_s2beq"]
 [ext_resource type="Script" uid="uid://dt7qwh6x8v8r0" path="res://src/manage/FightLabel.cs" id="7_1blxj"]
+[ext_resource type="AudioStream" uid="uid://cmn8cmhacnrc0" path="res://assets/sound/music/MGGJ_PhoebeBossTheme_wip1_alt_copy.mp3" id="8_s2beq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b0a66"]
 
@@ -73,3 +74,10 @@ label_settings = SubResource("LabelSettings_s2beq")
 autowrap_mode = 3
 script = ExtResource("7_1blxj")
 p = NodePath("../CharacterBody2D")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("8_s2beq")
+autoplay = true
+playback_type = 1
+parameters/looping = true
