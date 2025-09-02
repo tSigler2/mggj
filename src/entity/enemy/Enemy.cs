@@ -14,8 +14,8 @@ public partial class Enemy : BaseEntity
     [Export]
     protected double GenerateSpaceInterval;
 
-	[Export]
-	private double Radius;
+    [Export]
+    private double Radius;
 
     [Export]
     private double BulletSpeed;

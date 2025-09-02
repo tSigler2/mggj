@@ -27,25 +27,25 @@ public partial class Player : CharacterBody2D
             cooldown--;
         var velocity = Vector2.Zero; // The player's movement vector.
 
-		if (Input.IsActionPressed("move_right"))
-		{
-			velocity.X += 1;
-		}
+        if (Input.IsActionPressed("move_right"))
+        {
+            velocity.X += 1;
+        }
 
-		if (Input.IsActionPressed("move_left"))
-		{
-			velocity.X -= 1;
-		}
+        if (Input.IsActionPressed("move_left"))
+        {
+            velocity.X -= 1;
+        }
 
-		if (Input.IsActionPressed("move_down"))
-		{
-			velocity.Y += 1;
-		}
+        if (Input.IsActionPressed("move_down"))
+        {
+            velocity.Y += 1;
+        }
 
-		if (Input.IsActionPressed("move_up"))
-		{
-			velocity.Y -= 1;
-		}
+        if (Input.IsActionPressed("move_up"))
+        {
+            velocity.Y -= 1;
+        }
 
         //var animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 
