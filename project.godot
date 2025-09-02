@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="mggj"
-run/main_scene="uid://cs4fmv7d4t4bf"
+run/main_scene="uid://du47lv11opju8"
 config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
+config/main_scene=""
+
+[autoload]
+
+Ui="*res://src/manage/Ui.cs"
 
 [autoload]
 
@@ -67,5 +72,5 @@ locale/translations_pot_files=PackedStringArray("res://Dialogue/untitled.dialogu
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-renderer/rendering_method.web="forward_plus"
 textures/vram_compression/import_etc2_astc=true
+textures/default_filters/use_nearest_mipmap_filter=true

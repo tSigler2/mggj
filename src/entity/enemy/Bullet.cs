@@ -5,46 +5,63 @@ public partial class Bullet : BaseEntity
     [Export]
     private int Damage;
 
-    private Sprite2D sprite;
-    private CollisionShape2D Collider;
+    [Export]
+    public float Height;
+
+    [Export]
+    public float HeightDelta = 1.0f;
+
+    [Export]
+    public string SpritePath = "";
+
+    public Sprite2D sprite;
+    private RectangleShape2D ColliderShape;
+    private CollisionShape2D Collision;
+    public Vector2 Velocity;
 
     public override void _Ready()
     {
         sprite = new Sprite2D();
-        sprite.Texture = (Texture2D)ResourceLoader.Load("assets/art/test/asteroid.png");
+        sprite.Texture = (Texture2D)ResourceLoader.Load(SpritePath);
         AddChild(sprite);
 
-        Collider = new CollisionShape2D();
-        Collider.Shape = new CircleShape2D() { Radius = (sprite.Texture.GetSize().X / 2) };
-        AddChild(Collider);
+        Collision = new CollisionShape2D();
+
+        ColliderShape = new RectangleShape2D();
+        ColliderShape.Size = new Vector2(0.0f, 20.0f);
+        Collision.Shape = ColliderShape;
+        Height = Viewport.Y;
         Show();
     }
 
     public override void _Process(double delta)
     {
-        Position += Velocity * (float)delta;
-    }
-
-    public override void _PhysicsProcess(double delta)
-    {
-        var collide = MoveAndCollide(Velocity * (float)delta);
-
-        if (collide != null)
+        if (
+            Position.X <= 0
+            || Position.Y <= 0
+            || Position.X >= Viewport.X
+            || Position.Y >= Viewport.Y
+        )
         {
-            if (collide.GetCollider().HasMethod("AlterHealth"))
-            {
-                collide.GetCollider().Call("AlterHealth", Damage);
-            }
+            QueueFree();
+            return;
         }
+
+        Height -= HeightDelta;
+        Position -= Velocity * (float)delta;
+
+        ColliderShape.Size = new Vector2(ColliderShape.Size.X, Height);
+
+        sprite.Position = Position;
     }
 
     private void OnBodyEntered(Node2D body)
     {
-        //        if(body is Player p)
-        //        {
-        //            p.Health -= Damage;
-        //            QueueFree();
-        //        }
+        if (body is Player p)
+        {
+            p.Health -= Damage;
+            QueueFree();
+        }
     }
 
     private void OnVisibilityNotifier2DScreenExited()
