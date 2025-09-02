@@ -1,7 +1,6 @@
-using System;
 using Godot;
 
-public partial class BossTwoBulletOne : BaseEntity
+public partial class BossTwoBulletTwo : BaseEntity
 {
     [Export]
     public int Damage;
@@ -16,13 +15,9 @@ public partial class BossTwoBulletOne : BaseEntity
     public Player p;
     public Vector2 Velocity;
     public double bulletSpeed;
-    private Random rng = new Random();
 
     [Export]
-    public bool Direction;
-
-    [Export]
-    public float vChange = 0.03f;
+    public bool BeenInView = false;
 
     public override void _Ready()
     {
@@ -48,27 +43,27 @@ public partial class BossTwoBulletOne : BaseEntity
     public override void _PhysicsProcess(double delta)
     {
         Position += Velocity * (float)delta;
-
-        if (this.Direction)
-        {
-            Rotation = Mathf.Pi;
-        }
+        Rotation = Velocity.Angle() + Mathf.Pi;
 
         if (this.p.cooldown == 0)
             CheckPlayerCollision();
-        if (Position.Y >= Viewport.Y)
+        if (
+            (
+                Position.Y >= Viewport.Y
+                || Position.Y <= 0
+                || Position.X <= 0
+                || Position.X >= Viewport.X
+            ) && BeenInView
+        )
             QueueFree();
-
-        Velocity = new Vector2(
-            Velocity.X
-                + (float)(
-                    vChange * bulletSpeed + (((rng.NextDouble() * 0.02) - 0.01) * bulletSpeed)
-                ),
-            Velocity.Y
-        );
-
-        if (Velocity.X >= 300 || Velocity.X <= -300)
-            vChange *= -1;
+        if (
+            !BeenInView
+            && Position.Y > 0
+            && Position.Y < Viewport.Y
+            && Position.X > 0
+            && Position.X < Viewport.X
+        )
+            BeenInView = true;
     }
 
     private void CheckPlayerCollision()
