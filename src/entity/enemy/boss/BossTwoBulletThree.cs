@@ -16,6 +16,11 @@ public partial class BossTwoBulletThree : BaseEntity
     public Vector2 Target;
     public Player p;
 
+    public float Speed = 150f;
+
+    public int ShiftDirection = 1;
+    public float ShiftStrength = 200f;
+
     public override void _Ready()
     {
         base._Ready();
@@ -32,15 +37,17 @@ public partial class BossTwoBulletThree : BaseEntity
 
     public override void _PhysicsProcess(double delta)
     {
-        Vector2 toTarget = Target - Position;
+        Vector2 toCenter = (Target - Position).Normalized();
 
-        if (Velocity.Length() * (float)delta >= toTarget.Length())
-        {
-            Position = Target;
+        Vector2 tangent = toCenter.Rotated(ShiftDirection * Mathf.Pi / 2);
+
+        Vector2 finalVel = toCenter * Speed + tangent * ShiftStrength;
+
+        Position += finalVel * (float)delta;
+
+        Rotation = finalVel.Angle() + Mathf.Pi;
+
+        if ((Target - Position).Length() < 5f)
             QueueFree();
-            return;
-        }
-
-        Position += Velocity * (float)delta;
     }
 }

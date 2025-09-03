@@ -24,6 +24,9 @@ public partial class BossTwo : Sprite2D
 
     private Action<Random, double, int>[] BulletPatterns = new Action<Random, double, int>[4];
 
+    private int randomNum = 0;
+    private int lastPattern = -1;
+
     public override void _Ready()
     {
         Viewport = GetViewportRect().Size;
@@ -91,15 +94,36 @@ public partial class BossTwo : Sprite2D
         BulletPatterns[3] = (Random rng, double speed, int d) =>
         {
             Vector2 center = new Vector2(650 / 2, Viewport.Y / 2);
+            var random = new RandomNumberGenerator();
+
+            do
+            {
+                randomNum = random.RandiRange(1, 4);
+            } while (randomNum == lastPattern);
+
+            lastPattern = randomNum;
 
             float radius = 300f;
+            int ringShiftDir = rng.Next(0, 2) == 0 ? -1 : 1;
 
             for (float angle = 0; angle < 360; angle += 5f)
             {
                 float normalizedAngle = angle % 360;
 
-                if (normalizedAngle >= 270 || normalizedAngle <= 90)
-                    continue;
+                if (
+                    randomNum == 1
+                    && (
+                        (normalizedAngle >= 270 && normalizedAngle <= 360)
+                        || (normalizedAngle >= 0 && normalizedAngle <= 90)
+                    )
+                )
+                    continue; // Remove Right Portion
+                if (randomNum == 2 && (normalizedAngle >= 180 && normalizedAngle <= 360))
+                    continue; // Remove Bottom Portion
+                if (randomNum == 3 && (normalizedAngle >= 90 && normalizedAngle <= 270))
+                    continue; // Remove Left Portion
+                if (randomNum == 4 && (normalizedAngle >= 0 && normalizedAngle <= 180))
+                    continue; // Remove Top Portion
 
                 var bullet = new BossTwoBulletThree();
 
@@ -118,6 +142,8 @@ public partial class BossTwo : Sprite2D
                 bullet.p = p;
 
                 GetTree().CurrentScene.AddChild(bullet);
+
+                bullet.ShiftDirection = ringShiftDir;
             }
         };
     }

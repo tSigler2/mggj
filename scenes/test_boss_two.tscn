@@ -52,7 +52,7 @@ position = Vector2(215, 114)
 script = ExtResource("3_guif0")
 p = NodePath("../CharacterBody2D")
 BulletSpeed = 100.0
-BulletRate = 1.0
+BulletRate = 0.8
 stage = 3
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
