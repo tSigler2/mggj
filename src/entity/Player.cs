@@ -21,7 +21,7 @@ public partial class Player : CharacterBody2D
         SetCollisionMaskValue(2, true);
     }
 
-    public override void _Process(double delta)
+    public override void _PhysicsProcess(double delta)
     {
         if (cooldown > 0)
             cooldown--;
@@ -54,14 +54,19 @@ public partial class Player : CharacterBody2D
             velocity = velocity.Normalized() * Speed;
             //animatedSprite2D.Play();
         }
+
+        Velocity = velocity;
+        MoveAndSlide();
+
+        /*
         else
         {
             //animatedSprite2D.Stop();
-        }
+        }*/
 
         var CurrentScene = GetTree().CurrentScene;
         GD.Print(Position);
-        Position += velocity * (float)delta;
+        //Position += velocity * (float)delta;
         if (
             CurrentScene.Name != "TestBossScene"
             && CurrentScene.Name != "TestBossTwo"

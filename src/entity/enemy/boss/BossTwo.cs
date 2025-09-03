@@ -87,12 +87,6 @@ public partial class BossTwo : Sprite2D
 
         BulletPatterns[2] = (Random rng, double speed, int d) =>
         {
-            var bullet = new BossTwoBulletOne();
-            GetTree().CurrentScene.AddChild(bullet);
-        };
-
-        BulletPatterns[3] = (Random rng, double speed, int d) =>
-        {
             Vector2 center = new Vector2(650 / 2, Viewport.Y / 2);
             var random = new RandomNumberGenerator();
 
@@ -140,6 +134,8 @@ public partial class BossTwo : Sprite2D
                 bullet.Target = center;
 
                 bullet.p = p;
+
+                bullet.bulletSpeed = BulletSpeed;
 
                 GetTree().CurrentScene.AddChild(bullet);
 
