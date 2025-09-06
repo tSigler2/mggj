@@ -76,7 +76,6 @@ expand_mode = 3
 
 [node name="DialogueSystem" type="Node" parent="."]
 script = ExtResource("3")
-DialogueLines = null
 
 [node name="TransitionArea" type="Area2D" parent="."]
 position = Vector2(400, 500)
