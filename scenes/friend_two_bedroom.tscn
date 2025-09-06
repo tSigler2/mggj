@@ -56,7 +56,7 @@ texture = ExtResource("2_3y1ep")
 
 [node name="Area2D" type="Area2D" parent="NPC"]
 script = ExtResource("3_hogt4")
-TargetBattleScenePath = "res://scenes/boss_battle_one.tscn"
+TargetBattleScenePath = "res://scenes/boss_battle_two.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NPC/Area2D"]
 position = Vector2(-7, 12)
