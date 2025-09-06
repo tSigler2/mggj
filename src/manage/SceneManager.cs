@@ -11,6 +11,8 @@ public partial class SceneManager : Node
         if (Instance == null)
         {
             Instance = this;
+            // Keep this node running when changing scenes
+            ProcessMode = ProcessModeEnum.Always;
         }
         else
         {
@@ -25,20 +27,31 @@ public partial class SceneManager : Node
 
     private void DeferredChangeScene(string path)
     {
-        // Remove the current scene
-        if (currentScene != null)
-        {
-            currentScene.QueueFree();
-        }
+        // Get the current scene from the tree
+        var oldScene = GetTree().CurrentScene;
 
         // Load the new scene
         var nextScene = GD.Load<PackedScene>(path);
+        if (nextScene == null)
+        {
+            GD.PrintErr($"Failed to load scene: {path}");
+            return;
+        }
+
         currentScene = nextScene.Instantiate();
 
-        // Add it to the scene tree
+        // Add the new scene to the root
         GetTree().Root.AddChild(currentScene);
 
-        // Optionally, set it as the current scene
-        // GetTree().CurrentScene = currentScene;
+        // Set it as the current scene
+        GetTree().CurrentScene = currentScene;
+
+        // Remove the old scene if it exists
+        if (oldScene != null)
+        {
+            oldScene.QueueFree();
+        }
+
+        GD.Print($"Scene changed to: {path}");
     }
 }

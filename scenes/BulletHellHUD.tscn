@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://bhf54hactx38f"]
+[gd_scene load_steps=2 format=3 uid="uid://bmoymdvvb3sup"]
 
 [ext_resource type="Script" uid="uid://cc72jrsea68hj" path="res://src/manage/BulletHellHUD.cs" id="1_xjha1"]
 

@@ -9,6 +9,7 @@ public partial class Player : CharacterBody2D
 
     public Vector2 ScreenSize;
     public int cooldown = 0;
+    public bool CanMove = true;
 
     [Export]
     public CollisionShape2D Collision;
@@ -23,9 +24,13 @@ public partial class Player : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
+        if (!CanMove)
+            return;
+
         if (cooldown > 0)
             cooldown--;
-        var velocity = Vector2.Zero; // The player's movement vector.
+
+        var velocity = Vector2.Zero;
 
         if (Input.IsActionPressed("move_right"))
         {
@@ -47,8 +52,6 @@ public partial class Player : CharacterBody2D
             velocity.Y -= 1;
         }
 
-        //var animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-
         if (velocity.Length() > 0)
         {
             velocity = velocity.Normalized() * Speed;
@@ -65,17 +68,18 @@ public partial class Player : CharacterBody2D
         }*/
 
         var CurrentScene = GetTree().CurrentScene;
-        GD.Print(Position);
         //Position += velocity * (float)delta;
         if (
             CurrentScene.Name != "TestBossScene"
             && CurrentScene.Name != "TestBossTwo"
             && CurrentScene.Name != ""
         )
+        {
             Position = new Vector2(
                 x: Mathf.Clamp(Position.X, 0, ScreenSize.X),
                 y: Mathf.Clamp(Position.Y, 0, ScreenSize.Y)
             );
+        }
         else
         {
             Position = new Vector2(
@@ -83,6 +87,7 @@ public partial class Player : CharacterBody2D
                 y: Mathf.Clamp(Position.Y, 16, ScreenSize.Y - 16)
             );
         }
+
         if (this.Health <= 0)
             QueueFree();
     }
