@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=4 uid="uid://dq26s1rm0qxq2"]
+[gd_scene load_steps=9 format=4 uid="uid://dq26s1rm0qxq2"]
 
 [ext_resource type="Texture2D" uid="uid://cl4miy0vl83s3" path="res://assets/art/TilesetWIP.png" id="1_3ruvf"]
 [ext_resource type="Texture2D" uid="uid://q6suaj6lqytx" path="res://assets/art/npcs/SiennaSprite.png" id="2_cuylp"]
+[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="3_3y1ep"]
 [ext_resource type="Texture2D" uid="uid://bebni8unrl265" path="res://assets/art/test/friend_one_room.png" id="3_kg55b"]
 [ext_resource type="Script" uid="uid://e7qqvppbtiqf" path="res://src/manage/Dialogue.cs" id="4_3y1ep"]
 
@@ -48,6 +49,9 @@ tile_set = SubResource("TileSet_w547m")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(171, 61)
 texture = ExtResource("2_cuylp")
+
+[node name="Player" parent="." instance=ExtResource("3_3y1ep")]
+position = Vector2(20, 139)
 
 [node name="Background" type="TextureRect" parent="."]
 anchors_preset = 15

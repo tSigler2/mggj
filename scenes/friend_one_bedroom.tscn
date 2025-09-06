@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=4 uid="uid://bf2rmv8wdu747"]
+[gd_scene load_steps=9 format=4 uid="uid://bf2rmv8wdu747"]
 
 [ext_resource type="Texture2D" uid="uid://bebni8unrl265" path="res://assets/art/test/friend_one_room.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://cl4miy0vl83s3" path="res://assets/art/TilesetWIP.png" id="1_i8woc"]
 [ext_resource type="Texture2D" uid="uid://coi5npksbhncj" path="res://assets/art/npcs/AliceSprite.png" id="2_2x0wj"]
 [ext_resource type="Script" uid="uid://e7qqvppbtiqf" path="res://src/manage/Dialogue.cs" id="3"]
+[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="3_2x0wj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i8woc"]
 texture = ExtResource("1_i8woc")
@@ -48,6 +49,9 @@ tile_set = SubResource("TileSet_7r42v")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(171, 61)
 texture = ExtResource("2_2x0wj")
+
+[node name="Player" parent="." instance=ExtResource("3_2x0wj")]
+position = Vector2(17, 142)
 
 [node name="Background" type="TextureRect" parent="."]
 anchors_preset = 15
