@@ -1,11 +1,12 @@
-[gd_scene load_steps=11 format=4 uid="uid://0itxea65eyxd"]
+[gd_scene load_steps=12 format=4 uid="uid://0itxea65eyxd"]
 
 [ext_resource type="Texture2D" uid="uid://cl4miy0vl83s3" path="res://assets/art/TilesetWIP.png" id="1_h6ecc"]
 [ext_resource type="Texture2D" uid="uid://q6suaj6lqytx" path="res://assets/art/npcs/SiennaSprite.png" id="2_1fko2"]
 [ext_resource type="Texture2D" uid="uid://bebni8unrl265" path="res://assets/art/test/friend_one_room.png" id="3_1fko2"]
-[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="3_68mhi"]
 [ext_resource type="Script" uid="uid://c24iwh7ev5y2j" path="res://src/entity/NPC.cs" id="3_dac0m"]
+[ext_resource type="FontFile" uid="uid://blxj0y6745at2" path="res://assets/fonts/PixelatedEleganceRegular-ovyAA.ttf" id="4_biy0f"]
 [ext_resource type="Script" uid="uid://e7qqvppbtiqf" path="res://src/manage/Dialogue.cs" id="4_dac0m"]
+[ext_resource type="PackedScene" uid="uid://bpocujow317n4" path="res://scenes/Player.tscn" id="5_dac0m"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_biy0f"]
 texture = ExtResource("1_h6ecc")
@@ -57,13 +58,14 @@ texture = ExtResource("2_1fko2")
 [node name="Area2D" type="Area2D" parent="NPC"]
 script = ExtResource("3_dac0m")
 TargetBattleScenePath = "res://scenes/boss_battle_three.tscn"
+Font = ExtResource("4_biy0f")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NPC/Area2D"]
 position = Vector2(-7, 12)
 shape = SubResource("RectangleShape2D_biy0f")
 
-[node name="Player" parent="." instance=ExtResource("3_68mhi")]
-position = Vector2(17, 142)
+[node name="Newplayer" parent="." instance=ExtResource("5_dac0m")]
+position = Vector2(18, 138)
 
 [node name="Background" type="TextureRect" parent="."]
 anchors_preset = 15
