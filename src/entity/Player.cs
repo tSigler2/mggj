@@ -20,6 +20,9 @@ public partial class Player : CharacterBody2D
 
         SetCollisionLayerValue(1, true);
         SetCollisionMaskValue(2, true);
+
+        // Add to player group for interaction system
+        AddToGroup("player");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -55,25 +58,16 @@ public partial class Player : CharacterBody2D
         if (velocity.Length() > 0)
         {
             velocity = velocity.Normalized() * Speed;
-            //animatedSprite2D.Play();
         }
 
         Velocity = velocity;
         MoveAndSlide();
 
-        /*
-        else
-        {
-            //animatedSprite2D.Stop();
-        }*/
+        // Get the current scene name safely
+        string currentSceneName = GetTree().CurrentScene?.Name ?? "";
 
-        var CurrentScene = GetTree().CurrentScene;
-        //Position += velocity * (float)delta;
-        if (
-            CurrentScene.Name != "TestBossScene"
-            && CurrentScene.Name != "TestBossTwo"
-            && CurrentScene.Name != ""
-        )
+        // Clamp position to screen bounds
+        if (currentSceneName != "TestBossScene" && currentSceneName != "TestBossTwo")
         {
             Position = new Vector2(
                 x: Mathf.Clamp(Position.X, 0, ScreenSize.X),
