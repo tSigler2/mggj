@@ -4,7 +4,7 @@ public partial class NPC : InteractableEntity
 {
     [Export]
     public string TargetBattleScenePath;
-    
+
     [Export]
     public string[] DialogueLines;
 
@@ -18,13 +18,14 @@ public partial class NPC : InteractableEntity
 
     private void OnNPCInteract()
     {
-        if (_hasInteracted) return;
-        
+        if (_hasInteracted)
+            return;
+
         GD.Print("Starting dialogue with NPC");
         // TODO: Implement dialogue system
         // For now, we'll just transition to the battle scene after a short delay
         _hasInteracted = true;
-        
+
         GetTree().CreateTimer(1.0f).Timeout += () =>
         {
             if (!string.IsNullOrEmpty(TargetBattleScenePath))
