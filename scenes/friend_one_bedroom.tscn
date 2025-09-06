@@ -4,9 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://cl4miy0vl83s3" path="res://assets/art/TilesetWIP.png" id="1_i8woc"]
 [ext_resource type="Texture2D" uid="uid://coi5npksbhncj" path="res://assets/art/npcs/AliceSprite.png" id="2_2x0wj"]
 [ext_resource type="Script" uid="uid://e7qqvppbtiqf" path="res://src/manage/Dialogue.cs" id="3"]
-[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="3_2x0wj"]
 [ext_resource type="Script" uid="uid://c24iwh7ev5y2j" path="res://src/entity/NPC.cs" id="3_md2wn"]
 [ext_resource type="FontFile" uid="uid://blxj0y6745at2" path="res://assets/fonts/PixelatedEleganceRegular-ovyAA.ttf" id="4_7r42v"]
+[ext_resource type="PackedScene" uid="uid://bpocujow317n4" path="res://scenes/Player.tscn" id="5_7r42v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i8woc"]
 texture = ExtResource("1_i8woc")
@@ -64,8 +64,8 @@ Font = ExtResource("4_7r42v")
 position = Vector2(-7, 12)
 shape = SubResource("RectangleShape2D_2x0wj")
 
-[node name="Player" parent="." instance=ExtResource("3_2x0wj")]
-position = Vector2(17, 142)
+[node name="Newplayer" parent="." instance=ExtResource("5_7r42v")]
+position = Vector2(17, 138)
 
 [node name="Background" type="TextureRect" parent="."]
 anchors_preset = 15
@@ -76,6 +76,7 @@ expand_mode = 3
 
 [node name="DialogueSystem" type="Node" parent="."]
 script = ExtResource("3")
+DialogueLines = null
 
 [node name="TransitionArea" type="Area2D" parent="."]
 position = Vector2(400, 500)
