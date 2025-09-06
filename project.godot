@@ -19,9 +19,6 @@ config/icon="res://icon.svg"
 
 Ui="*res://src/manage/Ui.cs"
 SceneManager="*res://src/manage/SceneManager.cs"
-
-[autoload]
-
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
 [dialogue_manager]
