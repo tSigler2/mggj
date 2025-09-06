@@ -55,14 +55,25 @@ public partial class Player : CharacterBody2D
         if (velocity.Length() > 0)
         {
             velocity = velocity.Normalized() * Speed;
+            //animatedSprite2D.Play();
         }
 
         Velocity = velocity;
         MoveAndSlide();
 
-        // Clamp position to screen bounds
-        var currentScene = GetTree().CurrentScene;
-        if (currentScene.Name != "TestBossScene" && currentScene.Name != "TestBossTwo")
+        /*
+        else
+        {
+            //animatedSprite2D.Stop();
+        }*/
+
+        var CurrentScene = GetTree().CurrentScene;
+        //Position += velocity * (float)delta;
+        if (
+            CurrentScene.Name != "TestBossScene"
+            && CurrentScene.Name != "TestBossTwo"
+            && CurrentScene.Name != ""
+        )
         {
             Position = new Vector2(
                 x: Mathf.Clamp(Position.X, 0, ScreenSize.X),

@@ -17,8 +17,10 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_qhqgy"]
 radius = 9.05539
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="Area2D" node_paths=PackedStringArray("Collision")]
 process_mode = 3
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("2_qhqgy")
 Collision = NodePath("CollisionShape2D")
 metadata/_edit_group_ = true
@@ -29,5 +31,8 @@ scale = Vector2(1.29475, 1.29475)
 sprite_frames = SubResource("SpriteFrames_qhqgy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+process_mode = 3
+light_mask = 1023
+visibility_layer = 1023
 position = Vector2(36, 29)
 shape = SubResource("CircleShape2D_qhqgy")

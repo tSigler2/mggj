@@ -22,7 +22,10 @@ public partial class BossTwo : Sprite2D
     private int stage = 0;
     private double deltaAccumulate;
 
-    private Action<Random, double, int>[] BulletPatterns = new Action<Random, double, int>[3];
+    private Action<Random, double, int>[] BulletPatterns = new Action<Random, double, int>[4];
+
+    private int randomNum = 0;
+    private int lastPattern = -1;
 
     public override void _Ready()
     {
@@ -101,8 +104,60 @@ public partial class BossTwo : Sprite2D
 
         BulletPatterns[2] = (Random rng, double speed, int d) =>
         {
-            var bullet = new BossTwoBulletOne();
-            GetTree().CurrentScene.AddChild(bullet);
+            Vector2 center = new Vector2(650 / 2, Viewport.Y / 2);
+            var random = new RandomNumberGenerator();
+
+            do
+            {
+                randomNum = random.RandiRange(1, 4);
+            } while (randomNum == lastPattern);
+
+            lastPattern = randomNum;
+
+            float radius = 300f;
+            int ringShiftDir = rng.Next(0, 2) == 0 ? -1 : 1;
+
+            for (float angle = 0; angle < 360; angle += 5f)
+            {
+                float normalizedAngle = angle % 360;
+
+                if (
+                    randomNum == 1
+                    && (
+                        (normalizedAngle >= 270 && normalizedAngle <= 360)
+                        || (normalizedAngle >= 0 && normalizedAngle <= 90)
+                    )
+                )
+                    continue; // Remove Right Portion
+                if (randomNum == 2 && (normalizedAngle >= 180 && normalizedAngle <= 360))
+                    continue; // Remove Bottom Portion
+                if (randomNum == 3 && (normalizedAngle >= 90 && normalizedAngle <= 270))
+                    continue; // Remove Left Portion
+                if (randomNum == 4 && (normalizedAngle >= 0 && normalizedAngle <= 180))
+                    continue; // Remove Top Portion
+
+                var bullet = new BossTwoBulletThree();
+
+                Vector2 spawnPos = new Vector2(
+                    center.X + Mathf.Cos(Mathf.DegToRad(angle)) * radius,
+                    center.Y + Mathf.Sin(Mathf.DegToRad(angle)) * radius
+                );
+
+                bullet.Position = spawnPos;
+
+                Vector2 dirToCenter = (center - spawnPos).Normalized();
+                bullet.Velocity = dirToCenter * (float)speed;
+
+                bullet.Target = center;
+
+                bullet.p = p;
+
+                bullet.bulletSpeed = BulletSpeed;
+
+                GetTree().CurrentScene.AddChild(bullet);
+
+                bullet.ShiftDirection = ringShiftDir;
+            }
         };
     }
 
