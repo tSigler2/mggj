@@ -3,7 +3,7 @@ repos:
     hooks:
       - id: csharpier
         name: Run CSharpier on C# files
-        entry: dotnet csharpier format .
+        entry: csharpier format .
         language: system
         types:
           - c#
