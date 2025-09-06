@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=4 uid="uid://ddeyt3q46yb3y"]
+[gd_scene load_steps=11 format=4 uid="uid://ddeyt3q46yb3y"]
 
 [ext_resource type="Texture2D" uid="uid://c8ux35xa6utix" path="res://assets/art/test/boarding_school_bg.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://cl4miy0vl83s3" path="res://assets/art/TilesetWIP.png" id="2_u0cw3"]
 [ext_resource type="PackedScene" uid="uid://bsp7vdlusqovh" path="res://scenes/Player.tscn" id="3_u0cw3"]
 [ext_resource type="Script" uid="uid://wjta3nxk6jo7" path="res://src/entity/Door.cs" id="4_u0cw3"]
+[ext_resource type="FontFile" uid="uid://blxj0y6745at2" path="res://assets/fonts/PixelatedEleganceRegular-ovyAA.ttf" id="5_84bvw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u0cw3"]
 texture = ExtResource("2_u0cw3")
@@ -68,6 +69,7 @@ position = Vector2(16, 36)
 position = Vector2(271, 268)
 script = ExtResource("4_u0cw3")
 TargetScenePath = "res://scenes/friend_one_bedroom.tscn"
+Font = ExtResource("5_84bvw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FriendDoors/FriendOneDoor"]
 position = Vector2(-1, 0)
@@ -77,6 +79,7 @@ shape = SubResource("RectangleShape2D_sey61")
 position = Vector2(399, 268)
 script = ExtResource("4_u0cw3")
 TargetScenePath = "res://scenes/friend_two_bedroom.tscn"
+Font = ExtResource("5_84bvw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FriendDoors/FriendTwoDoor"]
 shape = SubResource("RectangleShape2D_u0cw3")
@@ -85,6 +88,7 @@ shape = SubResource("RectangleShape2D_u0cw3")
 position = Vector2(528, 270)
 script = ExtResource("4_u0cw3")
 TargetScenePath = "res://scenes/friend_three_bedroom.tscn"
+Font = ExtResource("5_84bvw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FriendDoors/FriendThreeDoor"]
 position = Vector2(1, -3)
