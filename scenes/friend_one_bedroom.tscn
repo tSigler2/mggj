@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://coi5npksbhncj" path="res://assets/art/npcs/AliceSprite.png" id="2_2x0wj"]
 [ext_resource type="Script" uid="uid://e7qqvppbtiqf" path="res://src/manage/Dialogue.cs" id="3"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_md2wn"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i8woc"]
 texture = ExtResource("1_i8woc")
 separation = Vector2i(10, 7)
 texture_region_size = Vector2i(32, 32)
@@ -35,7 +35,7 @@ texture_region_size = Vector2i(32, 32)
 [sub_resource type="TileSet" id="TileSet_7r42v"]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_md2wn")
+sources/0 = SubResource("TileSetAtlasSource_i8woc")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_umafs"]
 

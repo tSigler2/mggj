@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cs4fmv7d4t4bf"]
+[gd_scene load_steps=5 format=3 uid="uid://bsp7vdlusqovh"]
 
 [ext_resource type="Texture2D" uid="uid://dq8nlymgh5d0g" path="res://assets/art/test/Alice_Moth_Still_2.png" id="2_g2els"]
 [ext_resource type="Script" uid="uid://biw5ll5ewicnv" path="res://src/entity/Player.cs" id="2_qhqgy"]
