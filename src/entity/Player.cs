@@ -9,6 +9,7 @@ public partial class Player : CharacterBody2D
 
     public Vector2 ScreenSize;
     public int cooldown = 0;
+    public bool CanMove = true;
 
     [Export]
     public CollisionShape2D Collision;
@@ -23,6 +24,9 @@ public partial class Player : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
+        if (!CanMove)
+            return;
+
         if (cooldown > 0)
             cooldown--;
 
