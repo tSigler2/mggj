@@ -1,12 +1,53 @@
-[gd_scene load_steps=5 format=3 uid="uid://bf2rmv8wdu747"]
+[gd_scene load_steps=8 format=4 uid="uid://bf2rmv8wdu747"]
 
 [ext_resource type="Texture2D" uid="uid://bebni8unrl265" path="res://assets/art/test/friend_one_room.png" id="1"]
-[ext_resource type="Texture2D" uid="uid://3tyaysiqocbh" path="res://assets/art/test/moth_1.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://cl4miy0vl83s3" path="res://assets/art/TilesetWIP.png" id="1_i8woc"]
+[ext_resource type="Texture2D" uid="uid://coi5npksbhncj" path="res://assets/art/npcs/AliceSprite.png" id="2_2x0wj"]
 [ext_resource type="Script" uid="uid://e7qqvppbtiqf" path="res://src/manage/Dialogue.cs" id="3"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_md2wn"]
+texture = ExtResource("1_i8woc")
+separation = Vector2i(10, 7)
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+4:0/0/z_index = 1
+5:0/0 = 0
+5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+6:0/0 = 0
+6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+8:0/0 = 0
+8:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+1:0/0 = 0
+2:0/0 = 0
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+7:0/0 = 0
+7:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSet" id="TileSet_7r42v"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_md2wn")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_umafs"]
 
 [node name="FriendOneBedroom" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAAAAAAAAACAAAAAAABAAAAAAACAAAAAAACAAAAAAACAAAAAAADAAAAAAACAAAAAAAEAAAAAAACAAAAAAAFAAAAAAACAAAAAAD//wAAAAABAAEAAAAGAAAAAAACAAEAAAAGAAEAAAACAAEAAAAGAAIAAAACAAEAAAAGAAMAAAACAAEAAAAGAAQAAAACAAEAAAAGAAUAAAACAAEAAAD//wEAAAABAAEAAAD//wIAAAABAAEAAAD//wMAAAABAAEAAAD//wQAAAABAAEAAAD//wUAAAABAAEAAAD//wYAAAAIAAAAAAAGAAYAAAAHAAAAAAAAAAYAAAAAAAEAAAACAAYAAAAAAAEAAAADAAYAAAAAAAEAAAAEAAYAAAAAAAEAAAAFAAYAAAAAAAEAAAAAAAUAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAMAAAAAAAAAAAABAAMAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAQAAAAAAAAAAAAFAAQAAAAAAAAAAAABAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAEAAAAAAAAAAAACAAEAAAAAAAAAAAADAAEAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAIAAAAAAAAAAAAFAAIAAAAAAAAAAAAFAAEAAAAAAAAAAAAFAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAADAAIAAAAAAAAAAAACAAIAAAAAAAAAAAAFAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAADAAUAAAAAAAAAAAACAAUAAAAAAAAAAAABAAUAAAAAAAAAAAABAAQAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAD/////AAAGAAAAAAAGAP//AAAFAAAAAAAAAP//AAADAAEAAAABAP//AAADAAEAAAACAP//AAADAAEAAAADAP//AAADAAEAAAAEAP//AAADAAEAAAAFAP//AAADAAEAAAA=")
+tile_set = SubResource("TileSet_7r42v")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(171, 61)
+texture = ExtResource("2_2x0wj")
 
 [node name="Background" type="TextureRect" parent="."]
 anchors_preset = 15
@@ -14,10 +55,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource("1")
 expand_mode = 3
-
-[node name="Friend" type="Sprite2D" parent="."]
-position = Vector2(400, 300)
-texture = ExtResource("2")
 
 [node name="DialogueSystem" type="Node" parent="."]
 script = ExtResource("3")
