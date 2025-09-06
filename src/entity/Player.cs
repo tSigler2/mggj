@@ -21,11 +21,12 @@ public partial class Player : CharacterBody2D
         SetCollisionMaskValue(2, true);
     }
 
-    public override void _Process(double delta)
+    public override void _PhysicsProcess(double delta)
     {
         if (cooldown > 0)
             cooldown--;
-        var velocity = Vector2.Zero; // The player's movement vector.
+
+        var velocity = Vector2.Zero;
 
         if (Input.IsActionPressed("move_right"))
         {
@@ -47,30 +48,23 @@ public partial class Player : CharacterBody2D
             velocity.Y -= 1;
         }
 
-        //var animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-
         if (velocity.Length() > 0)
         {
             velocity = velocity.Normalized() * Speed;
-            //animatedSprite2D.Play();
-        }
-        else
-        {
-            //animatedSprite2D.Stop();
         }
 
-        var CurrentScene = GetTree().CurrentScene;
-        GD.Print(Position);
-        Position += velocity * (float)delta;
-        if (
-            CurrentScene.Name != "TestBossScene"
-            && CurrentScene.Name != "TestBossTwo"
-            && CurrentScene.Name != ""
-        )
+        Velocity = velocity;
+        MoveAndSlide();
+
+        // Clamp position to screen bounds
+        var currentScene = GetTree().CurrentScene;
+        if (currentScene.Name != "TestBossScene" && currentScene.Name != "TestBossTwo")
+        {
             Position = new Vector2(
                 x: Mathf.Clamp(Position.X, 0, ScreenSize.X),
                 y: Mathf.Clamp(Position.Y, 0, ScreenSize.Y)
             );
+        }
         else
         {
             Position = new Vector2(
@@ -78,6 +72,7 @@ public partial class Player : CharacterBody2D
                 y: Mathf.Clamp(Position.Y, 16, ScreenSize.Y - 16)
             );
         }
+
         if (this.Health <= 0)
             QueueFree();
     }

@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cl4miy0vl83s3" path="res://assets/art/TilesetWIP.png" id="1_3ruvf"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7x08r"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3ruvf"]
 texture = ExtResource("1_3ruvf")
 separation = Vector2i(10, 7)
 texture_region_size = Vector2i(32, 32)
@@ -32,7 +32,7 @@ texture_region_size = Vector2i(32, 32)
 [sub_resource type="TileSet" id="TileSet_w547m"]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_7x08r")
+sources/0 = SubResource("TileSetAtlasSource_3ruvf")
 
 [node name="FriendTwoBedroom" type="Node2D"]
 

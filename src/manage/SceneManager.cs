@@ -38,7 +38,7 @@ public partial class SceneManager : Node
         // Add it to the scene tree
         GetTree().Root.AddChild(currentScene);
 
-        // Optionally, set it as the current scene
-        // GetTree().CurrentScene = currentScene;
+        // Set it as the current scene
+        GetTree().CurrentScene = currentScene;
     }
 }
