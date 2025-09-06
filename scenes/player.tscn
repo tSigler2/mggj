@@ -17,9 +17,10 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_qhqgy"]
 radius = 9.05539
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="CharacterBody2D"]
 process_mode = 3
 script = ExtResource("2_qhqgy")
+Collision = NodePath("CollisionShape2D")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
