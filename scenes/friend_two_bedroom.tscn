@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://dq26s1rm0qxq2"]
+[gd_scene load_steps=32 format=4 uid="uid://dq26s1rm0qxq2"]
 
 [ext_resource type="Texture2D" uid="uid://cl4miy0vl83s3" path="res://assets/art/TilesetWIP.png" id="1_3ruvf"]
 [ext_resource type="Script" uid="uid://c24iwh7ev5y2j" path="res://src/entity/NPC.cs" id="3_hogt4"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://q6suaj6lqytx" path="res://assets/art/npcs/SiennaSprite.png" id="5_5qfw6"]
 [ext_resource type="Script" uid="uid://biw5ll5ewicnv" path="res://src/entity/Player.cs" id="7_5qfw6"]
 [ext_resource type="Texture2D" uid="uid://b83nbliophv2e" path="res://assets/art/npcs/AliceSpriteSheet.png" id="8_ruglx"]
+[ext_resource type="AudioStream" uid="uid://xjva10snkgkq" path="res://assets/sound/music/MGGJ_Overworld_wip1.mp3" id="9_ruglx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3ruvf"]
 texture = ExtResource("1_3ruvf")
@@ -204,26 +205,26 @@ _data = {
 &"move_up": SubResource("Animation_sf3ba")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qqipd"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ctc3g"]
 animation = &"idle_up"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_oyyr4"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0x8ux"]
 animation = &"idle_left"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_25uxb"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gwa3b"]
 animation = &"idle_right"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qbimk"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m5csd"]
 animation = &"idle_down"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_pq7h1"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_qqipd")
+blend_point_0/node = SubResource("AnimationNodeAnimation_ctc3g")
 blend_point_0/pos = Vector2(0, 1)
-blend_point_1/node = SubResource("AnimationNodeAnimation_oyyr4")
+blend_point_1/node = SubResource("AnimationNodeAnimation_0x8ux")
 blend_point_1/pos = Vector2(-1, 0)
-blend_point_2/node = SubResource("AnimationNodeAnimation_25uxb")
+blend_point_2/node = SubResource("AnimationNodeAnimation_gwa3b")
 blend_point_2/pos = Vector2(1, 0)
-blend_point_3/node = SubResource("AnimationNodeAnimation_qbimk")
+blend_point_3/node = SubResource("AnimationNodeAnimation_m5csd")
 blend_point_3/pos = Vector2(0, -0.9)
 blend_mode = 1
 
@@ -295,3 +296,7 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_nvw5e")
 anim_player = NodePath("../AnimationPlayer")
 parameters/idle/blend_position = Vector2(0, 0)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_ruglx")
+autoplay = true

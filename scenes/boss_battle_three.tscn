@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b5cq6bqfbamwa"]
+[gd_scene load_steps=5 format=3 uid="uid://b5cq6bqfbamwa"]
 
 [ext_resource type="Texture2D" uid="uid://cvsnbi2i8o4ag" path="res://assets/art/test/battle_bg.png" id="1_whcmp"]
 [ext_resource type="Script" uid="uid://dpmwu2bitscy0" path="res://src/entity/enemy/boss/BossOne.cs" id="2_v07pt"]
 [ext_resource type="Script" uid="uid://biw5ll5ewicnv" path="res://src/entity/Player.cs" id="3_km5s0"]
+[ext_resource type="AudioStream" uid="uid://dhy7q1pfu4ps1" path="res://assets/sound/music/MGGJ_PhoebeBossTheme_wip1_alt.mp3" id="4_v07pt"]
 
 [node name="BossBattleOne" type="Node2D"]
 
@@ -27,3 +28,7 @@ input_pickable = true
 script = ExtResource("3_km5s0")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_v07pt")
+autoplay = true
