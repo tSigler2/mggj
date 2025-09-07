@@ -1,10 +1,11 @@
-[gd_scene load_steps=30 format=4 uid="uid://ddeyt3q46yb3y"]
+[gd_scene load_steps=31 format=4 uid="uid://ddeyt3q46yb3y"]
 
 [ext_resource type="Texture2D" uid="uid://c8ux35xa6utix" path="res://assets/art/test/boarding_school_bg.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://cl4miy0vl83s3" path="res://assets/art/TilesetWIP.png" id="2_u0cw3"]
 [ext_resource type="Script" uid="uid://wjta3nxk6jo7" path="res://src/entity/Door.cs" id="4_u0cw3"]
 [ext_resource type="FontFile" uid="uid://blxj0y6745at2" path="res://assets/fonts/PixelatedEleganceRegular-ovyAA.ttf" id="5_84bvw"]
 [ext_resource type="Script" uid="uid://biw5ll5ewicnv" path="res://src/entity/Player.cs" id="6_3fm0n"]
+[ext_resource type="AudioStream" uid="uid://xjva10snkgkq" path="res://assets/sound/music/MGGJ_Overworld_wip1.mp3" id="7_3fm0n"]
 [ext_resource type="Texture2D" uid="uid://b83nbliophv2e" path="res://assets/art/npcs/AliceSpriteSheet.png" id="7_ta6dl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u0cw3"]
@@ -308,3 +309,7 @@ Font = ExtResource("5_84bvw")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FriendDoors/FriendThreeDoor"]
 position = Vector2(1, -3)
 shape = SubResource("RectangleShape2D_84bvw")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_3fm0n")
+autoplay = true
