@@ -18,11 +18,8 @@ config/main_scene=""
 
 [autoload]
 
-Ui="*res://src/manage/Ui.cs"
-
-[autoload]
-
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+Ui="*res://src/manage/Ui.cs"
 
 [dialogue_manager]
 
@@ -62,7 +59,7 @@ move_down={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://Dialogue/untitled.dialogue", "res://Dialogue/new.dialogue")
+locale/translations_pot_files=PackedStringArray("res://Dialogue/untitled.dialogue", "res://Dialogue/new.dialogue", "res://Dialogue/SiennaRoom/PlatformShoes.dialogue", "res://Dialogue/SiennaRoom/SiennaMisc.dialogue")
 
 [layer_names]
 
@@ -72,5 +69,6 @@ locale/translations_pot_files=PackedStringArray("res://Dialogue/untitled.dialogu
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+renderer/rendering_method.web="forward_plus"
 textures/vram_compression/import_etc2_astc=true
 textures/default_filters/use_nearest_mipmap_filter=true

@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bebni8unrl265" path="res://assets/art/test/friend_one_room.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://3tyaysiqocbh" path="res://assets/art/test/moth_1.png" id="2"]
-[ext_resource type="Script" uid="uid://e7qqvppbtiqf" path="res://src/manage/Dialogue.cs" id="3"]
+[ext_resource type="Script" path="res://src/manage/Dialogue.cs" id="3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_umafs"]
 

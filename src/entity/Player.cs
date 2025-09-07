@@ -3,29 +3,29 @@ using Godot;
 
 public partial class Player : CharacterBody2D
 {
-    [Export]
-    public int Speed { get; set; } = 400;
-    public int Health { get; set; } = 10;
+	[Export]
+	public int Speed { get; set; } = 400;
+	public int Health { get; set; } = 10;
 
-    public Vector2 ScreenSize;
-    public int cooldown = 0;
+	public Vector2 ScreenSize;
+	public int cooldown = 0;
 
-    [Export]
-    public CollisionShape2D Collision;
+	[Export]
+	public CollisionShape2D Collision;
 
-    public override void _Ready()
-    {
-        ScreenSize = GetViewportRect().Size;
+	public override void _Ready()
+	{
+		ScreenSize = GetViewportRect().Size;
 
-        SetCollisionLayerValue(1, true);
-        SetCollisionMaskValue(2, true);
-    }
+		SetCollisionLayerValue(1, true);
+		SetCollisionMaskValue(2, true);
+	}
 
-    public override void _Process(double delta)
-    {
-        if (cooldown > 0)
-            cooldown--;
-        var velocity = Vector2.Zero; // The player's movement vector.
+	public override void _Process(double delta)
+	{
+		if (cooldown > 0)
+			cooldown--;
+		var velocity = Vector2.Zero; // The player's movement vector.
 
 		if (Input.IsActionPressed("move_right"))
 		{
@@ -47,44 +47,44 @@ public partial class Player : CharacterBody2D
 			velocity.Y -= 1;
 		}
 
-        //var animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		//var animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 
-        if (velocity.Length() > 0)
-        {
-            velocity = velocity.Normalized() * Speed;
-            //animatedSprite2D.Play();
-        }
-        else
-        {
-            //animatedSprite2D.Stop();
-        }
+		if (velocity.Length() > 0)
+		{
+			velocity = velocity.Normalized() * Speed;
+			//animatedSprite2D.Play();
+		}
+		else
+		{
+			//animatedSprite2D.Stop();
+		}
 
-        var CurrentScene = GetTree().CurrentScene;
-        GD.Print(Position);
-        Position += velocity * (float)delta;
-        if (
-            CurrentScene.Name != "TestBossScene"
-            && CurrentScene.Name != "TestBossTwo"
-            && CurrentScene.Name != ""
-        )
-            Position = new Vector2(
-                x: Mathf.Clamp(Position.X, 0, ScreenSize.X),
-                y: Mathf.Clamp(Position.Y, 0, ScreenSize.Y)
-            );
-        else
-        {
-            Position = new Vector2(
-                x: Mathf.Clamp(Position.X, 32, 642.0f),
-                y: Mathf.Clamp(Position.Y, 16, ScreenSize.Y - 16)
-            );
-        }
-        if (this.Health <= 0)
-            QueueFree();
-    }
+		var CurrentScene = GetTree().CurrentScene;
+		//GD.Print(Position);
+		Position += velocity * (float)delta;
+		if (
+			CurrentScene.Name != "TestBossScene"
+			&& CurrentScene.Name != "TestBossTwo"
+			&& CurrentScene.Name != ""
+		)
+			Position = new Vector2(
+				x: Mathf.Clamp(Position.X, 0, ScreenSize.X),
+				y: Mathf.Clamp(Position.Y, 0, ScreenSize.Y)
+			);
+		else
+		{
+			Position = new Vector2(
+				x: Mathf.Clamp(Position.X, 32, 642.0f),
+				y: Mathf.Clamp(Position.Y, 16, ScreenSize.Y - 16)
+			);
+		}
+		if (this.Health <= 0)
+			QueueFree();
+	}
 
-    public void HealthChange()
-    {
-        GD.Print("Change Health");
-        Health -= 1;
-    }
+	public void HealthChange()
+	{
+		GD.Print("Change Health");
+		Health -= 1;
+	}
 }

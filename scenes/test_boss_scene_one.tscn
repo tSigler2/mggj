@@ -43,12 +43,11 @@ LongIntervalActive = false
 BulletSpeed = 200.0
 p = NodePath("../CharacterBody2D")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("Collision")]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 process_mode = 3
 z_index = 1
 position = Vector2(214, 114)
 script = ExtResource("2_uykmq")
-Collision = NodePath("CollisionShape2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 process_mode = 3

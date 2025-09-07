@@ -32,11 +32,10 @@ font_size = 25
 
 [node name="TestBossTwo" type="Node2D"]
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("Collision")]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 process_mode = 3
 position = Vector2(214, 114)
 script = ExtResource("1_44fik")
-Collision = NodePath("CollisionShape2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 process_mode = 3

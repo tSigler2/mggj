@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://4vop1byqfy4o"
+path="res://.godot/imported/SiennaMisc.dialogue-c681276770bc2cf696d23dd899672396.tres"
+
+[deps]
+
+source_file="res://Dialogue/SiennaRoom/SiennaMisc.dialogue"
+dest_files=["res://.godot/imported/SiennaMisc.dialogue-c681276770bc2cf696d23dd899672396.tres"]
+
+[params]
+
+defaults=true

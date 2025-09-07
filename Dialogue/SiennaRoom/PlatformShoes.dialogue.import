@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://bgxepu8pp5j7y"
+path="res://.godot/imported/PlatformShoes.dialogue-1dc0f8cdc079118fab7f140f829d829a.tres"
+
+[deps]
+
+source_file="res://Dialogue/SiennaRoom/PlatformShoes.dialogue"
+dest_files=["res://.godot/imported/PlatformShoes.dialogue-1dc0f8cdc079118fab7f140f829d829a.tres"]
+
+[params]
+
+defaults=true
