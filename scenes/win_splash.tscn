@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvgeeh8ao2mcu"]
+
+[ext_resource type="Texture2D" uid="uid://crrp7x1yfqcys" path="res://assets/art/ui/win_splash copy.png" id="1_2sbu7"]
+
+[node name="WinSplash" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_2sbu7")

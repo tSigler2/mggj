@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bmosrq3r35i7n"]
+
+[ext_resource type="Script" uid="uid://biw5ll5ewicnv" path="res://src/entity/Player.cs" id="1_fqqsx"]
+[ext_resource type="Texture2D" uid="uid://dq8nlymgh5d0g" path="res://assets/art/test/Alice_Moth_Still_2.png" id="2_bur0n"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qhqgy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_bur0n")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qhqgy"]
+radius = 9.05539
+
+[node name="Player" type="Area2D"]
+script = ExtResource("1_fqqsx")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(32.5679, 29.284)
+scale = Vector2(1.29475, 1.29475)
+sprite_frames = SubResource("SpriteFrames_qhqgy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(36, 29)
+shape = SubResource("CircleShape2D_qhqgy")

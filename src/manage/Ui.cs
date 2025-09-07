@@ -43,18 +43,20 @@ public partial class Ui : CanvasLayer
 		buttonClickPlayer = new AudioStreamPlayer();
 		AddChild(buttonClickPlayer);
 
-		if (ButtonClickSound != null)
-		{
-			buttonClickPlayer.Stream = ButtonClickSound;
-		}
-		else
-		{
-			// Fallback to the hardcoded path if not assigned in editor
-			//	buttonClickPlayer.Stream = GD.Load<AudioStream>(
-			//	"res://assets/sound/ui/button_click.ogg"
-			//);
-			//GD.Print("ButtonClickSound not assigned in editor, using fallback");
-		}
+        if (ButtonClickSound != null)
+        {
+            buttonClickPlayer.Stream = ButtonClickSound;
+        }
+        /*
+        else
+        {
+            // Fallback to the hardcoded path if not assigned in editor
+            buttonClickPlayer.Stream = GD.Load<AudioStream>(
+                "res://assets/sound/ui/button_click.ogg"
+            );
+            GD.Print("ButtonClickSound not assigned in editor, using fallback");
+        }
+        */
 
 		buttonClickPlayer.Bus = "UI";
 		buttonClickPlayer.VolumeDb = -10;
