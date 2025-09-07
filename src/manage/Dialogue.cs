@@ -1,32 +1,41 @@
 using Godot;
 
-public partial class Dialogue : Node
+
+public partial class Dialogue : InteractableEntity
 {
-    [Signal]
-    public delegate void DialogueFinishedEventHandler();
+	// Export as Resource because C# cannot directly export GDScript types
+	[Export] public Resource DialogueResourceObject;
+	[Export] public string DialogueStart = "start";
 
-    [Export]
-    public string[] DialogueLines;
+	private bool _isPlayerInRange = false;
 
-    private bool _isActive = false;
+	public override void _Ready()
+	{
+		base._Ready();
+		OnInteract += Action;
+	}
 
-    public void StartDialogue(string[] lines)
-    {
-        DialogueLines = lines;
-        _isActive = true;
-        GD.Print("Dialogue started (placeholder implementation)");
+	// Call this to trigger dialogue
+	public void Action()
+	{
+		if (DialogueResourceObject == null)
+		{
+			GD.PrintErr("⚠ DialogueResourceObject is not assigned!");
+			return;
+		}
 
-        // Simulate dialogue completion after a short delay
-        GetTree().CreateTimer(2.0f).Timeout += () =>
-        {
-            _isActive = false;
-            EmitSignal(SignalName.DialogueFinished);
-            GD.Print("Dialogue finished (placeholder implementation)");
-        };
-    }
+		GD.Print($"Action called on: {this}");
+		GD.Print($"Dialogue resource: {DialogueResourceObject}");
 
-    public bool IsActive()
-    {
-        return _isActive;
-    }
+		// Call the GDScript DialogueManager singleton
+		var manager = Engine.GetSingleton("DialogueManager");
+		if (manager != null)
+		{
+			manager.Call("show_dialogue_balloon", DialogueResourceObject, DialogueStart);
+		}
+		else
+		{
+			GD.PrintErr("⚠ DialogueManager singleton not found!");
+		}
+	}
 }

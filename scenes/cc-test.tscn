@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://d0gx1naxd7ugo"]
+[gd_scene load_steps=10 format=3 uid="uid://d0gx1naxd7ugo"]
 
 [ext_resource type="Texture2D" uid="uid://b2xa516xjo0m2" path="res://icon.svg" id="2_peehu"]
 [ext_resource type="Script" uid="uid://crkwgfgsuyoht" path="res://Dialogue/PlayerDialogue.gd" id="2_r7saq"]
 [ext_resource type="PackedScene" uid="uid://75mvwey5ooq" path="res://Dialogue/Actionable.tscn" id="3_r7saq"]
+[ext_resource type="Resource" uid="uid://btl2euykcm0qt" path="res://Dialogue/untitled.dialogue" id="3_ud8lg"]
 [ext_resource type="Script" uid="uid://biw5ll5ewicnv" path="res://src/entity/Player.cs" id="4_45n1d"]
 [ext_resource type="Texture2D" uid="uid://dq8nlymgh5d0g" path="res://assets/art/test/Alice_Moth_Still_2.png" id="5_4exeu"]
 
@@ -18,43 +19,43 @@ radius = 21.8403
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 z_index = 1
-position = Vector2(214, 114)
+position = Vector2(456, 218)
 scale = Vector2(0.640625, 0.625)
 texture = ExtResource("2_peehu")
 
 [node name="Actionable" parent="Sprite2D2" instance=ExtResource("3_r7saq")]
 scale = Vector2(1.56098, 1.6)
+collision_layer = 1
+collision_mask = 1
+dialogue_resource = ExtResource("3_ud8lg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D2/Actionable"]
 shape = SubResource("CircleShape2D_4exeu")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("Collision") groups=["Player"]]
 process_mode = 3
 z_index = 1
 position = Vector2(214, 114)
-collision_layer = 17
-collision_mask = 17
 script = ExtResource("4_45n1d")
+Collision = NodePath("CollisionShape2D")
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" groups=["Player"]]
 process_mode = 3
 position = Vector2(1, 0.999985)
 scale = Vector2(0.984375, 0.9375)
 texture = ExtResource("5_4exeu")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" groups=["Player"]]
 process_mode = 3
 shape = SubResource("RectangleShape2D_y04gl")
 one_way_collision_margin = 8.5
 
-[node name="ActionableFinder" type="Area2D" parent="CharacterBody2D" node_paths=PackedStringArray("actionable_finder", "target")]
-collision_mask = 16
+[node name="Direction" type="Marker2D" parent="CharacterBody2D" groups=["Player"]]
+
+[node name="ActionableFinder" type="Area2D" parent="CharacterBody2D/Direction" node_paths=PackedStringArray("actionable_finder", "target") groups=["Player"]]
 script = ExtResource("2_r7saq")
 actionable_finder = NodePath(".")
-target = NodePath("../../Sprite2D2/Actionable")
+target = NodePath("../../../Sprite2D2/Actionable")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/ActionableFinder"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Direction/ActionableFinder" groups=["Player"]]
 shape = SubResource("CircleShape2D_ud8lg")
-
-[node name="Direction" type="Marker2D" parent="."]
-position = Vector2(214, 114)

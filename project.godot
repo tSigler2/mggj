@@ -14,13 +14,13 @@ config/name="mggj"
 run/main_scene="uid://1ycetv1af4j0"
 config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
+config/main_scene=""
 
 [autoload]
 
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 Ui="*res://src/manage/Ui.cs"
 SceneManager="*res://src/manage/SceneManager.cs"
-DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
 [dialogue_manager]
 
