@@ -14,8 +14,6 @@ separation = Vector2i(10, 7)
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 3:0/0 = 0
-4:0/0 = 0
-4:0/0/z_index = 1
 5:0/0 = 0
 5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:0/0 = 0
@@ -34,6 +32,7 @@ texture_region_size = Vector2i(32, 32)
 3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 7:0/0 = 0
 7:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+4:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_84bvw"]
 tile_size = Vector2i(32, 32)
@@ -198,26 +197,26 @@ _data = {
 &"move_up": SubResource("Animation_sf3ba")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ctc3g"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8v753"]
 animation = &"idle_up"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0x8ux"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4npl6"]
 animation = &"idle_left"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gwa3b"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xfu2d"]
 animation = &"idle_right"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m5csd"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_20kmv"]
 animation = &"idle_down"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_pq7h1"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_ctc3g")
+blend_point_0/node = SubResource("AnimationNodeAnimation_8v753")
 blend_point_0/pos = Vector2(0, 1)
-blend_point_1/node = SubResource("AnimationNodeAnimation_0x8ux")
+blend_point_1/node = SubResource("AnimationNodeAnimation_4npl6")
 blend_point_1/pos = Vector2(-1, 0)
-blend_point_2/node = SubResource("AnimationNodeAnimation_gwa3b")
+blend_point_2/node = SubResource("AnimationNodeAnimation_xfu2d")
 blend_point_2/pos = Vector2(1, 0)
-blend_point_3/node = SubResource("AnimationNodeAnimation_m5csd")
+blend_point_3/node = SubResource("AnimationNodeAnimation_20kmv")
 blend_point_3/pos = Vector2(0, -0.9)
 blend_mode = 1
 
