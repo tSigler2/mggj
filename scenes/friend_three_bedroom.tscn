@@ -1,10 +1,7 @@
-[gd_scene load_steps=12 format=4 uid="uid://0itxea65eyxd"]
+[gd_scene load_steps=8 format=4 uid="uid://0itxea65eyxd"]
 
 [ext_resource type="Texture2D" uid="uid://cl4miy0vl83s3" path="res://assets/art/TilesetWIP.png" id="1_h6ecc"]
-[ext_resource type="Texture2D" uid="uid://q6suaj6lqytx" path="res://assets/art/npcs/SiennaSprite.png" id="2_1fko2"]
 [ext_resource type="Texture2D" uid="uid://bebni8unrl265" path="res://assets/art/test/friend_one_room.png" id="3_1fko2"]
-[ext_resource type="Script" uid="uid://c24iwh7ev5y2j" path="res://src/entity/NPC.cs" id="3_dac0m"]
-[ext_resource type="FontFile" uid="uid://blxj0y6745at2" path="res://assets/fonts/PixelatedEleganceRegular-ovyAA.ttf" id="4_biy0f"]
 [ext_resource type="Script" uid="uid://e7qqvppbtiqf" path="res://src/manage/Dialogue.cs" id="4_dac0m"]
 [ext_resource type="PackedScene" uid="uid://bpocujow317n4" path="res://scenes/player.tscn" id="5_dac0m"]
 
@@ -40,9 +37,6 @@ tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_biy0f")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_biy0f"]
-size = Vector2(56, 74)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4npl6"]
 
 [node name="FriendThreeBedroom" type="Node2D"]
@@ -50,19 +44,6 @@ size = Vector2(56, 74)
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAAAAAAAAACAAAAAAABAAAAAAACAAAAAAACAAAAAAACAAAAAAADAAAAAAACAAAAAAAEAAAAAAACAAAAAAAFAAAAAAACAAAAAAD//wAAAAABAAEAAAAGAAAAAAACAAEAAAAGAAEAAAACAAEAAAAGAAIAAAACAAEAAAAGAAMAAAACAAEAAAAGAAQAAAACAAEAAAAGAAUAAAACAAEAAAD//wEAAAABAAEAAAD//wIAAAABAAEAAAD//wMAAAABAAEAAAD//wQAAAABAAEAAAD//wUAAAABAAEAAAD//wYAAAAIAAAAAAAGAAYAAAAHAAAAAAAAAAYAAAAAAAEAAAACAAYAAAAAAAEAAAADAAYAAAAAAAEAAAAEAAYAAAAAAAEAAAAFAAYAAAAAAAEAAAAAAAUAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAMAAAAAAAAAAAABAAMAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAQAAAAAAAAAAAAFAAQAAAAAAAAAAAABAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAEAAAAAAAAAAAACAAEAAAAAAAAAAAADAAEAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAIAAAAAAAAAAAAFAAIAAAAAAAAAAAAFAAEAAAAAAAAAAAAFAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAADAAIAAAAAAAAAAAACAAIAAAAAAAAAAAAFAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAADAAUAAAAAAAAAAAACAAUAAAAAAAAAAAABAAUAAAAAAAAAAAABAAQAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAD/////AAAGAAAAAAAGAP//AAAFAAAAAAAAAP//AAADAAEAAAABAP//AAADAAEAAAACAP//AAADAAEAAAADAP//AAADAAEAAAAEAP//AAADAAEAAAAFAP//AAADAAEAAAA=")
 tile_set = SubResource("TileSet_8v753")
-
-[node name="NPC" type="Sprite2D" parent="."]
-position = Vector2(169, 37)
-texture = ExtResource("2_1fko2")
-
-[node name="Area2D" type="Area2D" parent="NPC"]
-script = ExtResource("3_dac0m")
-TargetBattleScenePath = "res://scenes/boss_battle_three.tscn"
-Font = ExtResource("4_biy0f")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC/Area2D"]
-position = Vector2(-7, 12)
-shape = SubResource("RectangleShape2D_biy0f")
 
 [node name="Newplayer" parent="." instance=ExtResource("5_dac0m")]
 position = Vector2(18, 138)
