@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bebni8unrl265" path="res://assets/art/test/friend_one_room.png" id="3_kg55b"]
 [ext_resource type="Script" uid="uid://e7qqvppbtiqf" path="res://src/manage/Dialogue.cs" id="4_3y1ep"]
 [ext_resource type="FontFile" uid="uid://blxj0y6745at2" path="res://assets/fonts/PixelatedEleganceRegular-ovyAA.ttf" id="4_hogt4"]
-[ext_resource type="PackedScene" uid="uid://bpocujow317n4" path="res://scenes/Player.tscn" id="5_hogt4"]
+[ext_resource type="PackedScene" uid="uid://bpocujow317n4" path="res://scenes/player.tscn" id="5_hogt4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3ruvf"]
 texture = ExtResource("1_3ruvf")

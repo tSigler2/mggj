@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://c24iwh7ev5y2j" path="res://src/entity/NPC.cs" id="3_dac0m"]
 [ext_resource type="FontFile" uid="uid://blxj0y6745at2" path="res://assets/fonts/PixelatedEleganceRegular-ovyAA.ttf" id="4_biy0f"]
 [ext_resource type="Script" uid="uid://e7qqvppbtiqf" path="res://src/manage/Dialogue.cs" id="4_dac0m"]
-[ext_resource type="PackedScene" uid="uid://bpocujow317n4" path="res://scenes/Player.tscn" id="5_dac0m"]
+[ext_resource type="PackedScene" uid="uid://bpocujow317n4" path="res://scenes/player.tscn" id="5_dac0m"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_biy0f"]
 texture = ExtResource("1_h6ecc")
