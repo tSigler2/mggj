@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bas8m1m5fcq6p"
-path="res://.godot/imported/Phoebe.png-2b5c1bf7cc2eea1f2462d958bf75e0c4.ctex"
+uid="uid://bw1v047p6rseu"
+path="res://.godot/imported/Alice_Human_FrontWalk_SpriteSheet.png-16168364996c8bfce809733b1f8cdede.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/ui/Phoebe.png"
-dest_files=["res://.godot/imported/Phoebe.png-2b5c1bf7cc2eea1f2462d958bf75e0c4.ctex"]
+source_file="res://assets/art/player/Alice_Human_FrontWalk_SpriteSheet.png"
+dest_files=["res://.godot/imported/Alice_Human_FrontWalk_SpriteSheet.png-16168364996c8bfce809733b1f8cdede.ctex"]
 
 [params]
 

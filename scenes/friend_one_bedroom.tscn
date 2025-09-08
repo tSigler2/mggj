@@ -5,8 +5,8 @@
 [ext_resource type="Script" uid="uid://e7qqvppbtiqf" path="res://src/manage/Dialogue.cs" id="3"]
 [ext_resource type="Script" uid="uid://c24iwh7ev5y2j" path="res://src/entity/NPC.cs" id="3_md2wn"]
 [ext_resource type="FontFile" uid="uid://blxj0y6745at2" path="res://assets/fonts/PixelatedEleganceRegular-ovyAA.ttf" id="4_7r42v"]
-[ext_resource type="Texture2D" uid="uid://q6suaj6lqytx" path="res://assets/art/npcs/SiennaSprite.png" id="4_dv78o"]
-[ext_resource type="Resource" uid="uid://btl2euykcm0qt" path="res://Dialogue/untitled.dialogue" id="6_dv78o"]
+[ext_resource type="Resource" uid="uid://du3jswvb2qhrc" path="res://Dialogue/BossStart.dialogue" id="4_j2y35"]
+[ext_resource type="Texture2D" uid="uid://v3cpc6kto8rv" path="res://assets/art/npcs/PhoebeSprite.png" id="5_j2y35"]
 [ext_resource type="Script" uid="uid://biw5ll5ewicnv" path="res://src/entity/Player.cs" id="7_j2y35"]
 [ext_resource type="Texture2D" uid="uid://b83nbliophv2e" path="res://assets/art/npcs/AliceSpriteSheet.png" id="8_napea"]
 [ext_resource type="AudioStream" uid="uid://xjva10snkgkq" path="res://assets/sound/music/MGGJ_Overworld_wip1.mp3" id="9_napea"]
@@ -268,12 +268,13 @@ shape = SubResource("RectangleShape2D_umafs")
 
 [node name="NPC" type="Sprite2D" parent="."]
 position = Vector2(394, 195)
-texture = ExtResource("4_dv78o")
+texture = ExtResource("5_j2y35")
 
 [node name="Area2D" type="Area2D" parent="NPC"]
 script = ExtResource("3_md2wn")
 TargetBattleScenePath = "res://scenes/boss_battle_two.tscn"
-dialogue = ExtResource("6_dv78o")
+dialogue = ExtResource("4_j2y35")
+dialogueStart = "Sienna"
 Font = ExtResource("4_7r42v")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NPC/Area2D"]
