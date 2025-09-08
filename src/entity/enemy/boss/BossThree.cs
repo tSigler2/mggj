@@ -22,6 +22,7 @@ public partial class BossThree : Sprite2D
 
     [Export]
     private int stage = 0;
+    private double stageTimer;
     private double deltaAccumulate;
 
     private Action<Random, double, int>[] BulletPatterns = new Action<Random, double, int>[6];
@@ -197,23 +198,24 @@ public partial class BossThree : Sprite2D
     public override void _Process(double delta)
     {
         deltaAccumulate += delta;
-        if (stage == 0 && deltaAccumulate >= 60.0)
+        stageTimer += delta;
+
+        if (stageTimer >= 20.0)
         {
             stage++;
-        }
-        else if (stage == 1 && deltaAccumulate >= 180.0)
-        {
-            stage++;
-        }
-        else if (deltaAccumulate >= 300.0)
-        {
-            QueueFree();
+            stageTimer = 0.0;
+
+            if (stage >= BulletPatterns.Length)
+            {
+                QueueFree();
+            }
         }
 
         if (deltaAccumulate >= BulletRate)
         {
             BulletPatterns[stage](rng, BulletSpeed, SideChoice);
             deltaAccumulate = 0.0;
+
             if (stage == 0)
                 SideChoice *= -1;
         }
