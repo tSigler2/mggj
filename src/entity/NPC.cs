@@ -1,5 +1,5 @@
-using Godot;
 using DialogueManagerRuntime;
+using Godot;
 
 public partial class NPC : InteractableEntity
 {
