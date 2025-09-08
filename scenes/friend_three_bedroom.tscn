@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://0itxea65eyxd"]
+[gd_scene load_steps=37 format=4 uid="uid://0itxea65eyxd"]
 
 [ext_resource type="Texture2D" uid="uid://cl4miy0vl83s3" path="res://assets/art/TilesetWIP.png" id="1_h6ecc"]
 [ext_resource type="Texture2D" uid="uid://bebni8unrl265" path="res://assets/art/test/friend_one_room.png" id="3_1fko2"]
@@ -225,13 +225,36 @@ blend_point_3/node = SubResource("AnimationNodeAnimation_20kmv")
 blend_point_3/pos = Vector2(0, -0.9)
 blend_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m3t2c"]
+animation = &"move_down"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_67wrc"]
+animation = &"move_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mnngg"]
+animation = &"move_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6d2y2"]
+animation = &"move_up"
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_osv3n"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_e11yf"]
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_m3t2c"]
-states/Start/position = Vector2(212, 147)
+states/Start/position = Vector2(236, 64)
 states/idle/node = SubResource("AnimationNodeBlendSpace2D_pq7h1")
-states/idle/position = Vector2(435, 84)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_osv3n")]
+states/idle/position = Vector2(495, 118)
+states/move_down/node = SubResource("AnimationNodeAnimation_m3t2c")
+states/move_down/position = Vector2(495, 195)
+states/move_left/node = SubResource("AnimationNodeAnimation_67wrc")
+states/move_left/position = Vector2(343, 118)
+states/move_right/node = SubResource("AnimationNodeAnimation_mnngg")
+states/move_right/position = Vector2(655, 118)
+states/move_up/node = SubResource("AnimationNodeAnimation_6d2y2")
+states/move_up/position = Vector2(495, 50)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_osv3n"), "idle", "move_up", SubResource("AnimationNodeStateMachineTransition_e11yf")]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8v753"]
 size = Vector2(56, 74)
@@ -239,6 +262,7 @@ size = Vector2(56, 74)
 [node name="FriendThreeBedroom" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
+texture_filter = 1
 tile_map_data = PackedByteArray("AAAAAAAAAAACAAAAAAABAAAAAAACAAAAAAACAAAAAAACAAAAAAADAAAAAAACAAAAAAAEAAAAAAACAAAAAAAFAAAAAAACAAAAAAD//wAAAAABAAEAAAAGAAAAAAACAAEAAAAGAAEAAAACAAEAAAAGAAIAAAACAAEAAAAGAAMAAAACAAEAAAAGAAQAAAACAAEAAAAGAAUAAAACAAEAAAD//wEAAAABAAEAAAD//wIAAAABAAEAAAD//wMAAAABAAEAAAD//wQAAAABAAEAAAD//wUAAAABAAEAAAD//wYAAAAIAAAAAAAGAAYAAAAHAAAAAAAAAAYAAAAAAAEAAAACAAYAAAAAAAEAAAADAAYAAAAAAAEAAAAEAAYAAAAAAAEAAAAFAAYAAAAAAAEAAAAAAAUAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAMAAAAAAAAAAAABAAMAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAQAAAAAAAAAAAAFAAQAAAAAAAAAAAABAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAEAAAAAAAAAAAACAAEAAAAAAAAAAAADAAEAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAIAAAAAAAAAAAAFAAIAAAAAAAAAAAAFAAEAAAAAAAAAAAAFAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAADAAIAAAAAAAAAAAACAAIAAAAAAAAAAAAFAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAADAAUAAAAAAAAAAAACAAUAAAAAAAAAAAABAAUAAAAAAAAAAAABAAQAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAD/////AAAGAAAAAAAGAP//AAAFAAAAAAAAAP//AAADAAEAAAABAP//AAADAAEAAAACAP//AAADAAEAAAADAP//AAADAAEAAAAEAP//AAADAAEAAAAFAP//AAADAAEAAAA=")
 tile_set = SubResource("TileSet_8v753")
 

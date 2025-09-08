@@ -10,6 +10,9 @@ public partial class Player : CharacterBody2D
 	public Vector2 ScreenSize;
 	public int cooldown = 0;
 	public bool CanMove = true;
+	public bool inOverworld = true;
+	private AnimationTree animationTree;
+	private AnimationNodeStateMachinePlayback animState;
 
 	[Export]
 	public CollisionShape2D Collision;
@@ -23,6 +26,10 @@ public partial class Player : CharacterBody2D
 
 		// Add to player group for interaction system
 		AddToGroup("player");
+		animationTree = GetNode<AnimationTree>("AnimationTree");
+		animationTree.Active = true;
+
+		animState = (AnimationNodeStateMachinePlayback)animationTree.Get("parameters/playback");
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -38,22 +45,28 @@ public partial class Player : CharacterBody2D
 		if (Input.IsActionPressed("move_right"))
 		{
 			velocity.X += 1;
+			if (inOverworld) animState.Travel("move_right");
 		}
 
 		if (Input.IsActionPressed("move_left"))
 		{
 			velocity.X -= 1;
+			if (inOverworld) animState.Travel("move_left");
 		}
 
 		if (Input.IsActionPressed("move_down"))
 		{
 			velocity.Y += 1;
+			if (inOverworld) animState.Travel("move_down");
 		}
 
 		if (Input.IsActionPressed("move_up"))
 		{
 			velocity.Y -= 1;
+			if (inOverworld) animState.Travel("move_up");
 		}
+
+		if (inOverworld) animState.Travel("idle");
 
 		if (velocity.Length() > 0)
 		{
