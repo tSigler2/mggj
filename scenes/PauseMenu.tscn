@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://bf6cqak5w2735"]
+[gd_scene load_steps=7 format=3 uid="uid://bf6cqak5w2735"]
 
 [ext_resource type="Script" uid="uid://bpio7n2epo0qq" path="res://src/manage/PauseMenu.cs" id="1_jvnd5"]
+[ext_resource type="Texture2D" uid="uid://5lmya4iag4lt" path="res://assets/art/ui/window2.png" id="2_40atx"]
+[ext_resource type="FontFile" uid="uid://blxj0y6745at2" path="res://assets/fonts/PixelatedEleganceRegular-ovyAA.ttf" id="3_yx35g"]
+[ext_resource type="Texture2D" uid="uid://dxqn656jf5nj2" path="res://assets/art/ui/button_resume.png" id="4_vd2mf"]
+[ext_resource type="Texture2D" uid="uid://dchkr6ivd8kqg" path="res://assets/art/ui/button_restart.png" id="5_abn1t"]
+[ext_resource type="Texture2D" uid="uid://ckbxliftdeky" path="res://assets/art/ui/button_quit.png" id="6_8ti4s"]
 
 [node name="PauseMenu" type="MarginContainer" node_paths=PackedStringArray("VolumeSlider", "ResumeButton", "RestartButton", "QuitButton")]
 anchors_preset = 15
@@ -9,39 +14,68 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jvnd5")
-VolumeSlider = NodePath("VBoxContainer/HBoxContainer1/VolumeSlider")
-ResumeButton = NodePath("VBoxContainer/Button1")
-RestartButton = NodePath("VBoxContainer/Button2")
-QuitButton = NodePath("VBoxContainer/Button3")
+VolumeSlider = NodePath("")
+ResumeButton = NodePath("Window/CenterContainer/VBoxContainer/Buttons/Button3")
+RestartButton = NodePath("Window/CenterContainer/VBoxContainer/Buttons/Button4")
+QuitButton = NodePath("Window/CenterContainer/VBoxContainer/Buttons/Button5")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Window" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_40atx")
+stretch_mode = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="Window"]
+layout_mode = 2
+offset_right = 630.0
+offset_bottom = 500.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Window/CenterContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="Window/CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.427451, 0.12549, 0.133333, 1)
+theme_override_colors/font_shadow_color = Color(1, 0.858824, 0.796078, 1)
+theme_override_fonts/font = ExtResource("3_yx35g")
+theme_override_font_sizes/font_size = 21
 text = "Paused"
 horizontal_alignment = 1
 
-[node name="HBoxContainer1" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Buttons" type="VBoxContainer" parent="Window/CenterContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Window/CenterContainer/VBoxContainer/Buttons"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer1"]
+[node name="Label" type="Label" parent="Window/CenterContainer/VBoxContainer/Buttons/HBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.427451, 0.12549, 0.133333, 1)
+theme_override_colors/font_shadow_color = Color(1, 0.858824, 0.796078, 1)
+theme_override_fonts/font = ExtResource("3_yx35g")
+theme_override_font_sizes/font_size = 12
 text = "Volume"
 
-[node name="VolumeSlider" type="HSlider" parent="VBoxContainer/HBoxContainer1"]
+[node name="VolumeSlider" type="HSlider" parent="Window/CenterContainer/VBoxContainer/Buttons/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+value = 80.0
 
-[node name="Button1" type="Button" parent="VBoxContainer"]
+[node name="Button3" type="Button" parent="Window/CenterContainer/VBoxContainer/Buttons"]
 layout_mode = 2
-text = "Resume"
+icon = ExtResource("4_vd2mf")
+flat = true
+icon_alignment = 1
 
-[node name="Button2" type="Button" parent="VBoxContainer"]
+[node name="Button4" type="Button" parent="Window/CenterContainer/VBoxContainer/Buttons"]
 layout_mode = 2
-text = "Restart"
+icon = ExtResource("5_abn1t")
+flat = true
+icon_alignment = 1
 
-[node name="Button3" type="Button" parent="VBoxContainer"]
+[node name="Button5" type="Button" parent="Window/CenterContainer/VBoxContainer/Buttons"]
 layout_mode = 2
-text = "Quit"
+icon = ExtResource("6_8ti4s")
+flat = true
+icon_alignment = 1
