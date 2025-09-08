@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://q6suaj6lqytx" path="res://assets/art/npcs/SiennaSprite.png" id="2_1fko2"]
 [ext_resource type="Texture2D" uid="uid://bebni8unrl265" path="res://assets/art/test/friend_one_room.png" id="3_1fko2"]
 [ext_resource type="Script" uid="uid://c24iwh7ev5y2j" path="res://src/entity/NPC.cs" id="3_dac0m"]
-[ext_resource type="Resource" uid="uid://btl2euykcm0qt" path="res://Dialogue/untitled.dialogue" id="4_8v753"]
+[ext_resource type="Resource" uid="uid://du3jswvb2qhrc" path="res://Dialogue/BossStart.dialogue" id="4_8v753"]
 [ext_resource type="FontFile" uid="uid://blxj0y6745at2" path="res://assets/fonts/PixelatedEleganceRegular-ovyAA.ttf" id="4_biy0f"]
 [ext_resource type="Script" uid="uid://e7qqvppbtiqf" path="res://src/manage/Dialogue.cs" id="4_dac0m"]
 [ext_resource type="PackedScene" uid="uid://bpocujow317n4" path="res://scenes/Player.tscn" id="5_dac0m"]
@@ -60,6 +60,7 @@ texture = ExtResource("2_1fko2")
 script = ExtResource("3_dac0m")
 TargetBattleScenePath = "res://scenes/boss_battle_three.tscn"
 dialogue = ExtResource("4_8v753")
+dialogueStart = "Phoebe"
 Font = ExtResource("4_biy0f")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NPC/Area2D"]
