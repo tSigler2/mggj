@@ -10,22 +10,22 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0affu"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pkcy8"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lmhtt"]
 texture = ExtResource("4_v88f3")
 0:0/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y05qv"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j6atf"]
 texture = ExtResource("5_lmhtt")
 0:0/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qublw"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pkcy8"]
 texture = ExtResource("6_j6atf")
 0:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_20dpm"]
-sources/1 = SubResource("TileSetAtlasSource_pkcy8")
-sources/2 = SubResource("TileSetAtlasSource_y05qv")
-sources/3 = SubResource("TileSetAtlasSource_qublw")
+sources/1 = SubResource("TileSetAtlasSource_lmhtt")
+sources/2 = SubResource("TileSetAtlasSource_j6atf")
+sources/3 = SubResource("TileSetAtlasSource_pkcy8")
 
 [sub_resource type="LabelSettings" id="LabelSettings_lmhtt"]
 font_size = 25

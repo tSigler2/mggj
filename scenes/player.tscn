@@ -1,13 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://cs4fmv7d4t4bf"]
+[gd_scene load_steps=5 format=3 uid="uid://bpocujow317n4"]
 
-[ext_resource type="Texture2D" uid="uid://dq8nlymgh5d0g" path="res://assets/art/test/Alice_Moth_Still_2.png" id="2_g2els"]
-[ext_resource type="Script" uid="uid://biw5ll5ewicnv" path="res://src/entity/Player.cs" id="2_qhqgy"]
+[ext_resource type="Script" uid="uid://biw5ll5ewicnv" path="res://src/entity/Player.cs" id="1_txkl7"]
+[ext_resource type="Texture2D" uid="uid://dq8nlymgh5d0g" path="res://assets/art/test/Alice_Moth_Still_2.png" id="2_g2jbo"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qhqgy"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_g2els")
+"texture": ExtResource("2_g2jbo")
 }],
 "loop": true,
 "name": &"default",
@@ -17,10 +17,10 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_qhqgy"]
 radius = 9.05539
 
-[node name="Player" type="Area2D"]
+[node name="Newplayer" type="CharacterBody2D" node_paths=PackedStringArray("Collision") groups=["Player"]]
 process_mode = 3
-script = ExtResource("2_qhqgy")
-metadata/_edit_group_ = true
+script = ExtResource("1_txkl7")
+Collision = NodePath("CollisionShape2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(32.5679, 29.284)
@@ -28,5 +28,8 @@ scale = Vector2(1.29475, 1.29475)
 sprite_frames = SubResource("SpriteFrames_qhqgy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+process_mode = 3
+light_mask = 1023
+visibility_layer = 1023
 position = Vector2(36, 29)
 shape = SubResource("CircleShape2D_qhqgy")

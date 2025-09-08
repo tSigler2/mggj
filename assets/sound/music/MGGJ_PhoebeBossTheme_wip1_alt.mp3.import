@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/MGGJ_PhoebeBossTheme_wip1_alt.mp3-f2aea9553bf
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0
