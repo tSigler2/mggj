@@ -265,7 +265,7 @@ texture = ExtResource("5_5qfw6")
 
 [node name="Area2D" type="Area2D" parent="NPC" node_paths=PackedStringArray("player")]
 script = ExtResource("3_hogt4")
-TargetBattleScenePath = "res://scenes/boss_battle_two.tscn"
+TargetBattleScenePath = "res://scenes/test_boss_two.tscn"
 dialogue = ExtResource("4_5qfw6")
 dialogueStart = "Phoebe"
 player = NodePath("../../Alice")

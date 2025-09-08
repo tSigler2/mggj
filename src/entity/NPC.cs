@@ -39,7 +39,7 @@ public partial class NPC : InteractableEntity
 		// For now, we'll just transition to the battle scene after a short delay
 
 		_hasInteracted = true;
-		//player.CanMove = false;
+		player.CanMove = false;
 		GD.Print("Starting dialogue with NPC");
 		DialogueManager.ShowDialogueBalloon(dialogue, dialogueStart);
 		DialogueManager.DialogueEnded += (Resource dialogueResource) =>
@@ -47,7 +47,7 @@ public partial class NPC : InteractableEntity
 			if (!string.IsNullOrEmpty(TargetBattleScenePath))
 			{
 				GD.Print($"Loading battle scene: {TargetBattleScenePath}");
-				//player.CanMove = true;
+				player.CanMove = true;
 				SceneManager.Instance.ChangeScene(TargetBattleScenePath);
 			}
 		};

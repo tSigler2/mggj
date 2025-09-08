@@ -193,8 +193,10 @@ namespace DialogueManagerRuntime
 			characterLabel.Visible = !string.IsNullOrEmpty(dialogueLine.Character);
 			characterLabel.Text = Tr(dialogueLine.Character, "dialogue");
 			string portraitPath = $"res://assets/art/ui/{characterLabel.Text}.png";
-			if (FileAccess.FileExists(portraitPath))
+			GD.Print("PP: "+portraitPath);
+			if (!FileAccess.FileExists(portraitPath))
 			{
+				GD.Print("PP: ran");
 				portrait.Texture = (Texture2D)ResourceLoader.Load(portraitPath);
 			}
 			else
@@ -203,8 +205,10 @@ namespace DialogueManagerRuntime
 			}
 			string dialogueBoxPath =
 				$"res://assets/art/ui/{characterLabel.Text.ToLower()}_dialoguebox.png";
-			if (FileAccess.FileExists(dialogueBoxPath))
+				GD.Print("DBP: "+dialogueBoxPath);
+			if (!FileAccess.FileExists(dialogueBoxPath))
 			{
+				GD.Print("DBP: ran");
 				dialogueBox.Texture = (Texture2D)ResourceLoader.Load(dialogueBoxPath);
 			}
 			else
