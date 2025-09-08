@@ -1,8 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://c3okb47gobdoj"]
 
-[ext_resource type="Texture2D" uid="uid://crrp7x1yfqcys" path="res://assets/art/ui/win_splash copy.png" id="1_2sbu7"]
+[ext_resource type="Texture2D" uid="uid://clyq0xavkah8g" path="res://assets/art/ui/win_splash.png" id="1_0453r"]
 
 [node name="LoseSplash" type="Node2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_2sbu7")
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_0453r")
+stretch_mode = 6

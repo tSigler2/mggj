@@ -13,6 +13,12 @@ public partial class NPC : InteractableEntity
 	public string dialogueStart = "start";
 
 	[Export]
+	Resource dialogueWin = GD.Load<Resource>("");
+
+	[Export]
+	public string dialogueWinStart = "start";
+
+	[Export]
 	Player player;
 
 	private bool _hasInteracted = false;

@@ -105,13 +105,15 @@ public partial class Player : CharacterBody2D
 		}
 
 		if (this.Health <= 0)
-			/*if (!string.IsNullOrEmpty(TargetEndScenePath))
+		{
+			if (!string.IsNullOrEmpty(TargetEndScenePath))
 			{
-				GD.Print($"Loading end scene: {TargetEndScenePath}");
+				//GD.Print($"Loading end scene: {TargetEndScenePath}");
 				//player.CanMove = true;
 				SceneManager.Instance.ChangeScene(TargetEndScenePath);
-			}*/
+			}
 			QueueFree();
+		}
 	}
 
 	public void HealthChange()

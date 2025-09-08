@@ -4,5 +4,8 @@
 
 [node name="WinSplash" type="Node2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
 texture = ExtResource("1_2sbu7")
+stretch_mode = 5
