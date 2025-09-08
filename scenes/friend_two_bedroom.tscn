@@ -1,12 +1,12 @@
 [gd_scene load_steps=33 format=4 uid="uid://dq26s1rm0qxq2"]
 
 [ext_resource type="Texture2D" uid="uid://cl4miy0vl83s3" path="res://assets/art/TilesetWIP.png" id="1_3ruvf"]
-[ext_resource type="Texture2D" uid="uid://v3cpc6kto8rv" path="res://assets/art/npcs/PhoebeSprite.png" id="2_3y1ep"]
 [ext_resource type="Script" uid="uid://c24iwh7ev5y2j" path="res://src/entity/NPC.cs" id="3_hogt4"]
 [ext_resource type="Texture2D" uid="uid://bebni8unrl265" path="res://assets/art/test/friend_one_room.png" id="3_kg55b"]
 [ext_resource type="Script" uid="uid://e7qqvppbtiqf" path="res://src/manage/Dialogue.cs" id="4_3y1ep"]
 [ext_resource type="Resource" uid="uid://du3jswvb2qhrc" path="res://Dialogue/BossStart.dialogue" id="4_5qfw6"]
 [ext_resource type="FontFile" uid="uid://blxj0y6745at2" path="res://assets/fonts/PixelatedEleganceRegular-ovyAA.ttf" id="4_hogt4"]
+[ext_resource type="Texture2D" uid="uid://q6suaj6lqytx" path="res://assets/art/npcs/SiennaSprite.png" id="5_5qfw6"]
 [ext_resource type="Script" uid="uid://biw5ll5ewicnv" path="res://src/entity/Player.cs" id="7_5qfw6"]
 [ext_resource type="Texture2D" uid="uid://b83nbliophv2e" path="res://assets/art/npcs/AliceSpriteSheet.png" id="8_ruglx"]
 [ext_resource type="AudioStream" uid="uid://xjva10snkgkq" path="res://assets/sound/music/MGGJ_Overworld_wip1.mp3" id="9_ruglx"]
@@ -261,12 +261,13 @@ shape = SubResource("RectangleShape2D_hogt4")
 
 [node name="NPC" type="Sprite2D" parent="."]
 position = Vector2(169, 37)
-texture = ExtResource("2_3y1ep")
+texture = ExtResource("5_5qfw6")
 
 [node name="Area2D" type="Area2D" parent="NPC"]
 script = ExtResource("3_hogt4")
-TargetBattleScenePath = "res://scenes/boss_battle_three.tscn"
+TargetBattleScenePath = "res://scenes/boss_battle_two.tscn"
 dialogue = ExtResource("4_5qfw6")
+dialogueStart = "Phoebe"
 Font = ExtResource("4_hogt4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NPC/Area2D"]
