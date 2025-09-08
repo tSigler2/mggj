@@ -194,27 +194,12 @@ namespace DialogueManagerRuntime
 			characterLabel.Text = Tr(dialogueLine.Character, "dialogue");
 			string portraitPath = $"res://assets/art/ui/{characterLabel.Text}.png";
 			GD.Print("PP: "+portraitPath);
-			if (!FileAccess.FileExists(portraitPath))
-			{
-				GD.Print("PP: ran");
-				portrait.Texture = (Texture2D)ResourceLoader.Load(portraitPath);
-			}
-			else
-			{
-				portrait.Texture = null;
-			}
-			string dialogueBoxPath =
-				$"res://assets/art/ui/{characterLabel.Text.ToLower()}_dialoguebox.png";
-				GD.Print("DBP: "+dialogueBoxPath);
-			if (!FileAccess.FileExists(dialogueBoxPath))
-			{
-				GD.Print("DBP: ran");
-				dialogueBox.Texture = (Texture2D)ResourceLoader.Load(dialogueBoxPath);
-			}
-			else
-			{
-				dialogueBox.Texture = null;
-			}
+			GD.Print("PP: ran");
+			portrait.Texture = (Texture2D)ResourceLoader.Load(portraitPath);
+			string dialogueBoxPath = $"res://assets/art/ui/{characterLabel.Text.ToLower()}_dialoguebox.png";
+			GD.Print("DBP: "+dialogueBoxPath);
+			GD.Print("DBP: ran");
+			dialogueBox.Texture = (Texture2D)ResourceLoader.Load(dialogueBoxPath);
 
 			// Set up the dialogue
 			dialogueLabel.Hide();
