@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://wc6nniwp6y8v"]
+[gd_scene load_steps=7 format=3 uid="uid://wc6nniwp6y8v"]
 
 [ext_resource type="Script" uid="uid://m2fhjjqmr5ml" path="res://src/manage/MainMenu.cs" id="1_bqqt6"]
 [ext_resource type="FontFile" uid="uid://blxj0y6745at2" path="res://assets/fonts/PixelatedEleganceRegular-ovyAA.ttf" id="2"]
 [ext_resource type="Texture2D" uid="uid://biegw5o3dusaj" path="res://imgs/GirlsArtwork.png" id="2_2wh52"]
+[ext_resource type="Texture2D" uid="uid://d3ifjrbq88nsf" path="res://assets/art/ui/button_start.png" id="4_826wr"]
+[ext_resource type="Texture2D" uid="uid://m7goaieiqw68" path="res://assets/art/ui/button_settings.png" id="5_ucygd"]
+[ext_resource type="Texture2D" uid="uid://ckbxliftdeky" path="res://assets/art/ui/button_quit.png" id="6_mipys"]
 
 [node name="MainMenu" type="MarginContainer" node_paths=PackedStringArray("StartButton", "SettingsButton", "QuitButton")]
 process_mode = 3
@@ -14,43 +17,42 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bqqt6")
-StartButton = NodePath("Buttons/StartButton")
-SettingsButton = NodePath("Buttons/SettingsButton")
-QuitButton = NodePath("Buttons/QuitButton")
+StartButton = NodePath("HBoxContainer/Buttons/StartButton")
+SettingsButton = NodePath("HBoxContainer/Buttons/SettingsButton")
+QuitButton = NodePath("HBoxContainer/Buttons/QuitButton")
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 2
 texture = ExtResource("2_2wh52")
 stretch_mode = 5
 
-[node name="Buttons" type="VBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Buttons" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Title" type="Label" parent="Buttons"]
-visible = false
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2")
-theme_override_font_sizes/font_size = 64
-text = "Moth Friends
-Waiting in the Wings"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="StartButton" type="Button" parent="Buttons"]
+[node name="StartButton" type="Button" parent="HBoxContainer/Buttons"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 24
-text = "Start Game"
+icon = ExtResource("4_826wr")
+flat = true
+icon_alignment = 1
 
-[node name="SettingsButton" type="Button" parent="Buttons"]
+[node name="SettingsButton" type="Button" parent="HBoxContainer/Buttons"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 24
-text = "Settings"
+icon = ExtResource("5_ucygd")
+flat = true
+icon_alignment = 1
 
-[node name="QuitButton" type="Button" parent="Buttons"]
+[node name="QuitButton" type="Button" parent="HBoxContainer/Buttons"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 24
-text = "Quit"
+icon = ExtResource("6_mipys")
+flat = true
+icon_alignment = 1
