@@ -52,6 +52,8 @@ script = ExtResource("2_uykmq")
 Collision = NodePath("CollisionShape2D")
 TargetEndScenePath = "res://scenes/lose_splash.tscn"
 
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 process_mode = 3
 position = Vector2(1, 0.999985)

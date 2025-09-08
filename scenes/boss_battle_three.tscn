@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b5cq6bqfbamwa"]
+[gd_scene load_steps=5 format=3 uid="uid://cgutrtvrrjqpe"]
 
 [ext_resource type="Texture2D" uid="uid://cvsnbi2i8o4ag" path="res://assets/art/test/battle_bg.png" id="1_whcmp"]
 [ext_resource type="Script" uid="uid://dpmwu2bitscy0" path="res://src/entity/enemy/boss/BossOne.cs" id="2_v07pt"]
@@ -26,6 +26,8 @@ BulletSpeed = 200.0
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 input_pickable = true
 script = ExtResource("3_km5s0")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 

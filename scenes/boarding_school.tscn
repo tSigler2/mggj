@@ -258,6 +258,8 @@ position = Vector2(49, 301)
 script = ExtResource("6_3fm0n")
 Collision = NodePath("CollisionShape2D")
 
+[node name="Camera2D" type="Camera2D" parent="Alice"]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Alice"]
 position = Vector2(-2, 1)
 shape = SubResource("RectangleShape2D_ikp0m")
