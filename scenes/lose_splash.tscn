@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3okb47gobdoj"]
+
+[ext_resource type="Texture2D" uid="uid://clyq0xavkah8g" path="res://assets/art/ui/win_splash.png" id="1_0453r"]
+[ext_resource type="FontFile" uid="uid://blxj0y6745at2" path="res://assets/fonts/PixelatedEleganceRegular-ovyAA.ttf" id="2_vy8f3"]
+
+[node name="LoseSplash" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_0453r")
+stretch_mode = 6
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+offset_left = 443.0
+offset_top = 514.0
+offset_right = 720.0
+offset_bottom = 623.0
+alignment = 1
+
+[node name="StartButton" type="Button" parent="Buttons"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vy8f3")
+theme_override_font_sizes/font_size = 24
+text = "Restart"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://0itxea65eyxd"]
+[gd_scene load_steps=38 format=4 uid="uid://0itxea65eyxd"]
 
 [ext_resource type="Texture2D" uid="uid://cl4miy0vl83s3" path="res://assets/art/TilesetWIP.png" id="1_h6ecc"]
 [ext_resource type="Texture2D" uid="uid://bebni8unrl265" path="res://assets/art/test/friend_one_room.png" id="3_1fko2"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://biw5ll5ewicnv" path="res://src/entity/Player.cs" id="5_1fko2"]
 [ext_resource type="AudioStream" uid="uid://xjva10snkgkq" path="res://assets/sound/music/MGGJ_Overworld_wip1.mp3" id="5_68mhi"]
 [ext_resource type="Texture2D" uid="uid://b83nbliophv2e" path="res://assets/art/npcs/AliceSpriteSheet.png" id="6_dac0m"]
+[ext_resource type="Texture2D" uid="uid://bxvnt67ladf13" path="res://assets/art/Alice_Moth_Jarred_SpriteSheet.png" id="7_4npl6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_biy0f"]
 texture = ExtResource("1_h6ecc")
@@ -313,15 +314,19 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/idle/blend_position = Vector2(0, 0)
 
 [node name="NPC" type="Sprite2D" parent="."]
-position = Vector2(113, 72)
+position = Vector2(104, 85)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_4npl6")
+hframes = 5
 
-[node name="Area2D" type="Area2D" parent="NPC"]
+[node name="Area2D" type="Area2D" parent="NPC" node_paths=PackedStringArray("player")]
 script = ExtResource("3_dac0m")
-TargetBattleScenePath = "res://scenes/boss_battle_three.tscn"
+TargetBattleScenePath = "res://scenes/test_boss_three.tscn"
 dialogue = ExtResource("4_8v753")
 dialogueStart = "Alice"
+player = NodePath("../../Alice")
 Font = ExtResource("4_biy0f")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NPC/Area2D"]
-position = Vector2(-7, 12)
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_8v753")

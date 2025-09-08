@@ -174,6 +174,8 @@ public partial class BossTwo : Sprite2D
 
             if (stage >= BulletPatterns.Length)
             {
+				//GD.Print($"Loading end scene: {TargetEndScenePath}");
+				SceneManager.Instance.ChangeScene("res://scenes/boarding_school.tscn");
                 QueueFree();
             }
         }
