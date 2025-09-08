@@ -1,14 +1,16 @@
 [gd_scene load_steps=4 format=3 uid="uid://wc6nniwp6y8v"]
 
-[ext_resource type="Texture2D" uid="uid://dnw1oneiq7uib" path="res://assets/art/test/main_menu_bg.png" id="1"]
 [ext_resource type="Script" uid="uid://m2fhjjqmr5ml" path="res://src/manage/MainMenu.cs" id="1_bqqt6"]
 [ext_resource type="FontFile" uid="uid://blxj0y6745at2" path="res://assets/fonts/PixelatedEleganceRegular-ovyAA.ttf" id="2"]
+[ext_resource type="Texture2D" uid="uid://biegw5o3dusaj" path="res://imgs/GirlsArtwork.png" id="2_2wh52"]
 
 [node name="MainMenu" type="MarginContainer" node_paths=PackedStringArray("StartButton", "SettingsButton", "QuitButton")]
 process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -10.0
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bqqt6")
@@ -18,14 +20,15 @@ QuitButton = NodePath("Buttons/QuitButton")
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 2
-texture = ExtResource("1")
-expand_mode = 3
+texture = ExtResource("2_2wh52")
+stretch_mode = 5
 
 [node name="Buttons" type="VBoxContainer" parent="."]
 layout_mode = 2
 alignment = 1
 
 [node name="Title" type="Label" parent="Buttons"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
 theme_override_font_sizes/font_size = 64
