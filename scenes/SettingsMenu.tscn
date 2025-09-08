@@ -1,69 +1,80 @@
-[gd_scene load_steps=3 format=3 uid="uid://dm3tn3tkhosvr"]
+[gd_scene load_steps=7 format=3 uid="uid://dm3tn3tkhosvr"]
 
 [ext_resource type="Script" uid="uid://dtipn3bhyexqd" path="res://src/manage/SettingsMenu.cs" id="1_yelko"]
 [ext_resource type="Texture2D" uid="uid://biegw5o3dusaj" path="res://imgs/GirlsArtwork.png" id="2_1yw23"]
+[ext_resource type="Texture2D" uid="uid://5lmya4iag4lt" path="res://assets/art/ui/window2.png" id="3_fl0th"]
+[ext_resource type="Texture2D" uid="uid://dkhqi1hmdnsfg" path="res://assets/art/ui/button_apply.png" id="4_fl0th"]
+[ext_resource type="FontFile" uid="uid://blxj0y6745at2" path="res://assets/fonts/PixelatedEleganceRegular-ovyAA.ttf" id="4_nuakw"]
+[ext_resource type="Texture2D" uid="uid://cer3ikrrg53py" path="res://assets/art/ui/button_back.png" id="5_nuakw"]
 
 [node name="SettingsMenu" type="MarginContainer" node_paths=PackedStringArray("VolumeSlider", "ResolutionOption", "ApplyButton", "BackButton")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -10.0
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_yelko")
-VolumeSlider = NodePath("VBoxContainer/HBoxContainer1/VolumeSlider")
-ResolutionOption = NodePath("VBoxContainer/HBoxContainer2/ResolutionOption")
-ApplyButton = NodePath("VBoxContainer/Button1")
-BackButton = NodePath("VBoxContainer/Button2")
+VolumeSlider = NodePath("Window/CenterContainer/VBoxContainer/Buttons/HBoxContainer1/VolumeSlider")
+ResolutionOption = NodePath("")
+ApplyButton = NodePath("Window/CenterContainer/VBoxContainer/Buttons/Button1")
+BackButton = NodePath("Window/CenterContainer/VBoxContainer/Buttons/Button2")
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 2
 texture = ExtResource("2_1yw23")
 stretch_mode = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Window" type="TextureRect" parent="."]
 layout_mode = 2
-alignment = 1
+texture = ExtResource("3_fl0th")
+stretch_mode = 3
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="Window"]
 layout_mode = 2
+offset_right = 630.0
+offset_bottom = 500.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Window/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Window/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.427451, 0.12549, 0.133333, 1)
+theme_override_colors/font_shadow_color = Color(1, 0.858824, 0.796078, 1)
+theme_override_fonts/font = ExtResource("4_nuakw")
+theme_override_font_sizes/font_size = 21
 text = "Settings"
 horizontal_alignment = 1
 
-[node name="HBoxContainer1" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Buttons" type="VBoxContainer" parent="Window/CenterContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer1" type="HBoxContainer" parent="Window/CenterContainer/VBoxContainer/Buttons"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer1"]
+[node name="Label" type="Label" parent="Window/CenterContainer/VBoxContainer/Buttons/HBoxContainer1"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.427451, 0.12549, 0.133333, 1)
+theme_override_colors/font_shadow_color = Color(1, 0.858824, 0.796078, 1)
+theme_override_fonts/font = ExtResource("4_nuakw")
+theme_override_font_sizes/font_size = 12
 text = "Volume"
 
-[node name="VolumeSlider" type="HSlider" parent="VBoxContainer/HBoxContainer1"]
+[node name="VolumeSlider" type="HSlider" parent="Window/CenterContainer/VBoxContainer/Buttons/HBoxContainer1"]
 layout_mode = 2
 size_flags_horizontal = 3
 value = 80.0
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Button1" type="Button" parent="Window/CenterContainer/VBoxContainer/Buttons"]
 layout_mode = 2
+icon = ExtResource("4_fl0th")
+flat = true
+icon_alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
+[node name="Button2" type="Button" parent="Window/CenterContainer/VBoxContainer/Buttons"]
 layout_mode = 2
-text = "Resolution"
-
-[node name="ResolutionOption" type="OptionButton" parent="VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-selected = 0
-item_count = 3
-popup/item_0/text = "640x480"
-popup/item_0/id = 0
-popup/item_1/text = "1280x960"
-popup/item_1/id = 1
-popup/item_2/text = "1920x1440"
-popup/item_2/id = 2
-
-[node name="Button1" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Apply"
-
-[node name="Button2" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Back"
+icon = ExtResource("5_nuakw")
+flat = true
