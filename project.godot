@@ -26,6 +26,13 @@ DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 runtime/advanced/uses_dotnet=true
 runtime/balloon_path="uid://dtia1a02gf26c"
 
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=480
+window/size/mode=3
+window/stretch/mode="viewport"
+
 [dotnet]
 
 project/assembly_name="mggj"

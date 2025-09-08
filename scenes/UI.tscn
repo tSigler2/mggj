@@ -71,7 +71,6 @@ BulletHellHUDScene = ExtResource("3_ua6yw")
 ButtonClickSound = ExtResource("6_3wlde")
 
 [node name="MainMenu" parent="." instance=ExtResource("2_ro3t7")]
-visible = false
 
 [node name="SettingsMenu" parent="." instance=ExtResource("4_75u2n")]
 visible = false

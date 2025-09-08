@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dm3tn3tkhosvr"]
+[gd_scene load_steps=3 format=3 uid="uid://dm3tn3tkhosvr"]
 
 [ext_resource type="Script" uid="uid://dtipn3bhyexqd" path="res://src/manage/SettingsMenu.cs" id="1_yelko"]
+[ext_resource type="Texture2D" uid="uid://biegw5o3dusaj" path="res://imgs/GirlsArtwork.png" id="2_1yw23"]
 
 [node name="SettingsMenu" type="MarginContainer" node_paths=PackedStringArray("VolumeSlider", "ResolutionOption", "ApplyButton", "BackButton")]
 anchors_preset = 15
@@ -13,6 +14,11 @@ VolumeSlider = NodePath("VBoxContainer/HBoxContainer1/VolumeSlider")
 ResolutionOption = NodePath("VBoxContainer/HBoxContainer2/ResolutionOption")
 ApplyButton = NodePath("VBoxContainer/Button1")
 BackButton = NodePath("VBoxContainer/Button2")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_1yw23")
+stretch_mode = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
