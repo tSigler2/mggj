@@ -1,59 +1,74 @@
 using Godot;
+using System;
 
-public partial class PauseMenu : Control
+public partial class PauseMenu : MarginContainer
 {
-    [Signal]
-    public delegate void ResumeButtonPressedEventHandler();
-
-    [Signal]
-    public delegate void RestartButtonPressedEventHandler();
-
-    [Signal]
-    public delegate void QuitButtonPressedEventHandler();
-
-    [Signal]
-    public delegate void VolumeChangedEventHandler(float volume);
-
     [Export]
     public HSlider VolumeSlider;
 
-    private Button _resumeButton;
-    private Button _restartButton;
-    private Button _quitButton;
+    [Export]
+    public Button ResumeButton;
+
+    [Export]
+    public Button RestartButton;
+
+    [Export]
+    public Button QuitButton;
+
+    // Events
+    public event Action<float> VolumeChanged;
+    public event Action ResumeButtonPressed;
+    public event Action RestartButtonPressed;
+    public event Action QuitButtonPressed;
 
     public override void _Ready()
     {
-        _resumeButton = GetNode<Button>("ResumeButton");
-        _restartButton = GetNode<Button>("RestartButton");
-        _quitButton = GetNode<Button>("QuitButton");
-
-        _resumeButton.Pressed += OnResumePressed;
-        _restartButton.Pressed += OnRestartPressed;
-        _quitButton.Pressed += OnQuitPressed;
-
         if (VolumeSlider != null)
         {
-            VolumeSlider.ValueChanged += OnVolumeChanged;
+            VolumeSlider.ValueChanged += OnVolumeSliderValueChanged;
+        }
+
+        if (ResumeButton != null)
+        {
+            ResumeButton.Pressed += OnResumeButtonPressed;
+        }
+
+        if (RestartButton != null)
+        {
+            RestartButton.Pressed += OnRestartButtonPressed;
+        }
+
+        if (QuitButton != null)
+        {
+            QuitButton.Pressed += OnQuitButtonPressed;
         }
     }
 
-    private void OnResumePressed()
+    private void OnVolumeSliderValueChanged(double value)
     {
-        EmitSignal(SignalName.ResumeButtonPressed);
+        VolumeChanged?.Invoke((float)value);
     }
 
-    private void OnRestartPressed()
+    private void OnResumeButtonPressed()
     {
-        EmitSignal(SignalName.RestartButtonPressed);
+        ResumeButtonPressed?.Invoke();
     }
 
-    private void OnQuitPressed()
+    private void OnRestartButtonPressed()
     {
-        EmitSignal(SignalName.QuitButtonPressed);
+        RestartButtonPressed?.Invoke();
     }
 
-    private void OnVolumeChanged(double value)
+    private void OnQuitButtonPressed()
     {
-        EmitSignal(SignalName.VolumeChanged, (float)value);
+        QuitButtonPressed?.Invoke();
+    }
+
+    public void SetVolume(float volume)
+    {
+        if (VolumeSlider != null)
+        {
+            VolumeSlider.Value = volume;
+        }
     }
 }

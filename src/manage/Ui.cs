@@ -407,14 +407,23 @@ public partial class Ui : CanvasLayer
         AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("Master"), db);
     }
 
-    private void SaveVolumeSetting(float volume)
+    // Add these methods to your existing UI class
+    public void UpdateBossHealth(float healthPercentage)
+    {
+        if (bulletHellHUD != null)
+        {
+            bulletHellHUD.UpdateBossHealth(healthPercentage);
+        }
+    }
+
+    public void SaveVolumeSetting(float volume)
     {
         var config = new ConfigFile();
         config.SetValue("audio", "volume", volume);
         config.Save("user://settings.cfg");
     }
 
-    private float LoadVolumeSetting()
+    public float LoadVolumeSetting()
     {
         var config = new ConfigFile();
         var err = config.Load("user://settings.cfg");
