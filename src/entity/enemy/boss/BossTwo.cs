@@ -21,7 +21,7 @@ public partial class BossTwo : Sprite2D
     [Export]
     private int stage = 0;
     private double deltaAccumulate;
-    private double stageTimer;
+    public double stageTimer;
 
     private Action<Random, double, int>[] BulletPatterns = new Action<Random, double, int>[4];
 
@@ -175,7 +175,7 @@ public partial class BossTwo : Sprite2D
             if (stage >= BulletPatterns.Length)
             {
 				//GD.Print($"Loading end scene: {TargetEndScenePath}");
-				SceneManager.Instance.ChangeScene("res://scenes/boarding_school.tscn");
+				SceneManager.Instance.ChangeScene("res://scenes/win_splash.tscn");
                 QueueFree();
             }
         }

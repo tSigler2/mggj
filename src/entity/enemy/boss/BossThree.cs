@@ -22,7 +22,7 @@ public partial class BossThree : Sprite2D
 
     [Export]
     private int stage = 0;
-    private double stageTimer;
+    public double stageTimer;
     private double deltaAccumulate;
 
     private Action<Random, double, int>[] BulletPatterns = new Action<Random, double, int>[6];
