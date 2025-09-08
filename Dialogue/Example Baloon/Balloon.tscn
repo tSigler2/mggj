@@ -102,7 +102,7 @@ theme_override_constants/separation = 10
 
 [node name="Portrait" type="TextureRect" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(170, 0)
+custom_minimum_size = Vector2(173, 0)
 layout_mode = 2
 stretch_mode = 5
 

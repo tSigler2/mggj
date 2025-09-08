@@ -100,9 +100,7 @@ public partial class BossOne : Sprite2D
             PatternCount++;
         }
         else if (
-            GlobalDeltaAccumulate >= 120.0
-            && GlobalDeltaAccumulate < 180.0
-            && PatternCount == 1
+            GlobalDeltaAccumulate >= 120.0 && GlobalDeltaAccumulate < 180.0 && PatternCount == 1
         )
         {
             PatternCount++;
