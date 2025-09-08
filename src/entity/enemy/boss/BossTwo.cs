@@ -21,6 +21,7 @@ public partial class BossTwo : Sprite2D
     [Export]
     private int stage = 0;
     private double deltaAccumulate;
+    private double stageTimer;
 
     private Action<Random, double, int>[] BulletPatterns = new Action<Random, double, int>[4];
 
@@ -164,6 +165,18 @@ public partial class BossTwo : Sprite2D
     public override void _Process(double delta)
     {
         deltaAccumulate += delta;
+        stageTimer += delta;
+
+        if (stageTimer >= 20.0)
+        {
+            stage++;
+            stageTimer = 0.0;
+
+            if (stage >= BulletPatterns.Length)
+            {
+                QueueFree();
+            }
+        }
         if (stage == 0 && deltaAccumulate >= 1.0)
         {
             stage++;
