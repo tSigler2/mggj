@@ -284,7 +284,7 @@ position = Vector2(16, 37)
 [node name="FriendOneDoor" type="Area2D" parent="FriendDoors"]
 position = Vector2(271, 268)
 script = ExtResource("4_u0cw3")
-TargetScenePath = "res://scenes/friend_one_bedroom.tscn"
+TargetScenePath = "res://scenes/cc-test.tscn"
 Font = ExtResource("5_84bvw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FriendDoors/FriendOneDoor"]

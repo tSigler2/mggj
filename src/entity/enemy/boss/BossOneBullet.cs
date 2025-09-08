@@ -6,7 +6,7 @@ public partial class BossOneBullet : BaseEntity
 	public int Damage;
 
 	[Export]
-	public string SpritePath = "./assets/art/projectile/SiennaBullet.png";
+	public string SpritePath = "./assets/art/projectile/AliceBullet.png";
 
 	public double Height;
 

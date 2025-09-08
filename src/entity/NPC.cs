@@ -1,4 +1,5 @@
 using Godot;
+using DialogueManagerRuntime;
 
 public partial class NPC : InteractableEntity
 {
@@ -6,7 +7,10 @@ public partial class NPC : InteractableEntity
 	public string TargetBattleScenePath;
 
 	[Export]
-	public string[] DialogueLines;
+	Resource dialogue = GD.Load<Resource>("");
+
+	[Export]
+	public string dialogueStart = "start";
 
 	private bool _hasInteracted = false;
 
@@ -19,20 +23,33 @@ public partial class NPC : InteractableEntity
 	private void OnNPCInteract()
 	{
 		if (_hasInteracted)
+		{
 			return;
-
-		GD.Print("Starting dialogue with NPC");
+		}
 		// TODO: Implement dialogue system
 		// For now, we'll just transition to the battle scene after a short delay
+		
 		_hasInteracted = true;
+		GD.Print("Starting dialogue with NPC");
+		DialogueManager.ShowDialogueBalloon(dialogue, dialogueStart);
+		DialogueManager.DialogueEnded += (Resource dialogueResource) =>
+			{
+				if (!string.IsNullOrEmpty(TargetBattleScenePath))
+					{
+						GD.Print($"Loading battle scene: {TargetBattleScenePath}");
+						SceneManager.Instance.ChangeScene(TargetBattleScenePath);
+					}
+			};
 
-		GetTree().CreateTimer(1.0f).Timeout += () =>
+		
+
+		/*GetTree().CreateTimer(1.0f).Timeout += () =>
 		{
 			if (!string.IsNullOrEmpty(TargetBattleScenePath))
 			{
 				GD.Print($"Loading battle scene: {TargetBattleScenePath}");
 				SceneManager.Instance.ChangeScene(TargetBattleScenePath);
 			}
-		};
+		};*/
 	}
 }

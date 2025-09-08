@@ -62,7 +62,6 @@ public partial class Player : CharacterBody2D
 
 		Velocity = velocity;
 		MoveAndSlide();
-		
 
 		// Get the current scene name safely
 		string currentSceneName = GetTree().CurrentScene?.Name ?? "";
