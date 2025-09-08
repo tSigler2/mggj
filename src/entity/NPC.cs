@@ -12,11 +12,11 @@ public partial class NPC : InteractableEntity
 	[Export]
 	public string dialogueStart = "start";
 
-	[Export]
+	/*[Export]
 	Resource dialogueWin = GD.Load<Resource>("");
 
 	[Export]
-	public string dialogueWinStart = "start";
+	public string dialogueWinStart = "start";*/
 
 	[Export]
 	Player player;
