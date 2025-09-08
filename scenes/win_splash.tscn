@@ -1,15 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://cvgeeh8ao2mcu"]
+[gd_scene load_steps=4 format=3 uid="uid://cvgeeh8ao2mcu"]
 
 [ext_resource type="Texture2D" uid="uid://333hbnokvh3y" path="res://assets/art/ui/Win Splash.png" id="1_2sbu7"]
+[ext_resource type="Script" uid="uid://bgm5yj0r02xum" path="res://scenes/splash.cs" id="1_do8sh"]
 [ext_resource type="FontFile" uid="uid://blxj0y6745at2" path="res://assets/fonts/PixelatedEleganceRegular-ovyAA.ttf" id="2_qt8mw"]
 
-[node name="WinSplash" type="Node2D"]
+[node name="WinSplash" type="Node2D" node_paths=PackedStringArray("mmButton")]
+script = ExtResource("1_do8sh")
+mmButton = NodePath("Buttons/StartButton")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("1_2sbu7")
 stretch_mode = 5
+
+[node name="Camera2D" type="Camera2D" parent="TextureRect"]
+anchor_mode = 0
+zoom = Vector2(0.25, 0.38)
 
 [node name="Buttons" type="VBoxContainer" parent="."]
 offset_left = 1111.0
@@ -21,5 +28,5 @@ alignment = 1
 [node name="StartButton" type="Button" parent="Buttons"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_qt8mw")
-theme_override_font_sizes/font_size = 24
-text = "Restart"
+theme_override_font_sizes/font_size = 70
+text = "Main Menu"
