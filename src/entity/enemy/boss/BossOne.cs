@@ -18,6 +18,9 @@ public partial class BossOne : Sprite2D
     [Export]
     private double BulletSpeed = 20.0;
 
+    private double stageTimer;
+    private int stage = 0;
+
     [Export]
     private int BulletCount = 7;
 
@@ -95,6 +98,19 @@ public partial class BossOne : Sprite2D
         deltaAccumulate += delta;
         GlobalDeltaAccumulate += delta;
 
+        stageTimer += delta;
+
+        if (stageTimer >= 20.0)
+        {
+            stage++;
+            stageTimer = 0.0;
+
+            if (stage >= BulletPatterns.Length)
+            {
+                SceneManager.Instance.ChangeScene("res://scenes/boarding_school.tscn");
+                QueueFree();
+            }
+        }
         if (GlobalDeltaAccumulate >= 20.0 && GlobalDeltaAccumulate < 40.0 && PatternCount == 0)
         {
             PatternCount++;

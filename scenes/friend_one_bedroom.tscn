@@ -270,11 +270,12 @@ shape = SubResource("RectangleShape2D_umafs")
 position = Vector2(394, 195)
 texture = ExtResource("5_j2y35")
 
-[node name="Area2D" type="Area2D" parent="NPC"]
+[node name="Area2D" type="Area2D" parent="NPC" node_paths=PackedStringArray("player")]
 script = ExtResource("3_md2wn")
-TargetBattleScenePath = "res://scenes/boss_battle_two.tscn"
+TargetBattleScenePath = "res://scenes/test_boss_scene_one.tscn"
 dialogue = ExtResource("4_j2y35")
 dialogueStart = "Sienna"
+player = NodePath("../../Alice")
 Font = ExtResource("4_7r42v")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NPC/Area2D"]
