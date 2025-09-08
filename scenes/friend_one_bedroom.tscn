@@ -5,8 +5,8 @@
 [ext_resource type="Script" uid="uid://e7qqvppbtiqf" path="res://src/manage/Dialogue.cs" id="3"]
 [ext_resource type="Script" uid="uid://c24iwh7ev5y2j" path="res://src/entity/NPC.cs" id="3_md2wn"]
 [ext_resource type="FontFile" uid="uid://blxj0y6745at2" path="res://assets/fonts/PixelatedEleganceRegular-ovyAA.ttf" id="4_7r42v"]
-[ext_resource type="Resource" uid="uid://du3jswvb2qhrc" path="res://Dialogue/BossStart.dialogue" id="4_j2y35"]
-[ext_resource type="Texture2D" uid="uid://v3cpc6kto8rv" path="res://assets/art/npcs/PhoebeSprite.png" id="5_j2y35"]
+[ext_resource type="Texture2D" uid="uid://q6suaj6lqytx" path="res://assets/art/npcs/SiennaSprite.png" id="4_dv78o"]
+[ext_resource type="Resource" uid="uid://btl2euykcm0qt" path="res://Dialogue/untitled.dialogue" id="6_dv78o"]
 [ext_resource type="Script" uid="uid://biw5ll5ewicnv" path="res://src/entity/Player.cs" id="7_j2y35"]
 [ext_resource type="Texture2D" uid="uid://b83nbliophv2e" path="res://assets/art/npcs/AliceSpriteSheet.png" id="8_napea"]
 [ext_resource type="AudioStream" uid="uid://xjva10snkgkq" path="res://assets/sound/music/MGGJ_Overworld_wip1.mp3" id="9_napea"]
@@ -206,26 +206,26 @@ _data = {
 &"move_up": SubResource("Animation_sf3ba")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ctc3g"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fyk8r"]
 animation = &"idle_up"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0x8ux"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_w0hct"]
 animation = &"idle_left"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gwa3b"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jy0u6"]
 animation = &"idle_right"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m5csd"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xkvto"]
 animation = &"idle_down"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_pq7h1"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_ctc3g")
+blend_point_0/node = SubResource("AnimationNodeAnimation_fyk8r")
 blend_point_0/pos = Vector2(0, 1)
-blend_point_1/node = SubResource("AnimationNodeAnimation_0x8ux")
+blend_point_1/node = SubResource("AnimationNodeAnimation_w0hct")
 blend_point_1/pos = Vector2(-1, 0)
-blend_point_2/node = SubResource("AnimationNodeAnimation_gwa3b")
+blend_point_2/node = SubResource("AnimationNodeAnimation_jy0u6")
 blend_point_2/pos = Vector2(1, 0)
-blend_point_3/node = SubResource("AnimationNodeAnimation_m5csd")
+blend_point_3/node = SubResource("AnimationNodeAnimation_xkvto")
 blend_point_3/pos = Vector2(0, -0.9)
 blend_mode = 1
 
@@ -266,18 +266,17 @@ position = Vector2(400, 500)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea"]
 shape = SubResource("RectangleShape2D_umafs")
 
-[node name="NPC2" type="Sprite2D" parent="."]
+[node name="NPC" type="Sprite2D" parent="."]
 position = Vector2(394, 195)
-texture = ExtResource("5_j2y35")
+texture = ExtResource("4_dv78o")
 
-[node name="Area2D" type="Area2D" parent="NPC2"]
+[node name="Area2D" type="Area2D" parent="NPC"]
 script = ExtResource("3_md2wn")
 TargetBattleScenePath = "res://scenes/boss_battle_two.tscn"
-dialogue = ExtResource("4_j2y35")
-dialogueStart = "Sienna"
+dialogue = ExtResource("6_dv78o")
 Font = ExtResource("4_7r42v")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC2/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC/Area2D"]
 position = Vector2(-7, 12)
 shape = SubResource("RectangleShape2D_napea")
 
