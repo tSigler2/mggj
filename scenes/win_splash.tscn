@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cvgeeh8ao2mcu"]
 
-[ext_resource type="Texture2D" uid="uid://crrp7x1yfqcys" path="res://assets/art/ui/win_splash copy.png" id="1_2sbu7"]
+[ext_resource type="Texture2D" uid="uid://333hbnokvh3y" path="res://assets/art/ui/Win Splash.png" id="1_2sbu7"]
 
 [node name="WinSplash" type="Node2D"]
 

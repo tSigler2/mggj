@@ -48,6 +48,7 @@ z_index = 1
 position = Vector2(214, 114)
 script = ExtResource("3_vsca0")
 Collision = NodePath("CollisionShape2D")
+TargetEndScenePath = "res://scenes/lose_splash.tscn"
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 process_mode = 3

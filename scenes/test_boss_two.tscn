@@ -39,6 +39,7 @@ collision_layer = 255
 collision_mask = 255
 script = ExtResource("1_44fik")
 Collision = NodePath("CollisionShape2D")
+TargetEndScenePath = "res://scenes/lose_splash.tscn"
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 process_mode = 3

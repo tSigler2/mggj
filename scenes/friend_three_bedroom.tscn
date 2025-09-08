@@ -315,11 +315,12 @@ parameters/idle/blend_position = Vector2(0, 0)
 [node name="NPC" type="Sprite2D" parent="."]
 position = Vector2(113, 72)
 
-[node name="Area2D" type="Area2D" parent="NPC"]
+[node name="Area2D" type="Area2D" parent="NPC" node_paths=PackedStringArray("player")]
 script = ExtResource("3_dac0m")
 TargetBattleScenePath = "res://scenes/boss_battle_three.tscn"
 dialogue = ExtResource("4_8v753")
 dialogueStart = "Alice"
+player = NodePath("../../Alice")
 Font = ExtResource("4_biy0f")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NPC/Area2D"]

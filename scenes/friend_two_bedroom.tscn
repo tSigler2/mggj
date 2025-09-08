@@ -263,11 +263,12 @@ shape = SubResource("RectangleShape2D_hogt4")
 position = Vector2(169, 37)
 texture = ExtResource("5_5qfw6")
 
-[node name="Area2D" type="Area2D" parent="NPC"]
+[node name="Area2D" type="Area2D" parent="NPC" node_paths=PackedStringArray("player")]
 script = ExtResource("3_hogt4")
 TargetBattleScenePath = "res://scenes/boss_battle_two.tscn"
 dialogue = ExtResource("4_5qfw6")
 dialogueStart = "Phoebe"
+player = NodePath("../../Alice")
 Font = ExtResource("4_hogt4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NPC/Area2D"]
