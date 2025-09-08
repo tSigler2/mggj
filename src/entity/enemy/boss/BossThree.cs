@@ -207,6 +207,7 @@ public partial class BossThree : Sprite2D
 
             if (stage >= BulletPatterns.Length)
             {
+                SceneManager.Instance.ChangeScene("res://scenes/win_splash.tscn");
                 QueueFree();
             }
         }
