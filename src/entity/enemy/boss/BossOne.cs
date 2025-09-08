@@ -18,7 +18,7 @@ public partial class BossOne : Sprite2D
     [Export]
     private double BulletSpeed = 20.0;
 
-    private double stageTimer;
+    public double stageTimer;
     private int stage = 0;
 
     [Export]
@@ -107,7 +107,7 @@ public partial class BossOne : Sprite2D
 
             if (stage >= BulletPatterns.Length)
             {
-                SceneManager.Instance.ChangeScene("res://scenes/boarding_school.tscn");
+                SceneManager.Instance.ChangeScene("res://scenes/win_splash.tscn");
                 QueueFree();
             }
         }
