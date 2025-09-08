@@ -7,17 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://dchkr6ivd8kqg" path="res://assets/art/ui/button_restart.png" id="5_abn1t"]
 [ext_resource type="Texture2D" uid="uid://ckbxliftdeky" path="res://assets/art/ui/button_quit.png" id="6_8ti4s"]
 
-[node name="PauseMenu" type="MarginContainer" node_paths=PackedStringArray("VolumeSlider", "ResumeButton", "RestartButton", "QuitButton")]
+[node name="PauseMenu" type="MarginContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jvnd5")
-VolumeSlider = NodePath("")
-ResumeButton = NodePath("Window/CenterContainer/VBoxContainer/Buttons/Button3")
-RestartButton = NodePath("Window/CenterContainer/VBoxContainer/Buttons/Button4")
-QuitButton = NodePath("Window/CenterContainer/VBoxContainer/Buttons/Button5")
 
 [node name="Window" type="TextureRect" parent="."]
 layout_mode = 2

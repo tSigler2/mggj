@@ -30,6 +30,7 @@ public partial class Ui : CanvasLayer
 
     private bool gameStarted = false;
     private bool inBulletHell = false;
+    private bool isPaused = false;
 
     private AudioStreamPlayer buttonClickPlayer;
     private ColorRect sceneTransitionOverlay;
@@ -47,16 +48,6 @@ public partial class Ui : CanvasLayer
         {
             buttonClickPlayer.Stream = ButtonClickSound;
         }
-        /*
-        else
-        {
-            // Fallback to the hardcoded path if not assigned in editor
-            buttonClickPlayer.Stream = GD.Load<AudioStream>(
-                "res://assets/sound/ui/button_click.ogg"
-            );
-            GD.Print("ButtonClickSound not assigned in editor, using fallback");
-        }
-        */
 
         buttonClickPlayer.Bus = "UI";
         buttonClickPlayer.VolumeDb = -10;
@@ -306,62 +297,79 @@ public partial class Ui : CanvasLayer
 
     public override void _Input(InputEvent @event)
     {
-        if (@event.IsActionPressed("ui_cancel"))
+        if (@event.IsActionPressed("ui_cancel") && !@event.IsEcho())
         {
-            // If game is started and no menu is visible, show pause menu
-            if (
-                gameStarted
-                && (mainMenu == null || !mainMenu.Visible)
-                && (settingsMenu == null || !settingsMenu.Visible)
-                && (pauseMenu == null || !pauseMenu.Visible)
-            )
-            {
-                ShowPauseMenu();
-                return;
-            }
-
-            // If pause menu is visible, resume game
-            if (pauseMenu != null && pauseMenu.Visible)
-            {
-                ResumeGame();
-                return;
-            }
-
-            // If settings menu is open, go back to previous menu
-            if (settingsMenu != null && settingsMenu.Visible)
-            {
-                if (gameStarted)
-                {
-                    ShowPauseMenu();
-                }
-                else
-                {
-                    ShowMainMenu();
-                }
-                return;
-            }
+            HandleEscapeKey();
         }
     }
 
-    private void ShowPauseMenu()
+    private void HandleEscapeKey()
     {
-        if (pauseMenu != null)
-            pauseMenu.Visible = true;
-        if (bulletHellHUD != null)
-            bulletHellHUD.Visible = false;
-        GetTree().Paused = true;
-        Input.MouseMode = Input.MouseModeEnum.Visible;
+        // If game is started and no menu is visible, show pause menu
+        if (gameStarted && !IsAnyMenuVisible())
+        {
+            PauseGame();
+            return;
+        }
+
+        // If pause menu is visible, resume game
+        if (pauseMenu != null && pauseMenu.Visible)
+        {
+            ResumeGame();
+            return;
+        }
+
+        // If settings menu is open, go back to previous menu
+        if (settingsMenu != null && settingsMenu.Visible)
+        {
+            PlayButtonClick();
+            if (gameStarted)
+            {
+                ShowPauseMenu();
+            }
+            else
+            {
+                ShowMainMenu();
+            }
+            return;
+        }
     }
 
-    private void ResumeGame()
+    private bool IsAnyMenuVisible()
     {
+        return (mainMenu != null && mainMenu.Visible)
+            || (settingsMenu != null && settingsMenu.Visible)
+            || (pauseMenu != null && pauseMenu.Visible);
+    }
+
+    public void PauseGame()
+    {
+        if (isPaused)
+            return;
+
+        isPaused = true;
+        ShowPauseMenu();
+        GetTree().Paused = true;
+        Input.MouseMode = Input.MouseModeEnum.Visible;
+        GD.Print("Game paused");
+    }
+
+    public void ResumeGame()
+    {
+        if (!isPaused)
+            return;
+
         PlayButtonClick();
+        isPaused = false;
+
         if (pauseMenu != null)
             pauseMenu.Visible = false;
+
         if (inBulletHell && bulletHellHUD != null)
         {
             bulletHellHUD.Visible = true;
         }
+
         GetTree().Paused = false;
 
         if (inBulletHell)
@@ -372,6 +380,24 @@ public partial class Ui : CanvasLayer
         {
             Input.MouseMode = Input.MouseModeEnum.Visible;
         }
+
+        GD.Print("Game resumed");
+    }
+
+    private void ShowPauseMenu()
+    {
+        if (pauseMenu != null)
+        {
+            pauseMenu.Visible = true;
+            // Update pause menu with current settings if needed
+            if (pauseMenu.VolumeSlider != null)
+            {
+                pauseMenu.VolumeSlider.Value = LoadVolumeSetting();
+            }
+        }
+
+        if (bulletHellHUD != null)
+            bulletHellHUD.Visible = false;
     }
 
     private void ApplyAudioSettings(float volume)
@@ -469,7 +495,6 @@ public partial class Ui : CanvasLayer
     private void OnPauseResumeButtonPressed()
     {
         // Resume game
-        PlayButtonClick();
         ResumeGame();
     }
 
@@ -478,12 +503,19 @@ public partial class Ui : CanvasLayer
         // Restart current scene
         PlayButtonClick();
         GetTree().ReloadCurrentScene();
+        ResumeGame(); // Unpause after restart
     }
 
     private void OnPauseQuitButtonPressed()
     {
         // Quit to main menu
         PlayButtonClick();
+        GetTree().Paused = false; // Unpause before quitting to menu
         ShowMainMenu();
+        gameStarted = false;
+        isPaused = false;
+
+        // Transition back to main menu scene if needed
+        TransitionToScene("res://scenes/MainMenu.tscn");
     }
 }

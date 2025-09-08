@@ -7,7 +7,7 @@
 [ext_resource type="FontFile" uid="uid://blxj0y6745at2" path="res://assets/fonts/PixelatedEleganceRegular-ovyAA.ttf" id="4_nuakw"]
 [ext_resource type="Texture2D" uid="uid://cer3ikrrg53py" path="res://assets/art/ui/button_back.png" id="5_nuakw"]
 
-[node name="SettingsMenu" type="MarginContainer" node_paths=PackedStringArray("VolumeSlider", "ResolutionOption", "ApplyButton", "BackButton")]
+[node name="SettingsMenu" type="MarginContainer" node_paths=PackedStringArray("VolumeSlider", "ApplyButton", "BackButton")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -17,7 +17,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_yelko")
 VolumeSlider = NodePath("Window/CenterContainer/VBoxContainer/Buttons/HBoxContainer1/VolumeSlider")
-ResolutionOption = NodePath("")
 ApplyButton = NodePath("Window/CenterContainer/VBoxContainer/Buttons/Button1")
 BackButton = NodePath("Window/CenterContainer/VBoxContainer/Buttons/Button2")
 
