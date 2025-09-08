@@ -1,0 +1,86 @@
+[gd_scene load_steps=13 format=4 uid="uid://4i5aua5llnn8"]
+
+[ext_resource type="Texture2D" uid="uid://cl4miy0vl83s3" path="res://assets/art/TilesetWIP.png" id="1_i27kx"]
+[ext_resource type="Texture2D" uid="uid://v3cpc6kto8rv" path="res://assets/art/npcs/PhoebeSprite.png" id="2_tsgvn"]
+[ext_resource type="Script" uid="uid://c24iwh7ev5y2j" path="res://src/entity/NPC.cs" id="3_0w1i7"]
+[ext_resource type="Resource" uid="uid://btl2euykcm0qt" path="res://Dialogue/untitled.dialogue" id="4_fyk8r"]
+[ext_resource type="FontFile" uid="uid://blxj0y6745at2" path="res://assets/fonts/PixelatedEleganceRegular-ovyAA.ttf" id="5_w0hct"]
+[ext_resource type="PackedScene" uid="uid://bpocujow317n4" path="res://scenes/Player.tscn" id="6_jy0u6"]
+[ext_resource type="Texture2D" uid="uid://bebni8unrl265" path="res://assets/art/test/friend_one_room.png" id="7_xkvto"]
+[ext_resource type="Script" uid="uid://e7qqvppbtiqf" path="res://src/manage/Dialogue.cs" id="8_y07l5"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3ruvf"]
+texture = ExtResource("1_i27kx")
+separation = Vector2i(10, 7)
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+4:0/0/z_index = 1
+5:0/0 = 0
+5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+6:0/0 = 0
+6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+8:0/0 = 0
+8:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+1:0/0 = 0
+2:0/0 = 0
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+7:0/0 = 0
+7:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSet" id="TileSet_w547m"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_3ruvf")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5qfw6"]
+size = Vector2(56, 74)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hogt4"]
+
+[node name="FriendTwoBedroom" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAAAAAAAAACAAAAAAABAAAAAAACAAAAAAACAAAAAAACAAAAAAADAAAAAAACAAAAAAAEAAAAAAACAAAAAAAFAAAAAAACAAAAAAD//wAAAAABAAEAAAAGAAAAAAACAAEAAAAGAAEAAAACAAEAAAAGAAIAAAACAAEAAAAGAAMAAAACAAEAAAAGAAQAAAACAAEAAAAGAAUAAAACAAEAAAD//wEAAAABAAEAAAD//wIAAAABAAEAAAD//wMAAAABAAEAAAD//wQAAAABAAEAAAD//wUAAAABAAEAAAD//wYAAAAIAAAAAAAGAAYAAAAHAAAAAAAAAAYAAAAAAAEAAAACAAYAAAAAAAEAAAADAAYAAAAAAAEAAAAEAAYAAAAAAAEAAAAFAAYAAAAAAAEAAAAAAAUAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAMAAAAAAAAAAAABAAMAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAQAAAAAAAAAAAAFAAQAAAAAAAAAAAABAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAEAAAAAAAAAAAACAAEAAAAAAAAAAAADAAEAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAIAAAAAAAAAAAAFAAIAAAAAAAAAAAAFAAEAAAAAAAAAAAAFAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAADAAIAAAAAAAAAAAACAAIAAAAAAAAAAAAFAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAADAAUAAAAAAAAAAAACAAUAAAAAAAAAAAABAAUAAAAAAAAAAAABAAQAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAD/////AAAGAAAAAAAGAP//AAAFAAAAAAAAAP//AAADAAEAAAABAP//AAADAAEAAAACAP//AAADAAEAAAADAP//AAADAAEAAAAEAP//AAADAAEAAAAFAP//AAADAAEAAAA=")
+tile_set = SubResource("TileSet_w547m")
+
+[node name="NPC" type="Sprite2D" parent="."]
+position = Vector2(170, 43)
+texture = ExtResource("2_tsgvn")
+
+[node name="Area2D" type="Area2D" parent="NPC"]
+script = ExtResource("3_0w1i7")
+TargetBattleScenePath = "res://scenes/boss_battle_two.tscn"
+dialogue = ExtResource("4_fyk8r")
+Font = ExtResource("5_w0hct")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC/Area2D"]
+position = Vector2(-7, 12)
+shape = SubResource("RectangleShape2D_5qfw6")
+
+[node name="Newplayer" parent="." instance=ExtResource("6_jy0u6")]
+position = Vector2(22, 133)
+
+[node name="Background" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("7_xkvto")
+expand_mode = 3
+
+[node name="DialogueSystem" type="Node" parent="."]
+script = ExtResource("8_y07l5")
+
+[node name="TransitionArea" type="Area2D" parent="."]
+position = Vector2(400, 500)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea"]
+shape = SubResource("RectangleShape2D_hogt4")
